@@ -1,20 +1,21 @@
-# DailyLifts — Product Requirements Document
+# DailyFitness — Product Requirements Document
 
-**Version:** 0.2 (Draft)  
+**Version:** 0.3 (Draft)  
 **Last updated:** June 27, 2026  
 **Status:** In review  
 **Parent brand:** Dailybase  
-**Codename / repo:** `repforge` (rename before launch)
+**Visual identity:** Calm Strength  
+**Repository:** `/Users/jharaldsen/Projects/dailyfitness`
 
 ---
 
 ## 1. Executive Summary
 
-**DailyLifts** is a Dailybase-family iOS workout app for intermediate trainees who lift, stretch, and move consistently. It combines **MacroFactor-style smart progression** for strength work with **Hevy/Lyfta-grade logging speed**, plus **guided programs** across strength, mobility, yoga, and flexibility — not just barbell sessions.
+**DailyFitness** is a Dailybase-family iOS workout app for intermediate trainees who lift, stretch, and move consistently. It combines **MacroFactor-style smart progression** for strength work with **Hevy/Lyfta-grade logging speed**, plus **guided programs** across strength, mobility, yoga, and flexibility — not just barbell sessions.
 
 Users can follow **suggested programs** (curated splits, yoga flows, mobility routines) or build **fully custom programs** from a large exercise library. During a workout, **Lock Screen Live Activities** show the rest timer and let users tick off sets without unlocking the phone.
 
-**Positioning:** *Your daily training companion — lift, stretch, and progress, without the noise.*
+**Positioning:** *Your daily training — strength, mobility, and yoga in one calm app.*
 
 **Business model:** Freemium. Core logging, programs, and basic progress are free. Premium unlocks full progression, advanced analytics, and export.
 
@@ -97,24 +98,32 @@ No Dailybase-aligned iOS app combines **fast logging + lock-screen control**, **
 
 ## 5. Naming & Dailybase Family
 
-### Recommended name: **DailyLifts**
+### Chosen name: **DailyFitness**
 
 | Option | Pros | Cons | Verdict |
 |--------|------|------|---------|
-| **DailyLifts** | Clear Dailybase lineage; strength-forward but not exclusive; App Store friendly | Slightly lift-coded; mobility/yoga is a subtitle concern | **Recommended** |
-| **DailyReps** | Neutral, works for reps-based mobility too | Less distinctive; "reps" feels gym-only | Strong alternate |
-| **DailyFitness** | Broadest; covers yoga/mobility/strength equally | Generic; weak SEO; harder to own | Good if Dailybase is the hero brand |
-| **DailyMotion** | Dailybase rhyme | **Trademark conflict** with Dailymotion (video platform) | **Do not use** |
+| **DailyFitness** | Broadest scope; covers strength, yoga, mobility equally; clear Dailybase lineage | Generic keyword; crowded App Store; trademark search needed | **Chosen** |
+| DailyLifts | Distinctive for lifters | Underplays yoga/mobility positioning | Not selected |
+| DailyReps | Neutral | Gym-coded; less memorable | Not selected |
+| DailyMotion | Dailybase rhyme | **Trademark conflict** with Dailymotion | **Do not use** |
+
+**Why DailyFitness works for this product:** The app is intentionally multi-modal (strength + yoga + mobility + flexibility). A lift-specific name would undersell half the catalog. Paired with the **Calm Strength** visual identity and **Dailybase** parent brand, the generic name becomes an asset — Dailybase owns the personality; DailyFitness owns the category.
+
+**Mitigations for genericness:**
+
+- App Store listing: **"DailyFitness by Dailybase"**  
+- Distinct app icon (Calm Strength palette — not a dumbbell clip-art)  
+- Strong subtitle: *Track workouts. Build programs. Move daily.*  
+- Run trademark + App Store name availability check before finalizing bundle ID  
 
 ### Brand architecture
 
 ```
 Dailybase          ← parent brand (habit, daily practice, calm consistency)
-└── DailyLifts     ← this app (training tracker + programs)
-    └── Tagline TBD: "Lift. Stretch. Progress." or "Your daily training, tracked."
+└── DailyFitness   ← this app (training tracker + programs)
+    └── Visual: Calm Strength
+    └── Tagline: "Your daily training — tracked."
 ```
-
-If Dailybase becomes the consumer-facing App Store name later, DailyLifts can remain the product descriptor or module name inside the app.
 
 ---
 
@@ -139,24 +148,14 @@ If Dailybase becomes the consumer-facing App Store name later, DailyLifts can re
 4. **Program naming** — "Lower Body Strength", "Morning Mobility", "Hip Opener Flow" — not "Booty Burn" or "Arm Day for Bros".  
 5. **Iconography** — Abstract movement marks ( arcs, balance, flow lines ) over flexed biceps or barbell-only marks.
 
-### Recommended visual direction
-
-**Direction A — "Calm Strength" (recommended)**
+### Visual direction — **Calm Strength** (chosen)
 
 - **Palette:** Warm stone neutrals (`#F5F2ED` background), deep forest or slate primary (`#2D4A3E` / `#3D4F5F`), single accent in muted terracotta or sage (`#C4785A` / `#7A9E8E`) — works on light and dark mode  
-- **Typography:** SF Pro / rounded humanist sans for warmth; medium weight headings, generous line height for readability  
+- **Typography:** SF Pro; medium weight headings, generous line height for readability  
 - **Imagery:** Soft natural light, real environments (home, studio, gym), motion blur over posed flex shots  
 - **Motion:** Gentle springs; rest timer uses smooth countdown, not urgent flashing red  
-
-**Direction B — "Studio Minimal"**
-
-- Monochrome + one accent (Dailybase brand color if defined)  
-- More yoga/studio aesthetic; strength screens use same components  
-
-**Direction C — "Dailybase Extended"**
-
-- Inherit Dailybase color, logo mark, and grid/block visual language if the parent app already has a system  
-- DailyLifts feels like a sibling app, not a unrelated gym product  
+- **App icon:** Abstract flow/balance mark — not a barbell or yoga silhouette alone  
+- **Dailybase tie-in:** Shared wordmark treatment ("Daily" prefix); Calm Strength palette may extend to Dailybase sibling apps over time  
 
 ### Content categories (equal visual weight)
 
@@ -175,7 +174,7 @@ Same app chrome, same completion UX — category affects exercise fields and whe
 
 ## 7. Competitive Landscape
 
-| Capability | Hevy | Lyfta | MacroFactor Workouts | **DailyLifts (target)** |
+| Capability | Hevy | Lyfta | MacroFactor Workouts | **DailyFitness (target)** |
 |------------|------|-------|----------------------|-------------------------|
 | Fast set logging | Strong | Strong | Good | **Best-in-class** |
 | Lock Screen workout control | Limited | Limited | Unknown | **Live Activity (P0)** |
@@ -458,7 +457,7 @@ Every recommendation includes a `reason` string for UI.
 - Lock Screen Live Activities  
 - 2 exercises per workout with progression preview  
 
-### Premium — **DailyLifts Pro** (~$6.99/mo or $49.99/yr)
+### Premium — **DailyFitness Pro** (~$6.99/mo or $49.99/yr)
 
 - Unlimited custom programs  
 - Full smart progression (strength)  
@@ -474,15 +473,17 @@ Every recommendation includes a `reason` string for UI.
 
 ## 14. Technical Considerations
 
-| Area | Recommendation |
-|------|----------------|
-| Platform | Native iOS (SwiftUI) |
-| Lock Screen | **ActivityKit** Live Activities; WidgetKit for static widgets v1.1 |
-| Local storage | SwiftData or GRDB; offline-first workout state |
-| Backend | Supabase or Firebase (TDD decision) |
+See **[TDD.md](./TDD.md)** for full architecture. Summary:
+
+| Area | Decision |
+|------|----------|
+| Platform | Native iOS (SwiftUI), **iOS 17+** |
+| Lock Screen | **ActivityKit** Live Activities + App Intents |
+| Local storage | **SwiftData**, offline-first |
+| Backend | **Supabase** (Postgres + RLS + Auth) |
 | Exercise data | Bulk import pipeline; 2000+ seed records |
-| Subscriptions | StoreKit 2 + RevenueCat |
-| Analytics | TelemetryDeck or PostHog |
+| Subscriptions | StoreKit 2 + **RevenueCat** |
+| Analytics | **TelemetryDeck** |
 
 ---
 
@@ -490,7 +491,7 @@ Every recommendation includes a `reason` string for UI.
 
 ### Phase 0 — Foundation (Weeks 1–2)
 
-- Design system (Dailybase-aligned branding)  
+- Design system (Calm Strength + Dailybase alignment)  
 - Data models (strength + duration/hold exercises)  
 - Exercise library import (2000+ seed)  
 - Auth (Sign in with Apple)  
@@ -524,9 +525,10 @@ Every recommendation includes a `reason` string for UI.
 |------|--------|------------|
 | Live Activity iOS version fragmentation | Some users miss Lock Screen UX | Graceful in-app fallback + notification |
 | 2000+ exercise QA burden | Bad metadata | Automated validation + spot-check top 500 |
-| Lift-heavy brand scares yoga users | Split audience | Equal catalog prominence; inclusive creative |
+| Generic name gets lost in App Store search | Discovery | "By Dailybase" branding; ASO on specific features; strong icon |
+| Lift-heavy brand scares yoga users | Split audience | Equal catalog prominence; Calm Strength creative |
 | Progression wrong for casual yogis | Confusion | Progression only on strength; clear scope |
-| DailyMotion-style naming confusion | Legal/SEO | Avoid "DailyMotion"; use DailyLifts |
+| DailyFitness trademark conflict | Rebrand cost | Run USPTO + App Store name check in Phase 0 |
 
 ---
 
@@ -534,13 +536,14 @@ Every recommendation includes a `reason` string for UI.
 
 | # | Question | Status |
 |---|----------|--------|
-| 1 | Confirm **DailyLifts** vs **DailyReps** vs **DailyFitness** | **Recommend DailyLifts** — your call |
-| 2 | RIR default | **Decided: optional, off by default** |
-| 3 | Apple Watch | **Decided: v2+** |
-| 4 | Dailybase visual system — inherit or new sibling? | Needs Dailybase brand assets |
-| 5 | Metric vs imperial default from locale? | TBD Phase 0 |
-| 6 | Supabase vs Firebase? | TDD |
-| 7 | Rename repo `repforge` → `dailylifts`? | Before Phase 0 |
+| 1 | App name | **Decided: DailyFitness** |
+| 2 | Branding direction | **Decided: Calm Strength** |
+| 3 | RIR default | **Decided: optional, off by default** |
+| 4 | Apple Watch | **Decided: v2+** |
+| 5 | Repository | **Decided: `dailyfitness`** |
+| 6 | Metric vs imperial default from locale? | TBD Phase 0 |
+| 7 | Supabase vs Firebase? | **Decided: Supabase** — see [TDD.md](./TDD.md) |
+| 8 | DailyFitness trademark / App Store name availability? | TBD Phase 0 |
 
 ---
 
@@ -566,7 +569,11 @@ Every recommendation includes a `reason` string for UI.
 |---------|------|---------|
 | 0.1 | 2026-06-27 | Initial draft (Repforge) |
 | 0.2 | 2026-06-27 | Dailybase naming, branding, Lock Screen, programs, mobility/yoga, library scale, decisions |
+| 0.3 | 2026-06-27 | **DailyFitness** name locked; **Calm Strength** branding; repo renamed |
 
 ---
 
-*Next step: Confirm app name + branding direction (A/B/C), then Brand Guidelines one-pager and User Stories.*
+*Next step: Brand Guidelines one-pager, then Phase 0 scaffold.*
+
+**Technical design:** [TDD.md](./TDD.md)  
+**User stories:** [USER_STORIES.md](./USER_STORIES.md) — 60 stories across 15 epics, 40 P0 for MVP.
