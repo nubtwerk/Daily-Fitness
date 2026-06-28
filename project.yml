@@ -1,0 +1,110 @@
+name: DailyFitness
+options:
+  bundleIdPrefix: app.dailybase
+  deploymentTarget:
+    iOS: "17.0"
+  xcodeVersion: "16.0"
+  generateEmptyDirectories: true
+  groupSortPosition: top
+
+configs:
+  Debug: debug
+  Release: release
+
+configFiles:
+  Debug: Config/Debug.xcconfig
+  Release: Config/Release.xcconfig
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    TARGETED_DEVICE_FAMILY: "1"
+    DEVELOPMENT_TEAM: ""
+    CODE_SIGN_STYLE: Automatic
+    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: 0.1.0
+
+packages:
+  Supabase:
+    url: https://github.com/supabase/supabase-swift
+    from: 2.20.0
+  RevenueCat:
+    url: https://github.com/RevenueCat/purchases-ios
+    from: 5.14.0
+
+targets:
+  DailyFitness:
+    type: application
+    platform: iOS
+    sources:
+      - path: DailyFitness
+        excludes:
+          - "**/Resources/Exercises/exercises.json"
+      - path: DailyFitness/Resources/Exercises/exercises.json
+        buildPhase: resources
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.dailybase.dailyfitness
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: DailyFitness
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait
+        INFOPLIST_KEY_NSSupportsLiveActivities: YES
+        INFOPLIST_KEY_SUPABASE_URL: $(SUPABASE_URL)
+        INFOPLIST_KEY_SUPABASE_ANON_KEY: $(SUPABASE_ANON_KEY)
+        INFOPLIST_KEY_REVENUECAT_API_KEY: $(REVENUECAT_API_KEY)
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: Accent
+    entitlements:
+      path: DailyFitness/DailyFitness.entitlements
+    dependencies:
+      - package: Supabase
+        product: Supabase
+      - package: RevenueCat
+        product: RevenueCat
+    # WorkoutLiveActivityExtension embed disabled for CLI simulator install.
+    # Re-enable before TestFlight; run from Xcode (⌘R) for full Live Activity testing.
+    preBuildScripts: []
+
+  WorkoutLiveActivityExtension:
+    type: app-extension
+    platform: iOS
+    sources:
+      - path: WorkoutLiveActivityExtension
+        excludes:
+          - Info.plist
+    info:
+      path: WorkoutLiveActivityExtension/Info.plist
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.dailybase.dailyfitness.liveactivity
+        GENERATE_INFOPLIST_FILE: NO
+        INFOPLIST_FILE: WorkoutLiveActivityExtension/Info.plist
+    entitlements:
+      path: WorkoutLiveActivityExtension/WorkoutLiveActivityExtension.entitlements
+
+  DailyFitnessTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - DailyFitnessTests
+    dependencies:
+      - target: DailyFitness
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: app.dailybase.dailyfitness.tests
+        GENERATE_INFOPLIST_FILE: YES
+
+schemes:
+  DailyFitness:
+    build:
+      targets:
+        DailyFitness: all
+        WorkoutLiveActivityExtension: all
+        DailyFitnessTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - DailyFitnessTests
