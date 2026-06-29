@@ -6,14 +6,18 @@ struct LiveWorkoutView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
 
+    @Environment(\.scenePhase) private var scenePhase
+
     let sessionId: UUID
 
     @Query private var sessions: [WorkoutSessionEntity]
     @Query private var exercises: [ExerciseEntity]
+    @Query private var preferences: [UserPreferencesEntity]
 
     @State private var restEndsAt: Date?
     @State private var showEndConfirmation = false
     @State private var showExercisePicker = false
+    @State private var recentPRs: [PersonalRecord] = []
 
     init(sessionId: UUID, dependencies: DependencyContainer) {
         self.sessionId = sessionId
@@ -22,6 +26,10 @@ struct LiveWorkoutView: View {
     }
 
     private var session: WorkoutSessionEntity? { sessions.first }
+
+    private var userPrefs: UserPreferencesEntity? {
+        preferences.first(where: { $0.userId == dependencies.userSession.effectiveUserId })
+    }
 
     var body: some View {
         NavigationStack {
@@ -52,6 +60,7 @@ struct LiveWorkoutView: View {
             }
             .sheet(isPresented: $showExercisePicker) {
                 ExercisePickerView(
+                    dependencies: dependencies,
                     excludeIds: Set(sessions.first?.exercises.map(\.exerciseId) ?? []),
                     onSelect: { exercise in
                         guard let session = sessions.first else { return }
@@ -64,6 +73,42 @@ struct LiveWorkoutView: View {
                 Button("Discard", role: .destructive) { discardWorkout() }
                 Button("Cancel", role: .cancel) {}
             }
+            .onAppear {
+                WorkoutIntentObserver.shared.start { action in
+                    processIntentAction(action)
+                }
+                if let session {
+                    dependencies.workoutCoordinator.startLiveActivityIfEnabled(
+                        session: session,
+                        userId: dependencies.userSession.effectiveUserId,
+                        context: modelContext
+                    )
+                }
+                if let action = WorkoutIntentBridge.consumePendingAction() {
+                    processIntentAction(action)
+                }
+            }
+            .onDisappear {
+                WorkoutIntentObserver.shared.stop()
+            }
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active, let action = WorkoutIntentBridge.consumePendingAction() {
+                    processIntentAction(action)
+                }
+            }
+            .overlay(alignment: .top) {
+                if !recentPRs.isEmpty {
+                    PRToastView(records: recentPRs)
+                        .padding(.top, CalmStrength.Spacing.md)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .onAppear {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                withAnimation { recentPRs = [] }
+                            }
+                        }
+                }
+            }
+            .animation(.easeInOut, value: recentPRs.count)
         }
     }
 
@@ -72,7 +117,9 @@ struct LiveWorkoutView: View {
         ScrollView {
             VStack(spacing: CalmStrength.Spacing.md) {
                 if let restEndsAt, restEndsAt > Date() {
-                    RestTimerBanner(restEndsAt: restEndsAt)
+                    RestTimerBanner(restEndsAt: restEndsAt) {
+                        self.restEndsAt = restEndsAt.addingTimeInterval(30)
+                    }
                 }
 
                 if session.exercises.isEmpty {
@@ -84,13 +131,11 @@ struct LiveWorkoutView: View {
                         showExercisePicker = true
                     }
                 } else {
-                    ForEach(session.exercises.sorted(by: { $0.sortOrder < $1.sortOrder }), id: \.id) { workoutExercise in
-                        ExerciseWorkoutCard(
-                            exerciseName: exerciseName(for: workoutExercise.exerciseId),
-                            sets: workoutExercise.sets.sorted(by: { $0.setNumber < $1.setNumber }),
-                            onCompleteSet: { set in
-                                completeSet(set, workoutExercise: workoutExercise, session: session)
-                            }
+                    ForEach(Array(session.exercises.sorted(by: { $0.sortOrder < $1.sortOrder }).enumerated()), id: \.element.id) { index, workoutExercise in
+                        exerciseCard(
+                            workoutExercise: workoutExercise,
+                            strengthIndex: strengthIndex(upTo: index, in: session),
+                            session: session
                         )
                     }
                 }
@@ -99,49 +144,106 @@ struct LiveWorkoutView: View {
         }
     }
 
+    @ViewBuilder
+    private func exerciseCard(
+        workoutExercise: WorkoutExerciseEntity,
+        strengthIndex: Int,
+        session: WorkoutSessionEntity
+    ) -> some View {
+        let exercise = exercises.first(where: { $0.id == workoutExercise.exerciseId })
+        let loggingFields = exercise?.loggingFields ?? .weightReps
+        let usePounds = userPrefs?.usePounds ?? false
+        let rirEnabled = userPrefs?.rirEnabled ?? false
+        let showProgression = exercise?.category == .strength
+            && ContentLimitService.canShowProgression(forStrengthIndex: strengthIndex, isPro: dependencies.userSession.isPro)
+
+        DFCard {
+            VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
+                Text(exercise?.name ?? "Exercise")
+                    .font(.headline)
+                    .foregroundStyle(Color.dfPrimary)
+
+                if showProgression {
+                    ProgressionBanner(
+                        recommendation: dependencies.progressionService.latestRecommendation(
+                            exerciseId: workoutExercise.exerciseId,
+                            userId: dependencies.userSession.effectiveUserId,
+                            context: modelContext
+                        ),
+                        usePounds: usePounds
+                    )
+                }
+
+                ForEach(workoutExercise.sets.sorted(by: { $0.setNumber < $1.setNumber }), id: \.id) { set in
+                    SetRowFactory.row(
+                        for: set,
+                        loggingFields: loggingFields,
+                        usePounds: usePounds,
+                        rirEnabled: rirEnabled,
+                        onComplete: {
+                            completeSet(set, workoutExercise: workoutExercise, session: session, exercise: exercise)
+                        }
+                    )
+                }
+            }
+        }
+    }
+
+    private func strengthIndex(upTo index: Int, in session: WorkoutSessionEntity) -> Int {
+        let sorted = session.exercises.sorted(by: { $0.sortOrder < $1.sortOrder })
+        return sorted.prefix(index + 1).filter { item in
+            exercises.first(where: { $0.id == item.exerciseId })?.category == .strength
+        }.count - 1
+    }
+
     private func addExercise(_ exercise: ExerciseEntity, to session: WorkoutSessionEntity) {
         _ = WorkoutExerciseFactory.addExercise(exercise, to: session, in: modelContext)
         session.syncStatus = .pending
         try? modelContext.save()
     }
 
-    private func exerciseName(for id: UUID) -> String {
-        exercises.first(where: { $0.id == id })?.name ?? "Exercise"
-    }
-
     private func completeSet(
         _ set: WorkoutSetEntity,
         workoutExercise: WorkoutExerciseEntity,
-        session: WorkoutSessionEntity
+        session: WorkoutSessionEntity,
+        exercise: ExerciseEntity?
     ) {
-        guard !set.isCompleted else { return }
-        set.isCompleted = true
-        set.completedAt = Date()
-        if set.weightKg == nil { set.weightKg = 0 }
-        if set.reps == nil { set.reps = 0 }
-        session.syncStatus = .pending
-        try? modelContext.save()
+        let prs = dependencies.workoutCoordinator.completeSet(
+            set,
+            workoutExercise: workoutExercise,
+            session: session,
+            exercise: exercise,
+            userId: dependencies.userSession.effectiveUserId,
+            context: modelContext
+        )
+        if !prs.isEmpty {
+            recentPRs = prs
+        }
 
-        let restSeconds = 90
-        restEndsAt = Date().addingTimeInterval(TimeInterval(restSeconds))
-        LiveActivityManager.shared.update(session: session, phase: .resting, restEndsAt: restEndsAt)
+        let prefs = dependencies.preferencesRepository.loadOrCreate(
+            userId: dependencies.userSession.effectiveUserId,
+            context: modelContext
+        )
+        if exercise?.category == .strength, prefs.defaultRestSeconds > 0 {
+            restEndsAt = Date().addingTimeInterval(TimeInterval(prefs.defaultRestSeconds))
+        }
     }
 
     private func finishWorkout() {
         guard let session else { return }
-        session.endedAt = Date()
-        session.syncStatus = .pending
-        try? modelContext.save()
-        LiveActivityManager.shared.end()
+        dependencies.workoutCoordinator.finishSession(
+            session,
+            userId: dependencies.userSession.effectiveUserId,
+            isPro: dependencies.userSession.isPro,
+            context: modelContext
+        )
         dependencies.router.endWorkout()
         dismiss()
     }
 
     private func discardWorkout() {
         guard let session else { return }
-        modelContext.delete(session)
-        try? modelContext.save()
-        LiveActivityManager.shared.end()
+        dependencies.workoutCoordinator.discardSession(session, context: modelContext)
         dependencies.router.endWorkout()
         dismiss()
     }
@@ -150,10 +252,35 @@ struct LiveWorkoutView: View {
         dependencies.router.endWorkout()
         dismiss()
     }
+
+    private func processIntentAction(_ action: WorkoutIntentAction) {
+        guard let session else { return }
+        switch action {
+        case .completeSet:
+            completeNextSet(in: session)
+        case .extendRest:
+            if let restEndsAt {
+                self.restEndsAt = restEndsAt.addingTimeInterval(30)
+            }
+        case .endWorkout:
+            showEndConfirmation = true
+        }
+    }
+
+    private func completeNextSet(in session: WorkoutSessionEntity) {
+        for workoutExercise in session.exercises.sorted(by: { $0.sortOrder < $1.sortOrder }) {
+            for set in workoutExercise.sets.sorted(by: { $0.setNumber < $1.setNumber }) where !set.isCompleted {
+                let exercise = exercises.first(where: { $0.id == workoutExercise.exerciseId })
+                completeSet(set, workoutExercise: workoutExercise, session: session, exercise: exercise)
+                return
+            }
+        }
+    }
 }
 
 struct RestTimerBanner: View {
     let restEndsAt: Date
+    var onExtend: (() -> Void)?
 
     var body: some View {
         TimelineView(.periodic(from: .now, by: 1)) { context in
@@ -163,62 +290,15 @@ struct RestTimerBanner: View {
                     Text("Rest")
                         .font(.headline)
                     Spacer()
+                    if let onExtend {
+                        Button("+30s", action: onExtend)
+                            .font(.subheadline.weight(.medium))
+                    }
                     Text("\(remaining)s")
                         .font(.title2.monospacedDigit())
                         .foregroundStyle(Color.dfAccent)
                 }
             }
-        }
-    }
-}
-
-struct ExerciseWorkoutCard: View {
-    let exerciseName: String
-    let sets: [WorkoutSetEntity]
-    let onCompleteSet: (WorkoutSetEntity) -> Void
-
-    var body: some View {
-        DFCard {
-            VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
-                Text(exerciseName)
-                    .font(.headline)
-                    .foregroundStyle(Color.dfPrimary)
-
-                ForEach(sets, id: \.id) { set in
-                    SetRow(set: set, onComplete: { onCompleteSet(set) })
-                }
-            }
-        }
-    }
-}
-
-struct SetRow: View {
-    @Bindable var set: WorkoutSetEntity
-    let onComplete: () -> Void
-
-    var body: some View {
-        HStack(spacing: CalmStrength.Spacing.sm) {
-            Text("Set \(set.setNumber)")
-                .font(.subheadline)
-                .foregroundStyle(Color.dfSecondaryText)
-                .frame(width: 44, alignment: .leading)
-
-            TextField("kg", value: $set.weightKg, format: .number)
-                .keyboardType(.decimalPad)
-                .textFieldStyle(.roundedBorder)
-                .frame(width: 64)
-
-            TextField("reps", value: $set.reps, format: .number)
-                .keyboardType(.numberPad)
-                .textFieldStyle(.roundedBorder)
-                .frame(width: 52)
-
-            Button(action: onComplete) {
-                Image(systemName: set.isCompleted ? "checkmark.circle.fill" : "circle")
-                    .font(.title2)
-                    .foregroundStyle(set.isCompleted ? Color.dfAccent : Color.dfSecondaryText)
-            }
-            .frame(minWidth: 44, minHeight: 44)
         }
     }
 }

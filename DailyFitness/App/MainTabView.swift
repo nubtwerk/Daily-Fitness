@@ -17,7 +17,7 @@ struct MainTabView: View {
                 .tabItem { Label("Programs", systemImage: "calendar") }
                 .tag(AppTab.programs)
 
-            ProgressTabView()
+            ProgressTabView(dependencies: dependencies)
                 .tabItem { Label("Progress", systemImage: "chart.line.uptrend.xyaxis") }
                 .tag(AppTab.progress)
 

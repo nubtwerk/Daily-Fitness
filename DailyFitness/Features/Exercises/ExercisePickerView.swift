@@ -5,20 +5,28 @@ struct ExercisePickerView: View {
     @Environment(\.dismiss) private var dismiss
     @Query(sort: \ExerciseEntity.name) private var allExercises: [ExerciseEntity]
 
+    var dependencies: DependencyContainer?
     var excludeIds: Set<UUID> = []
     var onSelect: (ExerciseEntity) -> Void
 
     @State private var searchText = ""
     @State private var selectedCategory: ExerciseCategory?
+    @State private var selectedMuscle: String?
+    @State private var showCustomEditor = false
 
     private var exercises: [ExerciseEntity] {
         allExercises.filter { $0.deletedAt == nil }
+    }
+
+    private var muscleOptions: [String] {
+        Array(Set(exercises.flatMap(\.primaryMuscles))).sorted()
     }
 
     private var filteredExercises: [ExerciseEntity] {
         exercises.filter { exercise in
             guard !excludeIds.contains(exercise.id) else { return false }
             if let selectedCategory, exercise.category != selectedCategory { return false }
+            if let selectedMuscle, !exercise.primaryMuscles.contains(selectedMuscle) { return false }
             if searchText.isEmpty { return true }
             let query = searchText.lowercased()
             return exercise.name.lowercased().contains(query)
@@ -33,7 +41,7 @@ struct ExercisePickerView: View {
                 if exercises.isEmpty {
                     DFEmptyState(
                         title: "Library is empty",
-                        message: "Exercise data hasn't loaded yet. Force-quit and reopen the app, or reinstall from Xcode."
+                        message: "Exercise data hasn't loaded yet. Force-quit and reopen the app."
                     )
                 } else {
                     List(filteredExercises, id: \.id) { exercise in
@@ -55,10 +63,18 @@ struct ExercisePickerView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("Cancel") { dismiss() }
                 }
+                if dependencies != nil {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button("Custom") { showCustomEditor = true }
+                    }
+                }
             }
             .safeAreaInset(edge: .top) {
                 if !exercises.isEmpty {
-                    categoryFilter
+                    VStack(spacing: CalmStrength.Spacing.sm) {
+                        categoryFilter
+                        muscleFilter
+                    }
                 }
             }
             .overlay {
@@ -66,8 +82,20 @@ struct ExercisePickerView: View {
                     DFEmptyState(
                         title: "No exercises found",
                         message: searchText.isEmpty
-                            ? "Try a different category filter."
+                            ? "Try a different filter."
                             : "Try another search term."
+                    )
+                }
+            }
+            .sheet(isPresented: $showCustomEditor) {
+                if let dependencies {
+                    CustomExerciseEditorView(
+                        userId: dependencies.userSession.effectiveUserId,
+                        isPro: dependencies.userSession.isPro,
+                        onCreated: { exercise in
+                            onSelect(exercise)
+                            dismiss()
+                        }
                     )
                 }
             }
@@ -94,6 +122,27 @@ struct ExercisePickerView: View {
         }
         .background(Color.dfBackground)
     }
+
+    private var muscleFilter: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: CalmStrength.Spacing.sm) {
+                CategoryChip(title: "All muscles", isSelected: selectedMuscle == nil) {
+                    selectedMuscle = nil
+                }
+                ForEach(muscleOptions, id: \.self) { muscle in
+                    CategoryChip(
+                        title: muscle.capitalized,
+                        isSelected: selectedMuscle == muscle
+                    ) {
+                        selectedMuscle = muscle
+                    }
+                }
+            }
+            .padding(.horizontal, CalmStrength.Spacing.md)
+            .padding(.bottom, CalmStrength.Spacing.sm)
+        }
+        .background(Color.dfBackground)
+    }
 }
 
 private struct ExercisePickerRow: View {
@@ -101,9 +150,19 @@ private struct ExercisePickerRow: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
-            Text(exercise.name)
-                .font(.headline)
-                .foregroundStyle(Color.dfPrimary)
+            HStack {
+                Text(exercise.name)
+                    .font(.headline)
+                    .foregroundStyle(Color.dfPrimary)
+                if exercise.isCustom {
+                    Text("Custom")
+                        .font(.caption2.weight(.medium))
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.dfAccent.opacity(0.2))
+                        .clipShape(Capsule())
+                }
+            }
             HStack(spacing: CalmStrength.Spacing.sm) {
                 Text(exercise.category.rawValue.capitalized)
                     .font(.caption)

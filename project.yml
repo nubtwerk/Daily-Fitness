@@ -40,7 +40,13 @@ targets:
       - path: DailyFitness
         excludes:
           - "**/Resources/Exercises/exercises.json"
+          - "**/Resources/Exercises/exercises-manifest.json"
+          - "**/Resources/Programs/programs.json"
       - path: DailyFitness/Resources/Exercises/exercises.json
+        buildPhase: resources
+      - path: DailyFitness/Resources/Exercises/exercises-manifest.json
+        buildPhase: resources
+      - path: DailyFitness/Resources/Programs/programs.json
         buildPhase: resources
     settings:
       base:
@@ -62,9 +68,8 @@ targets:
         product: Supabase
       - package: RevenueCat
         product: RevenueCat
-    # WorkoutLiveActivityExtension embed disabled for CLI simulator install.
-    # Re-enable before TestFlight; run from Xcode (⌘R) for full Live Activity testing.
-    preBuildScripts: []
+      - target: WorkoutLiveActivityExtension
+        embed: true
 
   WorkoutLiveActivityExtension:
     type: app-extension
@@ -73,6 +78,10 @@ targets:
       - path: WorkoutLiveActivityExtension
         excludes:
           - Info.plist
+      - path: DailyFitness/Shared
+        excludes:
+          - WorkoutSessionState.swift
+          - WorkoutIntentObserver.swift
     info:
       path: WorkoutLiveActivityExtension/Info.plist
     settings:

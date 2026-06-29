@@ -2,7 +2,7 @@
 
 A Dailybase-family iOS workout app — track strength, mobility, yoga, and flexibility with smart progression and Lock Screen workout controls.
 
-**Status:** Phase 0 scaffold  
+**Status:** Phases 0.5–6 implemented  
 **Brand:** Calm Strength  
 **Docs:** [PRD](docs/PRD.md) · [User Stories](docs/USER_STORIES.md) · [Technical Design](docs/TDD.md) · [Technical Design](docs/TDD.md)
 
@@ -65,26 +65,24 @@ supabase link --project-ref YOUR_REF
 supabase db push
 ```
 
-## What's implemented (Phase 0)
+## What's implemented
 
 - Calm Strength design system + tab shell
-- SwiftData models (exercises, routines, programs, workouts)
-- Onboarding flow
-- Live workout logging (weight × reps, rest timer, set complete)
-- Live Activity manager (Lock Screen extension scaffold)
-- Progression engine + unit tests
-- 10-exercise seed JSON + import script placeholder
-- Initial Supabase migration
+- SwiftData models (exercises, routines, programs, workouts, PRs, progression)
+- Onboarding + live workout logging (strength, mobility, yoga, flexibility)
+- Exercise picker (search, filters) + custom exercise creation
+- Routine builder + program templates with Home schedule card
+- Progression engine wired to live workout UI
+- PR detection + Progress tab (history, charts, muscle heatmap, PR shelf)
+- Live Activity extension (embedded) + App Intents scaffold
+- Versioned exercise/program seeders + `scripts/import-exercises.py`
+- Sign in with Apple + Supabase sync (session/routine upsert)
+- RevenueCat paywall + content limits + CSV export (Pro)
+- Supabase migrations including personal records
 
-## Phase 1A (in progress)
+## Setup notes
 
-- Exercise picker (search + category filter)
-- Routine builder (add exercises, sets/reps/rest, reorder, edit)
-- Add exercises during live blank workouts
-
-## Next (Phase 1)
-
-- Custom exercise creation
-- Supabase auth + SyncEngine
-- Live Activity interactive complete-set intents
-- Expand exercise library to 2000+
+- Set **Development Team** in Xcode for DailyFitness and WorkoutLiveActivityExtension
+- Add real keys to `Config/Secrets.xcconfig` for Supabase + RevenueCat
+- Run `python3 scripts/import-exercises.py` to expand the exercise library
+- Live Activities: run from Xcode (⌘R) with Live Activities enabled

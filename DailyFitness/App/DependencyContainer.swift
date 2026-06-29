@@ -24,13 +24,25 @@ final class AppRouter {
 @MainActor
 final class UserSession {
     var localUserId: UUID
+    var supabaseUserId: UUID?
     var isAuthenticated: Bool
     var isPro: Bool
+    var syncStatus: SyncStatus = .synced
 
-    init(localUserId: UUID = UUID(), isAuthenticated: Bool = false, isPro: Bool = false) {
+    init(
+        localUserId: UUID = UUID(),
+        supabaseUserId: UUID? = nil,
+        isAuthenticated: Bool = false,
+        isPro: Bool = false
+    ) {
         self.localUserId = localUserId
+        self.supabaseUserId = supabaseUserId
         self.isAuthenticated = isAuthenticated
         self.isPro = isPro
+    }
+
+    var effectiveUserId: UUID {
+        supabaseUserId ?? localUserId
     }
 }
 
@@ -41,27 +53,79 @@ final class DependencyContainer {
     var userSession: UserSession
     let progressionEngine: ProgressionEngineProtocol
     let exerciseSeeder: ExerciseSeeder
+    let programSeeder: ProgramSeeder
+    let preferencesRepository: UserPreferencesRepository
+    let exerciseRepository: ExerciseRepository
+    let progressionService: ProgressionService
+    let prService: PRService
+    let workoutCoordinator: WorkoutSessionCoordinator
+    let syncEngine: SyncEngine
+    let authService: AuthService
+    let revenueCatService: RevenueCatService
 
     init(
         router: AppRouter,
         userSession: UserSession,
         progressionEngine: ProgressionEngineProtocol,
-        exerciseSeeder: ExerciseSeeder
+        exerciseSeeder: ExerciseSeeder,
+        programSeeder: ProgramSeeder,
+        preferencesRepository: UserPreferencesRepository,
+        exerciseRepository: ExerciseRepository,
+        progressionService: ProgressionService,
+        prService: PRService,
+        workoutCoordinator: WorkoutSessionCoordinator,
+        syncEngine: SyncEngine,
+        authService: AuthService,
+        revenueCatService: RevenueCatService
     ) {
         self.router = router
         self.userSession = userSession
         self.progressionEngine = progressionEngine
         self.exerciseSeeder = exerciseSeeder
+        self.programSeeder = programSeeder
+        self.preferencesRepository = preferencesRepository
+        self.exerciseRepository = exerciseRepository
+        self.progressionService = progressionService
+        self.prService = prService
+        self.workoutCoordinator = workoutCoordinator
+        self.syncEngine = syncEngine
+        self.authService = authService
+        self.revenueCatService = revenueCatService
     }
 
     static func makeDefault() -> DependencyContainer {
-        DependencyContainer(
+        let userSession = UserSession()
+        let progressionEngine = ProgressionEngine()
+        let preferencesRepository = UserPreferencesRepository()
+        let exerciseRepository = ExerciseRepository()
+        let progressionService = ProgressionService(engine: progressionEngine)
+        let prService = PRService()
+        let syncEngine = SyncEngine()
+        let authService = AuthService(userSession: userSession, syncEngine: syncEngine)
+        let revenueCatService = RevenueCatService(userSession: userSession)
+        let workoutCoordinator = WorkoutSessionCoordinator(
+            syncEngine: syncEngine,
+            prService: prService,
+            progressionService: progressionService,
+            preferencesRepository: preferencesRepository
+        )
+
+        return DependencyContainer(
             router: AppRouter(
                 showOnboarding: !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
             ),
-            userSession: UserSession(),
-            progressionEngine: ProgressionEngine(),
-            exerciseSeeder: ExerciseSeeder()
+            userSession: userSession,
+            progressionEngine: progressionEngine,
+            exerciseSeeder: ExerciseSeeder(),
+            programSeeder: ProgramSeeder(),
+            preferencesRepository: preferencesRepository,
+            exerciseRepository: exerciseRepository,
+            progressionService: progressionService,
+            prService: prService,
+            workoutCoordinator: workoutCoordinator,
+            syncEngine: syncEngine,
+            authService: authService,
+            revenueCatService: revenueCatService
         )
     }
 }

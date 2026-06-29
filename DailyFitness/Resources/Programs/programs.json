@@ -1,0 +1,35 @@
+{
+  "programs": [
+    {
+      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1",
+      "name": "Full Body 3× Week",
+      "category": "strength",
+      "weeks": 4,
+      "days": [
+        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb001", "weekIndex": 0, "dayOfWeek": 2, "routineName": "Full Body A", "sortOrder": 0 },
+        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb002", "weekIndex": 0, "dayOfWeek": 4, "routineName": "Full Body B", "sortOrder": 1 },
+        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb003", "weekIndex": 0, "dayOfWeek": 6, "routineName": "Full Body A", "sortOrder": 2 }
+      ]
+    },
+    {
+      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2",
+      "name": "Mobility Flow",
+      "category": "mobility",
+      "weeks": 2,
+      "days": [
+        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb101", "weekIndex": 0, "dayOfWeek": 1, "routineName": "Mobility Flow", "sortOrder": 0 },
+        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb102", "weekIndex": 0, "dayOfWeek": 4, "routineName": "Mobility Flow", "sortOrder": 1 }
+      ]
+    },
+    {
+      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa3",
+      "name": "Beginner Strength",
+      "category": "strength",
+      "weeks": 4,
+      "days": [
+        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb201", "weekIndex": 0, "dayOfWeek": 1, "routineName": "Full Body A", "sortOrder": 0 },
+        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb202", "weekIndex": 0, "dayOfWeek": 4, "routineName": "Full Body B", "sortOrder": 1 }
+      ]
+    }
+  ]
+}

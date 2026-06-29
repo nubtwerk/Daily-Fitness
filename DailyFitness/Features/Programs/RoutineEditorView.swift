@@ -9,6 +9,7 @@ struct RoutineExerciseDraft: Identifiable {
     var targetSets: Int
     var targetRepsMin: Int
     var targetRepsMax: Int
+    var targetDurationSeconds: Int
     var restSeconds: Int
 
     init(from entity: RoutineExerciseEntity, name: String, category: ExerciseCategory) {
@@ -19,6 +20,7 @@ struct RoutineExerciseDraft: Identifiable {
         targetSets = entity.targetSets
         targetRepsMin = entity.targetRepsMin ?? 8
         targetRepsMax = entity.targetRepsMax ?? 12
+        targetDurationSeconds = entity.targetDurationSeconds ?? 60
         restSeconds = entity.restSeconds
     }
 
@@ -30,8 +32,11 @@ struct RoutineExerciseDraft: Identifiable {
         targetSets = 3
         targetRepsMin = 8
         targetRepsMax = 12
-        restSeconds = 90
+        targetDurationSeconds = 60
+        restSeconds = category == .strength ? 90 : 30
     }
+
+    var isStrength: Bool { category == .strength }
 }
 
 struct RoutineEditorView: View {
@@ -84,10 +89,6 @@ struct RoutineEditorView: View {
                     }
                 } header: {
                     Text("Exercises")
-                } footer: {
-                    if !drafts.isEmpty {
-                        Text("Drag to reorder. Defaults: 3 sets, 8–12 reps, 90s rest.")
-                    }
                 }
             }
             .navigationTitle(existingRoutine == nil ? "New routine" : "Edit routine")
@@ -108,6 +109,7 @@ struct RoutineEditorView: View {
             }
             .sheet(isPresented: $showExercisePicker) {
                 ExercisePickerView(
+                    dependencies: dependencies,
                     excludeIds: Set(drafts.map(\.exerciseId)),
                     onSelect: addExercise
                 )
@@ -165,7 +167,7 @@ struct RoutineEditorView: View {
             routine.exercises.removeAll()
         } else {
             routine = RoutineEntity(
-                userId: dependencies.userSession.localUserId,
+                userId: dependencies.userSession.effectiveUserId,
                 name: trimmedName
             )
             modelContext.insert(routine)
@@ -176,8 +178,9 @@ struct RoutineEditorView: View {
                 sortOrder: index,
                 exerciseId: draft.exerciseId,
                 targetSets: draft.targetSets,
-                targetRepsMin: draft.targetRepsMin,
-                targetRepsMax: draft.targetRepsMax,
+                targetRepsMin: draft.isStrength ? draft.targetRepsMin : nil,
+                targetRepsMax: draft.isStrength ? draft.targetRepsMax : nil,
+                targetDurationSeconds: draft.isStrength ? nil : draft.targetDurationSeconds,
                 restSeconds: draft.restSeconds
             )
             modelContext.insert(routineExercise)
@@ -185,6 +188,7 @@ struct RoutineEditorView: View {
         }
 
         routine.syncStatus = .pending
+        dependencies.syncEngine.enqueue(.upsertRoutine(routine.id))
         try? modelContext.save()
         dismiss()
     }
@@ -201,15 +205,13 @@ private struct RoutineExerciseDraftRow: View {
 
             Stepper("Sets: \(draft.targetSets)", value: $draft.targetSets, in: 1...10)
 
-            HStack {
+            if draft.isStrength {
                 Stepper("Min reps: \(draft.targetRepsMin)", value: $draft.targetRepsMin, in: 1...30)
-            }
-
-            HStack {
                 Stepper("Max reps: \(draft.targetRepsMax)", value: $draft.targetRepsMax, in: 1...30)
+                Stepper("Rest: \(draft.restSeconds)s", value: $draft.restSeconds, in: 15...300, step: 15)
+            } else {
+                Stepper("Duration: \(draft.targetDurationSeconds)s", value: $draft.targetDurationSeconds, in: 15...3600, step: 15)
             }
-
-            Stepper("Rest: \(draft.restSeconds)s", value: $draft.restSeconds, in: 15...300, step: 15)
         }
         .padding(.vertical, CalmStrength.Spacing.xs)
     }

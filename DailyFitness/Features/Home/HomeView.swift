@@ -7,6 +7,8 @@ struct HomeView: View {
     @Query(sort: \RoutineEntity.name) private var routines: [RoutineEntity]
     @Query(filter: #Predicate<WorkoutSessionEntity> { $0.endedAt == nil })
     private var activeSessions: [WorkoutSessionEntity]
+    @Query(filter: #Predicate<ProgramEntity> { $0.isActive == true })
+    private var activePrograms: [ProgramEntity]
 
     init(dependencies: DependencyContainer) {
         self._dependencies = Bindable(wrappedValue: dependencies)
@@ -19,7 +21,7 @@ struct HomeView: View {
                     if let active = activeSessions.first {
                         DFCard {
                             VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
-                                Text("Workout in progress")
+                                Text("Session in progress")
                                     .font(.subheadline)
                                     .foregroundStyle(Color.dfSecondaryText)
                                 Text(active.name)
@@ -31,12 +33,14 @@ struct HomeView: View {
                         }
                     }
 
+                    todayProgramCard
+
                     DFSectionHeader(title: "Quick start")
 
                     if routines.isEmpty {
                         DFEmptyState(
                             title: "No routines yet",
-                            message: "Create a routine in Programs or start a blank workout."
+                            message: "Create a routine in Programs or start a blank session."
                         )
                     } else {
                         ForEach(routines.prefix(5), id: \.id) { routine in
@@ -64,7 +68,7 @@ struct HomeView: View {
                         }
                     }
 
-                    DFSecondaryButton(title: "Blank workout") {
+                    DFSecondaryButton(title: "Blank session") {
                         startBlankWorkout()
                     }
                 }
@@ -75,26 +79,66 @@ struct HomeView: View {
         }
     }
 
-    private func startRoutine(_ routine: RoutineEntity) {
+    @ViewBuilder
+    private var todayProgramCard: some View {
+        if let program = activePrograms.first,
+           let match = ProgramScheduleResolver.routineForToday(program: program, routines: routines) {
+            let (today, routine) = match
+            DFCard {
+                VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
+                    Text("Today's session")
+                        .font(.subheadline)
+                        .foregroundStyle(Color.dfSecondaryText)
+                    Text(routine.name)
+                        .font(.title3.weight(.semibold))
+                    Text(program.name)
+                        .font(.caption)
+                        .foregroundStyle(Color.dfSecondaryText)
+                    DFPrimaryButton(title: "Start") {
+                        startRoutine(routine, programDayId: today.id)
+                    }
+                }
+            }
+        }
+    }
+
+    private func startRoutine(_ routine: RoutineEntity, programDayId: UUID? = nil) {
         let session = WorkoutSessionEntity(
-            userId: dependencies.userSession.localUserId,
+            userId: dependencies.userSession.effectiveUserId,
             name: routine.name,
             routineId: routine.id
         )
+        session.programDayId = programDayId
+
+        let exerciseDescriptor = FetchDescriptor<ExerciseEntity>()
+        let allExercises = (try? modelContext.fetch(exerciseDescriptor)) ?? []
 
         for routineExercise in routine.exercises.sorted(by: { $0.sortOrder < $1.sortOrder }) {
-            WorkoutExerciseFactory.addFromRoutineExercise(routineExercise, to: session, in: modelContext)
+            let loggingFields = allExercises.first(where: { $0.id == routineExercise.exerciseId })?.loggingFields ?? .weightReps
+            WorkoutExerciseFactory.addFromRoutineExercise(
+                routineExercise,
+                to: session,
+                in: modelContext,
+                loggingFields: loggingFields
+            )
         }
 
         modelContext.insert(session)
+        dependencies.progressionService.prefillSessionFromRecommendations(
+            session: session,
+            userId: dependencies.userSession.effectiveUserId,
+            isPro: dependencies.userSession.isPro,
+            context: modelContext
+        )
         try? modelContext.save()
+        dependencies.syncEngine.enqueue(.upsertSession(session.id))
         dependencies.router.startWorkout(sessionId: session.id)
     }
 
     private func startBlankWorkout() {
         let session = WorkoutSessionEntity(
-            userId: dependencies.userSession.localUserId,
-            name: "Workout"
+            userId: dependencies.userSession.effectiveUserId,
+            name: "Session"
         )
         modelContext.insert(session)
         try? modelContext.save()

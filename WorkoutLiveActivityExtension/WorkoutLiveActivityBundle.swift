@@ -53,6 +53,19 @@ struct LockScreenWorkoutView: View {
                 Text(timerInterval: Date()...restEndsAt, countsDown: true)
                     .font(.title2.monospacedDigit())
             }
+
+            HStack {
+                Button(intent: CompleteSetIntent()) {
+                    Label("Done", systemImage: "checkmark.circle")
+                }
+                .buttonStyle(.borderedProminent)
+
+                Button(intent: ExtendRestIntent()) {
+                    Label("+30s", systemImage: "plus.circle")
+                }
+                .buttonStyle(.bordered)
+            }
+            .font(.caption)
         }
         .padding()
     }

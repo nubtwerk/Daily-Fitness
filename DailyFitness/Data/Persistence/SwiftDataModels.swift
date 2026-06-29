@@ -303,6 +303,43 @@ final class ProgressionRecommendationEntity {
 }
 
 @Model
+final class PersonalRecordEntity {
+    @Attribute(.unique) var id: UUID
+    var userId: UUID
+    var exerciseId: UUID
+    var typeRaw: String
+    var value: Double
+    var achievedAt: Date
+    var sessionId: UUID
+    var setId: UUID
+
+    var type: PersonalRecordType {
+        get { PersonalRecordType(rawValue: typeRaw) ?? .weight }
+        set { typeRaw = newValue.rawValue }
+    }
+
+    init(
+        id: UUID = UUID(),
+        userId: UUID,
+        exerciseId: UUID,
+        type: PersonalRecordType,
+        value: Double,
+        achievedAt: Date,
+        sessionId: UUID,
+        setId: UUID
+    ) {
+        self.id = id
+        self.userId = userId
+        self.exerciseId = exerciseId
+        self.typeRaw = type.rawValue
+        self.value = value
+        self.achievedAt = achievedAt
+        self.sessionId = sessionId
+        self.setId = setId
+    }
+}
+
+@Model
 final class UserPreferencesEntity {
     @Attribute(.unique) var id: UUID
     var userId: UUID
@@ -335,6 +372,7 @@ enum DailyFitnessSchema {
             WorkoutExerciseEntity.self,
             WorkoutSetEntity.self,
             ProgressionRecommendationEntity.self,
+            PersonalRecordEntity.self,
             UserPreferencesEntity.self
         ]
     }
