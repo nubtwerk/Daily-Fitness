@@ -107,11 +107,11 @@ struct ExercisePickerView: View {
     private var categoryFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: CalmStrength.Spacing.sm) {
-                CategoryChip(title: "All", isSelected: selectedCategory == nil) {
+                DFChip(title: "All", isSelected: selectedCategory == nil) {
                     selectedCategory = nil
                 }
                 ForEach(ExerciseCategory.allCases, id: \.self) { category in
-                    CategoryChip(
+                    DFChip(
                         title: category.rawValue.capitalized,
                         isSelected: selectedCategory == category
                     ) {
@@ -128,11 +128,11 @@ struct ExercisePickerView: View {
     private var muscleFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: CalmStrength.Spacing.sm) {
-                CategoryChip(title: "All muscles", isSelected: selectedMuscle == nil) {
+                DFChip(title: "All muscles", isSelected: selectedMuscle == nil) {
                     selectedMuscle = nil
                 }
                 ForEach(muscleOptions, id: \.self) { muscle in
-                    CategoryChip(
+                    DFChip(
                         title: muscle.capitalized,
                         isSelected: selectedMuscle == muscle
                     ) {
@@ -178,24 +178,5 @@ private struct ExercisePickerRow: View {
         }
         .padding(.vertical, CalmStrength.Spacing.xs)
         .contentShape(Rectangle())
-    }
-}
-
-private struct CategoryChip: View {
-    let title: String
-    let isSelected: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .dfFont(.subheading)
-                .padding(.horizontal, CalmStrength.Spacing.md)
-                .padding(.vertical, CalmStrength.Spacing.sm)
-                .background(isSelected ? Color.dfPrimary : Color.dfSurface)
-                .foregroundStyle(isSelected ? Color.white : Color.dfPrimary)
-                .clipShape(Capsule())
-        }
-        .buttonStyle(.plain)
     }
 }

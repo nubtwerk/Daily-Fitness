@@ -25,7 +25,7 @@ struct MainTabView: View {
                 .tabItem { Label("Profile", systemImage: "person.fill") }
                 .tag(AppTab.profile)
         }
-        .tint(Color.dfPrimary)
+        .tint(Color.dfAccent) // sage selected tab — the single-accent rule (DSS §6.8 / §9)
         .fullScreenCover(isPresented: workoutPresented) {
             if let sessionId = dependencies.router.activeWorkoutSessionId {
                 LiveWorkoutView(sessionId: sessionId, dependencies: dependencies)

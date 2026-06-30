@@ -10,7 +10,7 @@ struct DailyFitnessApp: App {
 
     init() {
         // Brand the system nav/tab bars before any UIKit view exists (no flash).
-        CalmStrength.configureGlobalAppearance()
+        AppearanceConfigurator.apply()
     }
 
     var body: some Scene {
@@ -91,7 +91,7 @@ struct RootView: View {
                 }
                 .padding(CalmStrength.Spacing.lg)
                 .background(Color.dfPrimary.opacity(0.9))
-                .clipShape(RoundedRectangle(cornerRadius: CalmStrength.Radius.md))
+                .clipShape(RoundedRectangle(cornerRadius: CalmStrength.Radius.md, style: .continuous))
             }
         }
         #if DEBUG
