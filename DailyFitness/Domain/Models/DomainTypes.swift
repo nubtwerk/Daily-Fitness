@@ -40,6 +40,36 @@ enum ProgramCategory: String, Codable, CaseIterable, Sendable {
     case yoga
     case flexibility
     case hybrid
+
+    var displayName: String { rawValue.capitalized }
+
+    var symbolName: String {
+        switch self {
+        case .strength: return "dumbbell.fill"
+        case .mobility: return "figure.cooldown"
+        case .yoga: return "figure.mind.and.body"
+        case .flexibility: return "figure.flexibility"
+        case .hybrid: return "figure.strengthtraining.functional"
+        }
+    }
+}
+
+enum ProgramLevel: String, Codable, CaseIterable, Sendable {
+    case beginner
+    case beginnerIntermediate = "beginner_intermediate"
+    case intermediate
+    case advanced
+    case all
+
+    var displayName: String {
+        switch self {
+        case .beginner: return "Beginner"
+        case .beginnerIntermediate: return "Beginner–Intermediate"
+        case .intermediate: return "Intermediate"
+        case .advanced: return "Advanced"
+        case .all: return "All levels"
+        }
+    }
 }
 
 enum WorkoutPhase: String, Codable, Sendable {
@@ -55,6 +85,7 @@ enum ProgressionAction: String, Codable, Sendable {
 
 enum AppTab: Hashable, Sendable {
     case home
+    case library
     case programs
     case progress
     case profile
