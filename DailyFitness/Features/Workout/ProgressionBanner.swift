@@ -12,15 +12,15 @@ struct ProgressionBanner: View {
                 VStack(alignment: .leading, spacing: 2) {
                     if let weight = recommendation.targetWeightKg {
                         Text("Suggested: \(WeightFormatter.display(kg: weight, usePounds: usePounds)) × \(recommendation.targetRepsMin)–\(recommendation.targetRepsMax)")
-                            .font(.caption.weight(.medium))
+                            .dfFont(.captionStrong)
                             .foregroundStyle(Color.dfPrimary)
                     } else {
                         Text("Target: \(recommendation.targetRepsMin)–\(recommendation.targetRepsMax) reps")
-                            .font(.caption.weight(.medium))
+                            .dfFont(.captionStrong)
                             .foregroundStyle(Color.dfPrimary)
                     }
                     Text(recommendation.reason)
-                        .font(.caption2)
+                        .dfFont(.micro)
                         .foregroundStyle(Color.dfSecondaryText)
                         .lineLimit(2)
                 }
@@ -39,7 +39,7 @@ struct PRToastView: View {
                 Image(systemName: "trophy.fill")
                     .foregroundStyle(Color.dfAccent)
                 Text(prMessage)
-                    .font(.subheadline.weight(.medium))
+                    .dfFont(.subheading)
                     .foregroundStyle(Color.dfPrimary)
             }
             .padding(CalmStrength.Spacing.sm)

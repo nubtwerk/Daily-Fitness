@@ -20,6 +20,40 @@ enum SetRowFactory {
     }
 }
 
+/// The spring set-completion control + sage row-fill + success haptic that every
+/// set row shares (DSS §5 / §6.5 — closes the LOG-04 haptic gap). Apply
+/// `.dfSetCompletion(_:)` to a row's container.
+private struct SetCompleteButton: View {
+    let isCompleted: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle")
+                .font(.title2)
+                .foregroundStyle(isCompleted ? Color.dfAccent : Color.dfSecondaryText)
+                .scaleEffect(isCompleted ? 1.0 : 0.9)
+                .animation(CalmStrength.Motion.standard, value: isCompleted)
+        }
+        .frame(minWidth: 44, minHeight: 44)
+    }
+}
+
+private extension View {
+    /// Sweeps a soft sage fill behind a completed set row and fires a success
+    /// haptic when completion toggles.
+    func dfSetCompletion(_ isCompleted: Bool) -> some View {
+        self
+            .padding(.horizontal, CalmStrength.Spacing.xs)
+            .background(
+                isCompleted ? Color.dfAccent.opacity(0.08) : Color.clear,
+                in: RoundedRectangle(cornerRadius: CalmStrength.Radius.sm, style: .continuous)
+            )
+            .animation(CalmStrength.Motion.standard, value: isCompleted)
+            .sensoryFeedback(.success, trigger: isCompleted)
+    }
+}
+
 struct StrengthSetRow: View {
     @Bindable var set: WorkoutSetEntity
     let usePounds: Bool
@@ -29,29 +63,30 @@ struct StrengthSetRow: View {
     var body: some View {
         HStack(spacing: CalmStrength.Spacing.sm) {
             Text("Set \(set.setNumber)")
-                .font(.subheadline)
+                .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
                 .frame(width: 44, alignment: .leading)
 
             TextField(usePounds ? "lb" : "kg", value: weightBinding, format: .number)
                 .keyboardType(.decimalPad)
-                .textFieldStyle(.roundedBorder)
+                .dfField()
                 .frame(width: 64)
 
             TextField("reps", value: $set.reps, format: .number)
                 .keyboardType(.numberPad)
-                .textFieldStyle(.roundedBorder)
+                .dfField()
                 .frame(width: 52)
 
             if rirEnabled {
                 TextField("RIR", value: $set.rir, format: .number)
                     .keyboardType(.numberPad)
-                    .textFieldStyle(.roundedBorder)
+                    .dfField()
                     .frame(width: 44)
             }
 
-            completeButton
+            SetCompleteButton(isCompleted: set.isCompleted, action: onComplete)
         }
+        .dfSetCompletion(set.isCompleted)
     }
 
     private var weightBinding: Binding<Double?> {
@@ -69,15 +104,6 @@ struct StrengthSetRow: View {
             }
         )
     }
-
-    private var completeButton: some View {
-        Button(action: onComplete) {
-            Image(systemName: set.isCompleted ? "checkmark.circle.fill" : "circle")
-                .font(.title2)
-                .foregroundStyle(set.isCompleted ? Color.dfAccent : Color.dfSecondaryText)
-        }
-        .frame(minWidth: 44, minHeight: 44)
-    }
 }
 
 struct DurationSetRow: View {
@@ -87,7 +113,7 @@ struct DurationSetRow: View {
     var body: some View {
         HStack(spacing: CalmStrength.Spacing.sm) {
             Text("Set \(set.setNumber)")
-                .font(.subheadline)
+                .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
                 .frame(width: 44, alignment: .leading)
 
@@ -103,13 +129,9 @@ struct DurationSetRow: View {
 
             Spacer()
 
-            Button(action: onComplete) {
-                Image(systemName: set.isCompleted ? "checkmark.circle.fill" : "circle")
-                    .font(.title2)
-                    .foregroundStyle(set.isCompleted ? Color.dfAccent : Color.dfSecondaryText)
-            }
-            .frame(minWidth: 44, minHeight: 44)
+            SetCompleteButton(isCompleted: set.isCompleted, action: onComplete)
         }
+        .dfSetCompletion(set.isCompleted)
     }
 }
 
@@ -121,7 +143,7 @@ struct HoldSetRow: View {
     var body: some View {
         HStack(spacing: CalmStrength.Spacing.sm) {
             Text("Set \(set.setNumber)")
-                .font(.subheadline)
+                .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
                 .frame(width: 44, alignment: .leading)
 
@@ -146,13 +168,9 @@ struct HoldSetRow: View {
 
             Spacer()
 
-            Button(action: onComplete) {
-                Image(systemName: set.isCompleted ? "checkmark.circle.fill" : "circle")
-                    .font(.title2)
-                    .foregroundStyle(set.isCompleted ? Color.dfAccent : Color.dfSecondaryText)
-            }
-            .frame(minWidth: 44, minHeight: 44)
+            SetCompleteButton(isCompleted: set.isCompleted, action: onComplete)
         }
+        .dfSetCompletion(set.isCompleted)
     }
 
     private var sideBinding: Binding<BodySide> {

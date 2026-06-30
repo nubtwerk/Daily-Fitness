@@ -54,6 +54,8 @@ struct ExercisePickerView: View {
                         .buttonStyle(.plain)
                     }
                     .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.dfBackground)
                 }
             }
             .searchable(text: $searchText, prompt: "Search exercises")
@@ -105,11 +107,11 @@ struct ExercisePickerView: View {
     private var categoryFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: CalmStrength.Spacing.sm) {
-                CategoryChip(title: "All", isSelected: selectedCategory == nil) {
+                DFChip(title: "All", isSelected: selectedCategory == nil) {
                     selectedCategory = nil
                 }
                 ForEach(ExerciseCategory.allCases, id: \.self) { category in
-                    CategoryChip(
+                    DFChip(
                         title: category.rawValue.capitalized,
                         isSelected: selectedCategory == category
                     ) {
@@ -126,11 +128,11 @@ struct ExercisePickerView: View {
     private var muscleFilter: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: CalmStrength.Spacing.sm) {
-                CategoryChip(title: "All muscles", isSelected: selectedMuscle == nil) {
+                DFChip(title: "All muscles", isSelected: selectedMuscle == nil) {
                     selectedMuscle = nil
                 }
                 ForEach(muscleOptions, id: \.self) { muscle in
-                    CategoryChip(
+                    DFChip(
                         title: muscle.capitalized,
                         isSelected: selectedMuscle == muscle
                     ) {
@@ -152,11 +154,11 @@ private struct ExercisePickerRow: View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
             HStack {
                 Text(exercise.name)
-                    .font(.headline)
+                    .dfFont(.subheading)
                     .foregroundStyle(Color.dfPrimary)
                 if exercise.isCustom {
                     Text("Custom")
-                        .font(.caption2.weight(.medium))
+                        .dfFont(.captionStrong)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
                         .background(Color.dfAccent.opacity(0.2))
@@ -165,35 +167,16 @@ private struct ExercisePickerRow: View {
             }
             HStack(spacing: CalmStrength.Spacing.sm) {
                 Text(exercise.category.rawValue.capitalized)
-                    .font(.caption)
+                    .dfFont(.caption)
                     .foregroundStyle(Color.dfSecondaryText)
                 if let muscle = exercise.primaryMuscles.first {
                     Text(muscle.capitalized)
-                        .font(.caption)
+                        .dfFont(.caption)
                         .foregroundStyle(Color.dfSecondaryText)
                 }
             }
         }
         .padding(.vertical, CalmStrength.Spacing.xs)
         .contentShape(Rectangle())
-    }
-}
-
-private struct CategoryChip: View {
-    let title: String
-    let isSelected: Bool
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            Text(title)
-                .font(.subheadline.weight(.medium))
-                .padding(.horizontal, CalmStrength.Spacing.md)
-                .padding(.vertical, CalmStrength.Spacing.sm)
-                .background(isSelected ? Color.dfPrimary : Color.dfSurface)
-                .foregroundStyle(isSelected ? Color.white : Color.dfPrimary)
-                .clipShape(Capsule())
-        }
-        .buttonStyle(.plain)
     }
 }

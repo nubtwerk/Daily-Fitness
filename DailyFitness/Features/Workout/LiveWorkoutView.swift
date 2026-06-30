@@ -15,6 +15,7 @@ struct LiveWorkoutView: View {
     @Query private var preferences: [UserPreferencesEntity]
 
     @State private var restEndsAt: Date?
+    @State private var restTotalSeconds = 0
     @State private var showEndConfirmation = false
     @State private var showExercisePicker = false
     @State private var recentPRs: [PersonalRecord] = []
@@ -117,17 +118,20 @@ struct LiveWorkoutView: View {
         ScrollView {
             VStack(spacing: CalmStrength.Spacing.md) {
                 if let restEndsAt, restEndsAt > Date() {
-                    RestTimerBanner(restEndsAt: restEndsAt) {
-                        self.restEndsAt = restEndsAt.addingTimeInterval(30)
-                    }
+                    DFRestTimerRing(
+                        restEndsAt: restEndsAt,
+                        totalSeconds: restTotalSeconds,
+                        onExtend: extendRest,
+                        onSkip: skipRest
+                    )
                 }
 
                 if session.exercises.isEmpty {
                     DFEmptyState(
                         title: "No exercises yet",
-                        message: "Add exercises from the library to start logging sets."
-                    )
-                    DFPrimaryButton(title: "Add exercise") {
+                        message: "Add exercises from the library to start logging sets.",
+                        actionTitle: "Add exercise"
+                    ) {
                         showExercisePicker = true
                     }
                 } else {
@@ -160,7 +164,7 @@ struct LiveWorkoutView: View {
         DFCard {
             VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
                 Text(exercise?.name ?? "Exercise")
-                    .font(.headline)
+                    .dfFont(.subheading)
                     .foregroundStyle(Color.dfPrimary)
 
                 if showProgression {
@@ -225,8 +229,22 @@ struct LiveWorkoutView: View {
             context: modelContext
         )
         if exercise?.category == .strength, prefs.defaultRestSeconds > 0 {
+            restTotalSeconds = prefs.defaultRestSeconds
             restEndsAt = Date().addingTimeInterval(TimeInterval(prefs.defaultRestSeconds))
         }
+    }
+
+    /// Add 30s to the running rest period (keeps the ring's progress in range).
+    private func extendRest() {
+        guard let restEndsAt else { return }
+        self.restEndsAt = restEndsAt.addingTimeInterval(30)
+        restTotalSeconds += 30
+    }
+
+    /// Dismiss the rest timer immediately (LOG-05 Skip control).
+    private func skipRest() {
+        restEndsAt = nil
+        restTotalSeconds = 0
     }
 
     private func finishWorkout() {
@@ -259,9 +277,7 @@ struct LiveWorkoutView: View {
         case .completeSet:
             completeNextSet(in: session)
         case .extendRest:
-            if let restEndsAt {
-                self.restEndsAt = restEndsAt.addingTimeInterval(30)
-            }
+            extendRest()
         case .endWorkout:
             showEndConfirmation = true
         }
@@ -278,27 +294,3 @@ struct LiveWorkoutView: View {
     }
 }
 
-struct RestTimerBanner: View {
-    let restEndsAt: Date
-    var onExtend: (() -> Void)?
-
-    var body: some View {
-        TimelineView(.periodic(from: .now, by: 1)) { context in
-            let remaining = max(0, Int(restEndsAt.timeIntervalSince(context.date)))
-            DFCard {
-                HStack {
-                    Text("Rest")
-                        .font(.headline)
-                    Spacer()
-                    if let onExtend {
-                        Button("+30s", action: onExtend)
-                            .font(.subheadline.weight(.medium))
-                    }
-                    Text("\(remaining)s")
-                        .font(.title2.monospacedDigit())
-                        .foregroundStyle(Color.dfAccent)
-                }
-            }
-        }
-    }
-}
