@@ -3,132 +3,146 @@ import UIKit
 
 // MARK: - Calm Strength design language
 //
-// DailyFitness's visual identity (PRD §6 / US-001): warm stone neutrals, deep
-// forest primary, a single muted-sage accent. Calm, capable, gender-neutral —
-// "Apple Health meets a calm studio", never gym-bro. This file is the single
-// source of truth for that language: tokens (spacing, radius, type, elevation,
-// motion), the color palette, and the shared components every screen is built
-// from. Touch the language here, not screen-by-screen.
+// DailyFitness's visual identity (PRD §6 / US-001, formalized in
+// docs/DESIGN_SYSTEM_SPEC.md): warm stone neutrals, deep forest primary, a
+// single muted-sage accent. Calm, capable, gender-neutral — "Apple Health meets
+// a calm studio", never gym-bro. This file is the single source of truth for
+// that language: tokens (spacing, radius, type, elevation, motion), the color
+// palette, system-chrome appearance, and the shared components every screen is
+// built from. Touch the language here, not screen-by-screen.
 
 enum CalmStrength {
 
-    // MARK: Spacing — an 8pt-ish rhythm with a tight 4pt step for dense rows.
+    // MARK: Spacing — 4 / 8 / 16 / 24 / 32 / 48 rhythm (DSS §4).
     enum Spacing {
         static let xs: CGFloat = 4
         static let sm: CGFloat = 8
         static let md: CGFloat = 16
         static let lg: CGFloat = 24
         static let xl: CGFloat = 32
-        static let xxl: CGFloat = 48
+        static let xxl: CGFloat = 48   // top-of-screen breathing room, empty-state pad
     }
 
-    // MARK: Corner radii — continuous corners everywhere (see `.continuous`).
+    // MARK: Corner radii — continuous (squircle) corners everywhere (DSS §3.3).
     enum Radius {
-        static let sm: CGFloat = 8
-        static let md: CGFloat = 12   // controls / buttons
-        static let lg: CGFloat = 16   // cards
-        static let pill: CGFloat = 999
+        static let sm: CGFloat = 8     // chips, small controls, input fields
+        static let md: CGFloat = 14    // cards
+        static let lg: CGFloat = 20    // sheets, hero cards
+        static let pill: CGFloat = 999 // capsule buttons, chips
     }
 
-    // MARK: Typography
+    // MARK: Typography (DSS §2)
     //
-    // SF Pro (the system face) on Dynamic Type text styles, so the scale honors
-    // the user's text-size setting. Headings are *medium* weight — present but
-    // unshouty — and body/title styles carry explicit line spacing for a calm,
-    // readable rhythm. Use via `Text(...).dfFont(.heading)`.
+    // SF Pro. Headings are `.medium` weight — present but unshouty; this is the
+    // single biggest "calm not aggressive" signal, so `.semibold` is reserved for
+    // buttons/callouts only. Per §2.2 Phase 1 ships fixed sizes with the token
+    // names kept, so a later Dynamic-Type migration (`.relativeTo`) is mechanical.
+    // Use via `Text(...).dfFont(.heading)`.
     enum Typography: CaseIterable {
-        case display       // hero moments — onboarding, paywall
-        case title         // screen titles
-        case heading       // card titles, section headers (medium weight)
-        case subheading    // emphasis, control labels
-        case body          // running text
-        case callout       // secondary running text
-        case caption       // metadata
+        case display       // big numbers — rest timer, hero stats
+        case title         // screen titles / large section intros
+        case heading       // card titles, section headers
+        case subheading    // row primary text, control labels
+        case body          // body copy, descriptions
+        case callout       // buttons, emphasized inline
+        case caption       // metadata, set labels, helper text
         case captionStrong // emphasized metadata
         case micro         // the very smallest labels
 
         var font: Font {
             switch self {
-            case .display:       return .system(.largeTitle, design: .default).weight(.semibold)
-            case .title:         return .system(.title2, design: .default).weight(.semibold)
-            case .heading:       return .system(.title3, design: .default).weight(.medium)
-            case .subheading:    return .system(.headline, design: .default).weight(.medium)
-            case .body:          return .system(.body, design: .default)
-            case .callout:       return .system(.callout, design: .default)
-            case .caption:       return .system(.caption, design: .default)
-            case .captionStrong: return .system(.caption, design: .default).weight(.medium)
-            case .micro:         return .system(.caption2, design: .default)
+            case .display:       return .system(size: 40, weight: .medium, design: .rounded)
+            case .title:         return .system(size: 28, weight: .medium)
+            case .heading:       return .system(size: 20, weight: .medium)
+            case .subheading:    return .system(size: 17, weight: .medium)
+            case .body:          return .system(size: 16, weight: .regular)
+            case .callout:       return .system(size: 16, weight: .semibold)
+            case .caption:       return .system(size: 13, weight: .regular)
+            case .captionStrong: return .system(size: 13, weight: .medium)
+            case .micro:         return .system(size: 11, weight: .regular)
             }
         }
 
         var lineSpacing: CGFloat {
             switch self {
-            case .display:  return 4
-            case .title:    return 3
-            case .heading:  return 2
-            case .body:     return 5
-            case .callout:  return 3
-            default:        return 1
+            case .display:       return 0
+            case .title:         return 2
+            case .heading:       return 2
+            case .subheading:    return 2
+            case .body:          return 4   // generous
+            case .callout:       return 0
+            case .caption:       return 2
+            case .captionStrong: return 2
+            case .micro:         return 0
             }
         }
     }
 
-    // MARK: Elevation
+    // MARK: Elevation (DSS §3.1)
     //
-    // Cards sit on a *very* soft shadow in light mode — black at 6% opacity, a
-    // wide 12pt blur, nudged 4pt down. Shadows read as mud on dark surfaces, so
-    // in dark mode cards are defined by a 1px hairline instead (see DFCard).
+    // Soft, low-opacity, large-blur shadows — calm, not "material design" hard.
+    // Shadows read as mud on dark surfaces, so in dark mode cards drop to the
+    // faint `pressed` shadow and lean on a 1px hairline instead (see DFCard).
+    struct Shadow {
+        let color: Color
+        let radius: CGFloat
+        let x: CGFloat
+        let y: CGFloat
+    }
     enum Elevation {
-        static let shadowColor = Color.black.opacity(0.06)
-        static let shadowRadius: CGFloat = 12
-        static let shadowY: CGFloat = 4
-
-        /// A tighter, slightly stronger shadow for floating/raised surfaces.
-        static let raisedColor = Color.black.opacity(0.10)
-        static let raisedRadius: CGFloat = 20
-        static let raisedY: CGFloat = 8
+        static let card    = Shadow(color: .black.opacity(0.06), radius: 12, x: 0, y: 4)
+        static let raised  = Shadow(color: .black.opacity(0.10), radius: 20, x: 0, y: 8)  // sheets, active banner
+        static let pressed = Shadow(color: .black.opacity(0.04), radius: 6,  x: 0, y: 2)  // pressed / dark cards
     }
 
-    // MARK: Motion — gentle springs only. Nothing snaps or flashes.
+    // MARK: Motion — gentle springs only (DSS §5). Nothing snaps or flashes.
     enum Motion {
-        /// Default — content transitions and value changes.
-        static let gentle = Animation.spring(response: 0.4, dampingFraction: 0.85)
-        /// Button-press feedback — a touch quicker, lightly bouncy.
-        static let press = Animation.spring(response: 0.3, dampingFraction: 0.72)
-        /// Larger entrances — slow and settled.
-        static let settle = Animation.spring(response: 0.55, dampingFraction: 0.9)
+        static let standard = Animation.spring(response: 0.40, dampingFraction: 0.85) // value changes, completions
+        static let gentle   = Animation.spring(response: 0.55, dampingFraction: 0.90) // screen / step transitions
+        static let snappy   = Animation.spring(response: 0.30, dampingFraction: 0.80) // button press feedback
+        static let calm     = Animation.easeInOut(duration: 0.8)                       // rest-timer ring depletion
     }
+}
 
-    /// Configure system bars (nav + tab) to the Calm Strength language: a warm
-    /// stone background, forest titles, no hard divider lines. Call once at launch.
+// MARK: - System chrome appearance (DSS §6.8)
+//
+// Branded nav + tab bars: warm-stone background, medium-weight forest titles, a
+// sage-tinted selected tab. NB: this deliberately does NOT set an opaque
+// `scrollEdgeAppearance` on the nav bar — on iOS 26 that blanks the large title
+// text. Branding the standard + compact states is enough: the large title
+// renders over the warm-stone content at the top, and the stone bar appears once
+// the user scrolls.
+enum AppearanceConfigurator {
     @MainActor
-    static func configureGlobalAppearance() {
-        let stone = UIColor(named: "Background") ?? .systemBackground
-        let forest = UIColor(named: "Primary") ?? .label
+    static func apply() {
+        let stone     = UIColor(named: "Background") ?? .systemBackground
+        let forest    = UIColor(named: "Primary") ?? .label
+        let sage      = UIColor(named: "Accent") ?? .tintColor
         let secondary = UIColor(named: "SecondaryText") ?? .secondaryLabel
 
         let nav = UINavigationBarAppearance()
         nav.configureWithOpaqueBackground()
         nav.backgroundColor = stone
         nav.shadowColor = .clear
-        // Color only — let UIKit own the title font metrics.
-        nav.titleTextAttributes = [.foregroundColor: forest]
-        nav.largeTitleTextAttributes = [.foregroundColor: forest]
-        // Brand the bar in its scrolled (standard) and compact states only. Do NOT
-        // set scrollEdgeAppearance: on iOS 26 an opaque scroll-edge background
-        // suppresses the large title text. Leaving it default keeps a clean
-        // large title over the warm-stone content at the top, and the branded
-        // stone bar appears once the user scrolls.
+        nav.titleTextAttributes = [
+            .foregroundColor: forest,
+            .font: UIFont.systemFont(ofSize: 17, weight: .medium),
+        ]
+        nav.largeTitleTextAttributes = [
+            .foregroundColor: forest,
+            .font: UIFont.systemFont(ofSize: 30, weight: .medium),
+        ]
         UINavigationBar.appearance().standardAppearance = nav
         UINavigationBar.appearance().compactAppearance = nav
+        // scrollEdgeAppearance intentionally left default — see note above.
 
         let tab = UITabBarAppearance()
         tab.configureWithOpaqueBackground()
         tab.backgroundColor = stone
         tab.shadowColor = UIColor.separator.withAlphaComponent(0.18)
         for layout in [tab.stackedLayoutAppearance, tab.inlineLayoutAppearance, tab.compactInlineLayoutAppearance] {
-            layout.selected.iconColor = forest
-            layout.selected.titleTextAttributes = [.foregroundColor: forest]
+            layout.selected.iconColor = sage
+            layout.selected.titleTextAttributes = [.foregroundColor: sage]
             layout.normal.iconColor = secondary
             layout.normal.titleTextAttributes = [.foregroundColor: secondary]
         }
@@ -137,30 +151,31 @@ enum CalmStrength {
     }
 }
 
-// MARK: - Palette
+// MARK: - Palette (DSS §1.3)
 
 extension Color {
-    static let dfBackground = Color("Background")        // warm stone
-    static let dfPrimary = Color("Primary")              // deep forest (inverts to pale sage in dark)
-    static let dfAccent = Color("Accent")                // muted sage
-    static let dfSecondaryText = Color("SecondaryText")  // muted sage-gray
-    static let dfSurface = Color("Surface")              // card surface
+    // Canvas & surfaces
+    static let dfBackground      = Color("Background")        // warm stone
+    static let dfSurface         = Color("Surface")           // card surface
+    static let dfSurfaceElevated = Color("SurfaceElevated")   // faint off-white for stacked/elevated cards
 
-    /// Forest fill for the primary CTA. `dfPrimary` inverts to a pale tint in dark
-    /// mode (it's a text color), so it can't back a white-text button — this stays
-    /// deep in both appearances, brightened a little in dark so it lifts off the
-    /// warm-black background.
-    static let dfPrimaryFill = Color(uiColor: UIColor { trait in
-        trait.userInterfaceStyle == .dark
-            ? UIColor(red: 0.243, green: 0.420, blue: 0.341, alpha: 1)
-            : UIColor(red: 0.176, green: 0.290, blue: 0.243, alpha: 1)
-    })
+    // Ink & accent
+    static let dfPrimary       = Color("Primary")             // deep forest (inverts to pale sage in dark)
+    static let dfAccent        = Color("Accent")              // muted sage — the single accent
+    static let dfSecondaryText = Color("SecondaryText")       // muted sage-gray
 
-    /// Foreground on filled primary buttons — a warm near-white, never pure #FFF.
-    static let dfOnPrimary = Color(.sRGB, red: 0.97, green: 0.96, blue: 0.94, opacity: 1)
+    // Derived / computed tokens (no asset needed)
+    static let dfHairline        = Color.dfPrimary.opacity(0.08)  // light input/separator border (dark cards use .white.opacity(0.08))
+    static let dfFieldBackground = Color.dfPrimary.opacity(0.04)  // input fill that matches the card system
+}
 
-    /// Defines card edges in dark mode, where the light-mode shadow vanishes.
-    static let dfHairline = Color.white.opacity(0.08)
+// MARK: - Shadow application
+
+extension View {
+    /// Apply a Calm Strength elevation shadow.
+    func dfShadow(_ s: CalmStrength.Shadow) -> some View {
+        shadow(color: s.color, radius: s.radius, x: s.x, y: s.y)
+    }
 }
 
 // MARK: - Typography modifier
@@ -181,98 +196,96 @@ extension View {
     }
 }
 
-// MARK: - Card
+// MARK: - Card (DSS §6.1)
 
 /// The elevated surface every block of content sits on: warm surface fill,
 /// continuous-rounded corners, a soft shadow in light mode and a 1px hairline
 /// in dark. Full-width by default so cards line up into a calm column.
 struct DFCard<Content: View>: View {
     @Environment(\.colorScheme) private var scheme
-    private let alignment: HorizontalAlignment
+    var elevation: CalmStrength.Shadow
+    var padding: CGFloat
     private let content: Content
 
-    init(alignment: HorizontalAlignment = .leading, @ViewBuilder content: () -> Content) {
-        self.alignment = alignment
+    init(elevation: CalmStrength.Shadow = CalmStrength.Elevation.card,
+         padding: CGFloat = CalmStrength.Spacing.md,
+         @ViewBuilder content: () -> Content) {
+        self.elevation = elevation
+        self.padding = padding
         self.content = content()
     }
 
     var body: some View {
         content
-            .padding(CalmStrength.Spacing.md)
-            .frame(maxWidth: .infinity, alignment: Alignment(horizontal: alignment, vertical: .center))
+            .padding(padding)
+            .frame(maxWidth: .infinity, alignment: .leading)
             .background(
                 Color.dfSurface,
-                in: RoundedRectangle(cornerRadius: CalmStrength.Radius.lg, style: .continuous)
+                in: RoundedRectangle(cornerRadius: CalmStrength.Radius.md, style: .continuous)
             )
             .overlay(
-                RoundedRectangle(cornerRadius: CalmStrength.Radius.lg, style: .continuous)
-                    .strokeBorder(Color.dfHairline, lineWidth: scheme == .dark ? 1 : 0)
+                RoundedRectangle(cornerRadius: CalmStrength.Radius.md, style: .continuous)
+                    .strokeBorder(Color.white.opacity(0.08), lineWidth: 1)
+                    .opacity(scheme == .dark ? 1 : 0)
             )
-            .shadow(
-                color: scheme == .dark ? .clear : CalmStrength.Elevation.shadowColor,
-                radius: CalmStrength.Elevation.shadowRadius,
-                x: 0,
-                y: CalmStrength.Elevation.shadowY
-            )
+            .dfShadow(scheme == .dark ? CalmStrength.Elevation.pressed : elevation)
     }
 }
 
-// MARK: - Button styles
+/// Wrap a tappable card so the whole surface springs on press.
+/// Usage: `Button { … } label: { DFCard { row } }.buttonStyle(DFCardButtonStyle())`.
+struct DFCardButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .scaleEffect(configuration.isPressed ? 0.98 : 1)
+            .animation(CalmStrength.Motion.standard, value: configuration.isPressed)
+    }
+}
+
+// MARK: - Button styles (DSS §6.2)
 //
 // Three tiers replace the stock .borderedProminent / .bordered chrome:
-//   • primary   — filled forest, white text, spring press scale
-//   • secondary — tinted/ghost forest on a faint forest wash
-//   • tertiary  — plain text, for low-emphasis actions
-// Each carries the same calm press animation.
+//   • primary   — filled forest, light ink, capsule, spring press + soft shadow
+//   • secondary — tinted forest wash, capsule
+//   • tertiary  — sage text only, for low-emphasis actions ("Skip", "+30s")
+// `dfPrimary`/`dfBackground` both invert in dark mode, so the filled CTA stays
+// legible in both schemes without hardcoded colors.
 
 struct DFPrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .dfFont(.subheading)
-            .foregroundStyle(Color.dfOnPrimary)
+            .dfFont(.callout)
+            .foregroundStyle(Color.dfBackground)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 15)
-            .padding(.horizontal, CalmStrength.Spacing.lg)
-            .background(
-                Color.dfPrimaryFill,
-                in: RoundedRectangle(cornerRadius: CalmStrength.Radius.md, style: .continuous)
-            )
-            .opacity(configuration.isPressed ? 0.94 : 1)
+            .padding(.vertical, 14)
+            .background(Color.dfPrimary, in: Capsule(style: .continuous))
+            .dfShadow(CalmStrength.Elevation.card)
+            .opacity(configuration.isPressed ? 0.92 : 1)
             .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .animation(CalmStrength.Motion.press, value: configuration.isPressed)
+            .animation(CalmStrength.Motion.snappy, value: configuration.isPressed)
     }
 }
 
 struct DFSecondaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .dfFont(.subheading)
+            .dfFont(.callout)
             .foregroundStyle(Color.dfPrimary)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 15)
-            .padding(.horizontal, CalmStrength.Spacing.lg)
-            .background(
-                Color.dfPrimary.opacity(0.10),
-                in: RoundedRectangle(cornerRadius: CalmStrength.Radius.md, style: .continuous)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: CalmStrength.Radius.md, style: .continuous)
-                    .strokeBorder(Color.dfPrimary.opacity(0.20), lineWidth: 1)
-            )
-            .opacity(configuration.isPressed ? 0.9 : 1)
+            .padding(.vertical, 14)
+            .background(Color.dfPrimary.opacity(0.10), in: Capsule(style: .continuous))
             .scaleEffect(configuration.isPressed ? 0.97 : 1)
-            .animation(CalmStrength.Motion.press, value: configuration.isPressed)
+            .animation(CalmStrength.Motion.snappy, value: configuration.isPressed)
     }
 }
 
 struct DFTertiaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .dfFont(.subheading)
-            .foregroundStyle(Color.dfPrimary)
-            .opacity(configuration.isPressed ? 0.55 : 1)
-            .scaleEffect(configuration.isPressed ? 0.98 : 1)
-            .animation(CalmStrength.Motion.press, value: configuration.isPressed)
+            .dfFont(.callout)
+            .foregroundStyle(Color.dfAccent)
+            .opacity(configuration.isPressed ? 0.6 : 1)
+            .animation(CalmStrength.Motion.snappy, value: configuration.isPressed)
     }
 }
 
@@ -291,43 +304,203 @@ extension ButtonStyle where Self == DFTertiaryButtonStyle {
 struct DFPrimaryButton: View {
     let title: String
     let action: () -> Void
-
-    var body: some View {
-        Button(title, action: action)
-            .buttonStyle(.dfPrimary)
-    }
+    var body: some View { Button(title, action: action).buttonStyle(.dfPrimary) }
 }
 
 struct DFSecondaryButton: View {
     let title: String
     let action: () -> Void
-
-    var body: some View {
-        Button(title, action: action)
-            .buttonStyle(.dfSecondary)
-    }
+    var body: some View { Button(title, action: action).buttonStyle(.dfSecondary) }
 }
 
 struct DFTertiaryButton: View {
     let title: String
     let action: () -> Void
+    var body: some View { Button(title, action: action).buttonStyle(.dfTertiary) }
+}
+
+// MARK: - Section header (DSS §6.3)
+
+struct DFSectionHeader<Trailing: View>: View {
+    let title: String
+    @ViewBuilder var trailing: () -> Trailing
 
     var body: some View {
-        Button(title, action: action)
-            .buttonStyle(.dfTertiary)
+        HStack(alignment: .firstTextBaseline) {
+            Text(title)
+                .dfFont(.heading)
+                .foregroundStyle(Color.dfPrimary)
+            Spacer()
+            trailing()
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }
 
-// MARK: - Section header
+extension DFSectionHeader where Trailing == EmptyView {
+    init(title: String) { self.init(title: title) { EmptyView() } }
+}
 
-struct DFSectionHeader: View {
+// MARK: - List row (DSS §6.4)
+
+struct DFListRow<Leading: View, Trailing: View>: View {
+    @ViewBuilder var leading: () -> Leading
     let title: String
+    var subtitle: String? = nil
+    @ViewBuilder var trailing: () -> Trailing
 
     var body: some View {
-        Text(title)
-            .dfFont(.heading)
-            .foregroundStyle(Color.dfPrimary)
-            .frame(maxWidth: .infinity, alignment: .leading)
+        HStack(spacing: CalmStrength.Spacing.md) {
+            leading()
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title).dfFont(.subheading)
+                if let subtitle {
+                    Text(subtitle)
+                        .dfFont(.caption)
+                        .foregroundStyle(Color.dfSecondaryText)
+                }
+            }
+            Spacer()
+            trailing()
+        }
+        .padding(.vertical, CalmStrength.Spacing.xs)
+        .frame(minHeight: 44)
+    }
+}
+
+// MARK: - Inputs (DSS §6.5)
+
+/// Card-system field style for set-row inputs — faint forest fill, hairline
+/// border, continuous corners, monospaced digits. Replaces `.roundedBorder`.
+struct DFFieldStyle: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .padding(.vertical, 8)
+            .padding(.horizontal, 10)
+            .background(
+                Color.dfFieldBackground,
+                in: RoundedRectangle(cornerRadius: CalmStrength.Radius.sm, style: .continuous)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: CalmStrength.Radius.sm, style: .continuous)
+                    .strokeBorder(Color.dfHairline, lineWidth: 1)
+            )
+            .font(CalmStrength.Typography.subheading.font.monospacedDigit())
+    }
+}
+
+extension View {
+    /// Calm Strength input field styling — use on set-row `TextField`s.
+    func dfField() -> some View { modifier(DFFieldStyle()) }
+}
+
+// MARK: - Chips / segmented selection (DSS §6.9)
+
+struct DFChip: View {
+    let title: String
+    let isSelected: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: action) {
+            Text(title)
+                .dfFont(.caption)
+                .padding(.vertical, 6)
+                .padding(.horizontal, 12)
+                .background(
+                    isSelected ? Color.dfAccent.opacity(0.18) : Color.dfPrimary.opacity(0.05),
+                    in: Capsule(style: .continuous)
+                )
+                .foregroundStyle(isSelected ? Color.dfPrimary : Color.dfSecondaryText)
+        }
+        .buttonStyle(.plain)
+        .animation(CalmStrength.Motion.snappy, value: isSelected)
+    }
+}
+
+/// A horizontally-scrolling row of `DFChip`s bound to a single selection — a
+/// calm replacement for stock `Picker(.segmented)`.
+struct DFChipPicker<Option: Hashable>: View {
+    let options: [Option]
+    let title: (Option) -> String
+    @Binding var selection: Option
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: CalmStrength.Spacing.sm) {
+                ForEach(options, id: \.self) { option in
+                    DFChip(title: title(option), isSelected: option == selection) {
+                        selection = option
+                    }
+                }
+            }
+        }
+    }
+}
+
+// MARK: - Stat tile (DSS §6.10)
+
+struct DFStatTile: View {
+    let value: String   // e.g. "12,450 kg"
+    let label: String   // e.g. "Volume"
+    var icon: String? = nil
+
+    var body: some View {
+        DFCard(padding: CalmStrength.Spacing.md) {
+            VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
+                if let icon {
+                    Image(systemName: icon).foregroundStyle(Color.dfAccent)
+                }
+                Text(value).dfFont(.title).foregroundStyle(Color.dfPrimary)
+                Text(label).dfFont(.caption).foregroundStyle(Color.dfSecondaryText)
+            }
+        }
+    }
+}
+
+// MARK: - Rest timer (DSS §6.7)
+
+/// A calm sage countdown ring (never red, never flashing): a circular progress
+/// track that smoothly depletes, the remaining seconds centered in display type,
+/// plus Skip / +30s tertiary controls.
+struct DFRestTimerRing: View {
+    let restEndsAt: Date
+    let totalSeconds: Int
+    var onExtend: (() -> Void)?
+    var onSkip: (() -> Void)?
+
+    var body: some View {
+        TimelineView(.periodic(from: .now, by: 0.2)) { ctx in
+            let remaining = max(0, restEndsAt.timeIntervalSince(ctx.date))
+            let progress = totalSeconds > 0 ? min(1, remaining / Double(totalSeconds)) : 0
+            DFCard {
+                HStack(spacing: CalmStrength.Spacing.lg) {
+                    ZStack {
+                        Circle().stroke(Color.dfAccent.opacity(0.15), lineWidth: 6)
+                        Circle()
+                            .trim(from: 0, to: progress)
+                            .stroke(Color.dfAccent, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                            .rotationEffect(.degrees(-90))
+                            .animation(CalmStrength.Motion.calm, value: progress)
+                        Text("\(Int(remaining))")
+                            .dfFont(.display)
+                            .monospacedDigit()
+                            .foregroundStyle(Color.dfPrimary)
+                    }
+                    .frame(width: 88, height: 88)
+
+                    VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
+                        Text("Rest").dfFont(.heading)
+                        HStack(spacing: CalmStrength.Spacing.md) {
+                            if let onSkip { Button("Skip", action: onSkip).buttonStyle(.dfTertiary) }
+                            if let onExtend { Button("+30s", action: onExtend).buttonStyle(.dfTertiary) }
+                        }
+                    }
+                    Spacer()
+                }
+            }
+            .transition(.opacity.combined(with: .scale(scale: 0.96)))
+        }
     }
 }
 
@@ -375,11 +548,11 @@ struct DFFlowMark: View {
     }
 }
 
-// MARK: - Empty state
+// MARK: - Empty state (DSS §6.6)
 
-/// Calm empty state: the flow mark, a title + message, and an optional CTA.
-/// Existing call sites pass only `title`/`message`; supply `actionTitle`/`action`
-/// to surface a next step.
+/// Calm empty state: the abstract flow mark, a title + message, and an optional
+/// CTA. Existing call sites pass only `title`/`message`; supply
+/// `actionTitle`/`action` to surface a next step.
 struct DFEmptyState: View {
     let title: String
     let message: String
@@ -395,16 +568,18 @@ struct DFEmptyState: View {
                     .foregroundStyle(Color.dfPrimary)
                     .multilineTextAlignment(.center)
                 Text(message)
-                    .dfFont(.callout)
+                    .dfFont(.body)
                     .foregroundStyle(Color.dfSecondaryText)
                     .multilineTextAlignment(.center)
             }
             if let actionTitle, let action {
                 DFSecondaryButton(title: actionTitle, action: action)
+                    .fixedSize()
                     .padding(.top, CalmStrength.Spacing.xs)
             }
         }
         .frame(maxWidth: .infinity)
-        .padding(CalmStrength.Spacing.xl)
+        .padding(.vertical, CalmStrength.Spacing.xxl)
+        .padding(.horizontal, CalmStrength.Spacing.lg)
     }
 }
