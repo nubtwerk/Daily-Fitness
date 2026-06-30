@@ -1,34 +1,436 @@
 {
   "programs": [
     {
-      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1",
-      "name": "Full Body 3× Week",
+      "id": "3823d367-307b-5ebc-b28e-9d25d6c293f1",
+      "name": "Upper / Lower Split",
       "category": "strength",
-      "weeks": 4,
+      "level": "intermediate",
+      "weeks": null,
+      "daysPerWeek": 4,
+      "equipment": [
+        "barbell",
+        "dumbbell",
+        "cable",
+        "machine"
+      ],
+      "description": "A classic 4-day split alternating upper- and lower-body sessions for balanced strength and hypertrophy.",
       "days": [
-        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb001", "weekIndex": 0, "dayOfWeek": 2, "routineName": "Full Body A", "sortOrder": 0 },
-        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb002", "weekIndex": 0, "dayOfWeek": 4, "routineName": "Full Body B", "sortOrder": 1 },
-        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb003", "weekIndex": 0, "dayOfWeek": 6, "routineName": "Full Body A", "sortOrder": 2 }
+        {
+          "id": "bd6bde2f-23e0-5f49-b9e1-1fcd165a2161",
+          "weekIndex": 0,
+          "dayOfWeek": 2,
+          "routineName": "Upper Body A",
+          "sortOrder": 0
+        },
+        {
+          "id": "eeb0e5ac-06f7-570a-a41f-1f08293f98bd",
+          "weekIndex": 0,
+          "dayOfWeek": 3,
+          "routineName": "Lower Body A",
+          "sortOrder": 1
+        },
+        {
+          "id": "91372145-7e4f-589a-a09d-eb592f850688",
+          "weekIndex": 0,
+          "dayOfWeek": 5,
+          "routineName": "Upper Body B",
+          "sortOrder": 2
+        },
+        {
+          "id": "60e6ba68-855b-5b80-9407-cea7df34ca15",
+          "weekIndex": 0,
+          "dayOfWeek": 6,
+          "routineName": "Lower Body B",
+          "sortOrder": 3
+        }
       ]
     },
     {
-      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2",
-      "name": "Mobility Flow",
-      "category": "mobility",
-      "weeks": 2,
+      "id": "5d8b31f8-ded8-5dfb-b5e5-5c1f5f66d39e",
+      "name": "Push / Pull / Legs",
+      "category": "strength",
+      "level": "intermediate",
+      "weeks": null,
+      "daysPerWeek": 3,
+      "equipment": [
+        "barbell",
+        "dumbbell",
+        "cable",
+        "machine",
+        "pull_up_bar"
+      ],
+      "description": "Organise training by movement pattern \u2014 push, pull, and legs. Run it 3 or 6 days a week.",
       "days": [
-        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb101", "weekIndex": 0, "dayOfWeek": 1, "routineName": "Mobility Flow", "sortOrder": 0 },
-        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb102", "weekIndex": 0, "dayOfWeek": 4, "routineName": "Mobility Flow", "sortOrder": 1 }
+        {
+          "id": "1f3c20cc-fc05-57b0-ab88-8ba6b0083726",
+          "weekIndex": 0,
+          "dayOfWeek": 2,
+          "routineName": "Push Day",
+          "sortOrder": 0
+        },
+        {
+          "id": "617144cf-439e-5e5f-94e2-33e053429cab",
+          "weekIndex": 0,
+          "dayOfWeek": 4,
+          "routineName": "Pull Day",
+          "sortOrder": 1
+        },
+        {
+          "id": "f1499092-8add-5958-a820-47f24c132bb3",
+          "weekIndex": 0,
+          "dayOfWeek": 6,
+          "routineName": "Leg Day",
+          "sortOrder": 2
+        }
+      ]
+    },
+    {
+      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa1",
+      "name": "Full Body 3\u00d7",
+      "category": "strength",
+      "level": "intermediate",
+      "weeks": null,
+      "daysPerWeek": 3,
+      "equipment": [
+        "barbell",
+        "cable",
+        "pull_up_bar"
+      ],
+      "description": "Hit every major muscle group three times a week. Efficient and great for busy schedules.",
+      "days": [
+        {
+          "id": "99df0c0b-ad1a-5f8d-ba76-1e2f45df6dfb",
+          "weekIndex": 0,
+          "dayOfWeek": 2,
+          "routineName": "Full Body A",
+          "sortOrder": 0
+        },
+        {
+          "id": "d9717146-9898-56c9-b0c7-9823f15ffe0f",
+          "weekIndex": 0,
+          "dayOfWeek": 4,
+          "routineName": "Full Body B",
+          "sortOrder": 1
+        },
+        {
+          "id": "7b9e31c8-2453-5d19-b9db-a9c6c9cba2b4",
+          "weekIndex": 0,
+          "dayOfWeek": 6,
+          "routineName": "Full Body A",
+          "sortOrder": 2
+        }
       ]
     },
     {
       "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa3",
-      "name": "Beginner Strength",
+      "name": "Beginner Strength Foundation",
       "category": "strength",
-      "weeks": 4,
+      "level": "beginner_intermediate",
+      "weeks": 8,
+      "daysPerWeek": 3,
+      "equipment": [
+        "barbell",
+        "machine",
+        "cable"
+      ],
+      "description": "An 8-week on-ramp to the main barbell lifts with simple full-body sessions and steady progression.",
       "days": [
-        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb201", "weekIndex": 0, "dayOfWeek": 1, "routineName": "Full Body A", "sortOrder": 0 },
-        { "id": "bbbbbbbb-bbbb-4bbb-8bbb-bbbbbbbbb202", "weekIndex": 0, "dayOfWeek": 4, "routineName": "Full Body B", "sortOrder": 1 }
+        {
+          "id": "6f89245e-5a49-5e0f-8993-61f6cf24c38f",
+          "weekIndex": 0,
+          "dayOfWeek": 2,
+          "routineName": "Beginner Full Body A",
+          "sortOrder": 0
+        },
+        {
+          "id": "81554b1c-81ab-5895-8cb2-9cdfa0914601",
+          "weekIndex": 0,
+          "dayOfWeek": 4,
+          "routineName": "Beginner Full Body B",
+          "sortOrder": 1
+        },
+        {
+          "id": "4fb2280f-0f01-5cc6-b49b-22c91527acf1",
+          "weekIndex": 0,
+          "dayOfWeek": 6,
+          "routineName": "Beginner Full Body A",
+          "sortOrder": 2
+        }
+      ]
+    },
+    {
+      "id": "aaaaaaaa-aaaa-4aaa-8aaa-aaaaaaaaaaa2",
+      "name": "Daily Mobility 10",
+      "category": "mobility",
+      "level": "all",
+      "weeks": null,
+      "daysPerWeek": 7,
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "description": "A 10-minute daily flow to keep your hips, spine, and ankles moving well. Do it any day.",
+      "days": [
+        {
+          "id": "40673dc1-d073-53a3-ab9b-974d2fb26fb1",
+          "weekIndex": 0,
+          "dayOfWeek": 1,
+          "routineName": "Daily Mobility Flow",
+          "sortOrder": 0
+        },
+        {
+          "id": "491ab8e4-87c0-5561-b7c6-71daf4a56ec7",
+          "weekIndex": 0,
+          "dayOfWeek": 2,
+          "routineName": "Daily Mobility Flow",
+          "sortOrder": 1
+        },
+        {
+          "id": "a04478c4-3c19-5ecd-bfe6-63771b598313",
+          "weekIndex": 0,
+          "dayOfWeek": 3,
+          "routineName": "Daily Mobility Flow",
+          "sortOrder": 2
+        },
+        {
+          "id": "5dc1604d-20e8-5797-befd-2bed3f39e41f",
+          "weekIndex": 0,
+          "dayOfWeek": 4,
+          "routineName": "Daily Mobility Flow",
+          "sortOrder": 3
+        },
+        {
+          "id": "aeda864f-a493-5b57-8a36-a166066a0051",
+          "weekIndex": 0,
+          "dayOfWeek": 5,
+          "routineName": "Daily Mobility Flow",
+          "sortOrder": 4
+        },
+        {
+          "id": "40cca65e-b983-53ce-8a3b-d942d21feb81",
+          "weekIndex": 0,
+          "dayOfWeek": 6,
+          "routineName": "Daily Mobility Flow",
+          "sortOrder": 5
+        },
+        {
+          "id": "cfb495b8-b4a8-5af2-8762-4e00401659ff",
+          "weekIndex": 0,
+          "dayOfWeek": 7,
+          "routineName": "Daily Mobility Flow",
+          "sortOrder": 6
+        }
+      ]
+    },
+    {
+      "id": "669a38a4-45c2-5260-a80a-98b3f596da53",
+      "name": "Post-Lift Stretch Routine",
+      "category": "flexibility",
+      "level": "all",
+      "weeks": null,
+      "daysPerWeek": 3,
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ],
+      "description": "Wind down after training with targeted static stretches for the muscles you just worked.",
+      "days": [
+        {
+          "id": "55d971da-3660-5c81-8a60-c21c0324d52e",
+          "weekIndex": 0,
+          "dayOfWeek": 3,
+          "routineName": "Post-Lift Stretch",
+          "sortOrder": 0
+        },
+        {
+          "id": "21dfc264-6ccb-5dda-880e-371394b0f17b",
+          "weekIndex": 0,
+          "dayOfWeek": 5,
+          "routineName": "Post-Lift Stretch",
+          "sortOrder": 1
+        },
+        {
+          "id": "b2d9dae6-3142-5be8-8326-f7b0b7b78448",
+          "weekIndex": 0,
+          "dayOfWeek": 7,
+          "routineName": "Post-Lift Stretch",
+          "sortOrder": 2
+        }
+      ]
+    },
+    {
+      "id": "54ca703f-d586-588d-8f50-3e81419633c4",
+      "name": "Hip & Ankle Opener",
+      "category": "mobility",
+      "level": "all",
+      "weeks": 4,
+      "daysPerWeek": 3,
+      "equipment": [
+        "bodyweight",
+        "mat",
+        "bands"
+      ],
+      "description": "A 4-week plan to build hip and ankle range of motion for deeper, stronger squats.",
+      "days": [
+        {
+          "id": "162a336b-b330-5164-92b6-90f145bacb85",
+          "weekIndex": 0,
+          "dayOfWeek": 2,
+          "routineName": "Hip & Ankle Opener",
+          "sortOrder": 0
+        },
+        {
+          "id": "6602d3d3-3e3c-5b30-9670-9540a3747124",
+          "weekIndex": 0,
+          "dayOfWeek": 4,
+          "routineName": "Hip & Ankle Opener",
+          "sortOrder": 1
+        },
+        {
+          "id": "bb550ed2-186d-5f40-ba89-3681135fc8e8",
+          "weekIndex": 0,
+          "dayOfWeek": 6,
+          "routineName": "Hip & Ankle Opener",
+          "sortOrder": 2
+        }
+      ]
+    },
+    {
+      "id": "aa821111-3863-566a-a344-97c04908bf63",
+      "name": "Shoulder Recovery Flow",
+      "category": "flexibility",
+      "level": "all",
+      "weeks": 4,
+      "daysPerWeek": 2,
+      "equipment": [
+        "bodyweight",
+        "bands"
+      ],
+      "description": "Restore healthy shoulder mobility and posture with gentle CARs, slides, and stretches.",
+      "days": [
+        {
+          "id": "1ced1431-6faa-543f-981e-960e82b2148e",
+          "weekIndex": 0,
+          "dayOfWeek": 3,
+          "routineName": "Shoulder Recovery",
+          "sortOrder": 0
+        },
+        {
+          "id": "a993551e-d332-5399-8724-d4677299586a",
+          "weekIndex": 0,
+          "dayOfWeek": 7,
+          "routineName": "Shoulder Recovery",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "77b41bb2-d311-5e0a-96da-3a871183ee6d",
+      "name": "Morning Flow 20",
+      "category": "yoga",
+      "level": "beginner",
+      "weeks": null,
+      "daysPerWeek": 3,
+      "equipment": [
+        "mat"
+      ],
+      "description": "Start the day with a gentle 20-minute yoga flow to wake up the body and mind.",
+      "days": [
+        {
+          "id": "e6d7f4d1-933e-5071-adc4-7f3395b5d9d8",
+          "weekIndex": 0,
+          "dayOfWeek": 2,
+          "routineName": "Morning Yoga Flow",
+          "sortOrder": 0
+        },
+        {
+          "id": "df55ba34-4c82-5816-9ea0-d57beee0c875",
+          "weekIndex": 0,
+          "dayOfWeek": 4,
+          "routineName": "Morning Yoga Flow",
+          "sortOrder": 1
+        },
+        {
+          "id": "beb160e8-0a3e-5b20-ae3b-fe9a3e8c3aaa",
+          "weekIndex": 0,
+          "dayOfWeek": 6,
+          "routineName": "Morning Yoga Flow",
+          "sortOrder": 2
+        }
+      ]
+    },
+    {
+      "id": "f0ab4f0c-e360-57b3-9174-f63e2ca087c4",
+      "name": "Recovery Yoga",
+      "category": "yoga",
+      "level": "all",
+      "weeks": null,
+      "daysPerWeek": 2,
+      "equipment": [
+        "mat",
+        "block"
+      ],
+      "description": "Slow, restorative yoga to aid recovery on rest days and ease tight muscles.",
+      "days": [
+        {
+          "id": "87a3be52-b63a-5352-8a70-e2a4cd42edbf",
+          "weekIndex": 0,
+          "dayOfWeek": 4,
+          "routineName": "Recovery Yoga",
+          "sortOrder": 0
+        },
+        {
+          "id": "2e03f900-e744-5fcf-8908-6c25e5a075fd",
+          "weekIndex": 0,
+          "dayOfWeek": 1,
+          "routineName": "Recovery Yoga",
+          "sortOrder": 1
+        }
+      ]
+    },
+    {
+      "id": "b6d3c2a8-8bb8-5247-a543-14e7d46db552",
+      "name": "Strength + Yoga Hybrid",
+      "category": "hybrid",
+      "level": "intermediate",
+      "weeks": 6,
+      "daysPerWeek": 4,
+      "equipment": [
+        "barbell",
+        "dumbbell",
+        "cable",
+        "mat"
+      ],
+      "description": "A 6-week hybrid blending strength training with yoga flows for power and suppleness.",
+      "days": [
+        {
+          "id": "1d0bd938-be1a-5816-a1ef-bf9b5c6f71db",
+          "weekIndex": 0,
+          "dayOfWeek": 2,
+          "routineName": "Upper Body A",
+          "sortOrder": 0
+        },
+        {
+          "id": "d063758e-26de-5abd-80e5-e91b4b19fd15",
+          "weekIndex": 0,
+          "dayOfWeek": 3,
+          "routineName": "Morning Yoga Flow",
+          "sortOrder": 1
+        },
+        {
+          "id": "62512be3-4905-535f-8897-72e765c261da",
+          "weekIndex": 0,
+          "dayOfWeek": 5,
+          "routineName": "Lower Body A",
+          "sortOrder": 2
+        },
+        {
+          "id": "e6219d87-b687-5b5d-abab-02c9909f40bf",
+          "weekIndex": 0,
+          "dayOfWeek": 7,
+          "routineName": "Recovery Yoga",
+          "sortOrder": 3
+        }
       ]
     }
   ]
