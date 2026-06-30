@@ -8,6 +8,11 @@ struct DailyFitnessApp: App {
     @Environment(\.scenePhase) private var scenePhase
     private let sharedModelContainer = ModelContainerFactory.make()
 
+    init() {
+        // Brand the system nav/tab bars before any UIKit view exists (no flash).
+        CalmStrength.configureGlobalAppearance()
+    }
+
     var body: some Scene {
         WindowGroup {
             RootView(dependencies: dependencies, seedingState: seedingState)
@@ -63,6 +68,7 @@ enum ModelContainerFactory {
 struct RootView: View {
     let dependencies: DependencyContainer
     let seedingState: SeedingState
+    @Environment(\.modelContext) private var modelContext
 
     var body: some View {
         ZStack {
@@ -80,7 +86,7 @@ struct RootView: View {
                 VStack(spacing: CalmStrength.Spacing.md) {
                     ProgressView()
                     Text(seedingState.message)
-                        .font(.subheadline)
+                        .dfFont(.callout)
                         .foregroundStyle(.white)
                 }
                 .padding(CalmStrength.Spacing.lg)
@@ -88,5 +94,38 @@ struct RootView: View {
                 .clipShape(RoundedRectangle(cornerRadius: CalmStrength.Radius.md))
             }
         }
+        #if DEBUG
+        .onAppear(perform: applyUITestLaunchArgumentsIfNeeded)
+        #endif
     }
+
+    #if DEBUG
+    /// Lets QA/screenshot tooling jump straight to a screen via `simctl launch` args,
+    /// e.g. `-uitestSkipOnboarding YES -uitestTab progress -uitestPro YES`. Debug-only.
+    private func applyUITestLaunchArgumentsIfNeeded() {
+        let defaults = UserDefaults.standard
+        if defaults.bool(forKey: "uitestSkipOnboarding") {
+            dependencies.router.showOnboarding = false
+        }
+        if defaults.bool(forKey: "uitestPro") {
+            dependencies.userSession.isPro = true
+        }
+        switch defaults.string(forKey: "uitestTab") {
+        case "home": dependencies.router.selectedTab = .home
+        case "programs": dependencies.router.selectedTab = .programs
+        case "progress": dependencies.router.selectedTab = .progress
+        case "profile": dependencies.router.selectedTab = .profile
+        default: break
+        }
+        if defaults.bool(forKey: "uitestBlankWorkout") {
+            let session = WorkoutSessionEntity(
+                userId: dependencies.userSession.effectiveUserId,
+                name: "Session"
+            )
+            modelContext.insert(session)
+            try? modelContext.save()
+            dependencies.router.startWorkout(sessionId: session.id)
+        }
+    }
+    #endif
 }

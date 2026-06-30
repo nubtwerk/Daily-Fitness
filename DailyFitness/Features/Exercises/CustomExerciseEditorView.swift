@@ -65,6 +65,8 @@ struct CustomExerciseEditorView: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.dfBackground)
             .navigationTitle("Custom exercise")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

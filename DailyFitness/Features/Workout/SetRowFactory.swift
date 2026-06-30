@@ -29,7 +29,7 @@ struct StrengthSetRow: View {
     var body: some View {
         HStack(spacing: CalmStrength.Spacing.sm) {
             Text("Set \(set.setNumber)")
-                .font(.subheadline)
+                .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
                 .frame(width: 44, alignment: .leading)
 
@@ -87,7 +87,7 @@ struct DurationSetRow: View {
     var body: some View {
         HStack(spacing: CalmStrength.Spacing.sm) {
             Text("Set \(set.setNumber)")
-                .font(.subheadline)
+                .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
                 .frame(width: 44, alignment: .leading)
 
@@ -121,7 +121,7 @@ struct HoldSetRow: View {
     var body: some View {
         HStack(spacing: CalmStrength.Spacing.sm) {
             Text("Set \(set.setNumber)")
-                .font(.subheadline)
+                .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
                 .frame(width: 44, alignment: .leading)
 

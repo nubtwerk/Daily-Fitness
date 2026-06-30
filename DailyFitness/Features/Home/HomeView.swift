@@ -22,10 +22,10 @@ struct HomeView: View {
                         DFCard {
                             VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
                                 Text("Session in progress")
-                                    .font(.subheadline)
+                                    .dfFont(.callout)
                                     .foregroundStyle(Color.dfSecondaryText)
                                 Text(active.name)
-                                    .font(.title2.weight(.semibold))
+                                    .dfFont(.heading)
                                 DFPrimaryButton(title: "Continue") {
                                     dependencies.router.startWorkout(sessionId: active.id)
                                 }
@@ -51,10 +51,10 @@ struct HomeView: View {
                                     HStack {
                                         VStack(alignment: .leading) {
                                             Text(routine.name)
-                                                .font(.headline)
+                                                .dfFont(.subheading)
                                                 .foregroundStyle(Color.dfPrimary)
                                             Text("\(routine.exercises.count) exercises")
-                                                .font(.subheadline)
+                                                .dfFont(.callout)
                                                 .foregroundStyle(Color.dfSecondaryText)
                                         }
                                         Spacer()
@@ -87,12 +87,12 @@ struct HomeView: View {
             DFCard {
                 VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
                     Text("Today's session")
-                        .font(.subheadline)
+                        .dfFont(.callout)
                         .foregroundStyle(Color.dfSecondaryText)
                     Text(routine.name)
-                        .font(.title3.weight(.semibold))
+                        .dfFont(.heading)
                     Text(program.name)
-                        .font(.caption)
+                        .dfFont(.caption)
                         .foregroundStyle(Color.dfSecondaryText)
                     DFPrimaryButton(title: "Start") {
                         startRoutine(routine, programDayId: today.id)

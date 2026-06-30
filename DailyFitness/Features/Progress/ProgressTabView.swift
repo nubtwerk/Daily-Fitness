@@ -69,7 +69,7 @@ struct ProgressTabView: View {
             )
             if prs.isEmpty {
                 Text("Complete strength sets to track personal records.")
-                    .font(.subheadline)
+                    .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             } else {
                 ForEach(prs, id: \.id) { pr in
@@ -77,14 +77,14 @@ struct ProgressTabView: View {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(exerciseName(for: pr.exerciseId))
-                                    .font(.headline)
+                                    .dfFont(.subheading)
                                 Text(pr.type.rawValue.capitalized)
-                                    .font(.caption)
+                                    .dfFont(.caption)
                                     .foregroundStyle(Color.dfSecondaryText)
                             }
                             Spacer()
                             Text(String(format: "%.1f", pr.value))
-                                .font(.title3.weight(.semibold))
+                                .dfFont(.heading)
                         }
                     }
                 }
@@ -102,7 +102,7 @@ struct ProgressTabView: View {
             )
             if !dependencies.userSession.isPro {
                 Text("Upgrade to Pro for 30-day muscle trends.")
-                    .font(.caption)
+                    .dfFont(.caption)
                     .foregroundStyle(Color.dfSecondaryText)
             }
         }
@@ -124,10 +124,10 @@ struct ProgressTabView: View {
                         DFCard {
                             VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
                                 Text(session.name)
-                                    .font(.headline)
+                                    .dfFont(.subheading)
                                     .foregroundStyle(Color.dfPrimary)
                                 Text(session.startedAt.formatted(date: .abbreviated, time: .shortened))
-                                    .font(.subheadline)
+                                    .dfFont(.callout)
                                     .foregroundStyle(Color.dfSecondaryText)
                             }
                         }
@@ -194,7 +194,7 @@ struct SessionDetailView: View {
         let exercise = exercises.first(where: { $0.id == workoutExercise.exerciseId })
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
             Text(exercise?.name ?? "Exercise")
-                .font(.headline)
+                .dfFont(.subheading)
             ExerciseChartView(
                 exerciseId: workoutExercise.exerciseId,
                 userId: dependencies.userSession.effectiveUserId,
@@ -203,7 +203,7 @@ struct SessionDetailView: View {
             )
             ForEach(workoutExercise.sets.filter(\.isCompleted).sorted(by: { $0.setNumber < $1.setNumber }), id: \.id) { set in
                 Text(setSummary(set, exercise: exercise))
-                    .font(.subheadline)
+                    .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             }
         }
@@ -249,7 +249,7 @@ struct ExerciseChartView: View {
     var body: some View {
         if !isPro {
             Text("Charts available with Pro")
-                .font(.caption)
+                .dfFont(.caption)
                 .foregroundStyle(Color.dfSecondaryText)
         } else if dataPoints.isEmpty {
             EmptyView()
@@ -293,7 +293,7 @@ struct MuscleHeatmapView: View {
     var body: some View {
         if volumeByMuscle.isEmpty {
             Text("Log strength work to see muscle volume.")
-                .font(.subheadline)
+                .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
         } else {
             let maxVolume = volumeByMuscle.values.max() ?? 1
@@ -304,9 +304,9 @@ struct MuscleHeatmapView: View {
                             .fill(Color.dfAccent.opacity(volume / maxVolume))
                             .frame(height: 40)
                         Text(muscle.capitalized)
-                            .font(.caption)
+                            .dfFont(.caption)
                         Text("\(Int(volume))")
-                            .font(.caption2)
+                            .dfFont(.micro)
                             .foregroundStyle(Color.dfSecondaryText)
                     }
                 }

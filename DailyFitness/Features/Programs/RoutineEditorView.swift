@@ -72,7 +72,7 @@ struct RoutineEditorView: View {
                 Section {
                     if drafts.isEmpty {
                         Text("Add exercises from the library to build this routine.")
-                            .font(.subheadline)
+                            .dfFont(.callout)
                             .foregroundStyle(Color.dfSecondaryText)
                     } else {
                         ForEach($drafts) { $draft in
@@ -91,6 +91,8 @@ struct RoutineEditorView: View {
                     Text("Exercises")
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.dfBackground)
             .navigationTitle(existingRoutine == nil ? "New routine" : "Edit routine")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -200,7 +202,7 @@ private struct RoutineExerciseDraftRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
             Text(draft.name)
-                .font(.headline)
+                .dfFont(.subheading)
                 .foregroundStyle(Color.dfPrimary)
 
             Stepper("Sets: \(draft.targetSets)", value: $draft.targetSets, in: 1...10)

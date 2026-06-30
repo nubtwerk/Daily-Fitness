@@ -54,6 +54,8 @@ struct ExercisePickerView: View {
                         .buttonStyle(.plain)
                     }
                     .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.dfBackground)
                 }
             }
             .searchable(text: $searchText, prompt: "Search exercises")
@@ -152,11 +154,11 @@ private struct ExercisePickerRow: View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
             HStack {
                 Text(exercise.name)
-                    .font(.headline)
+                    .dfFont(.subheading)
                     .foregroundStyle(Color.dfPrimary)
                 if exercise.isCustom {
                     Text("Custom")
-                        .font(.caption2.weight(.medium))
+                        .dfFont(.captionStrong)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
                         .background(Color.dfAccent.opacity(0.2))
@@ -165,11 +167,11 @@ private struct ExercisePickerRow: View {
             }
             HStack(spacing: CalmStrength.Spacing.sm) {
                 Text(exercise.category.rawValue.capitalized)
-                    .font(.caption)
+                    .dfFont(.caption)
                     .foregroundStyle(Color.dfSecondaryText)
                 if let muscle = exercise.primaryMuscles.first {
                     Text(muscle.capitalized)
-                        .font(.caption)
+                        .dfFont(.caption)
                         .foregroundStyle(Color.dfSecondaryText)
                 }
             }
@@ -187,7 +189,7 @@ private struct CategoryChip: View {
     var body: some View {
         Button(action: action) {
             Text(title)
-                .font(.subheadline.weight(.medium))
+                .dfFont(.subheading)
                 .padding(.horizontal, CalmStrength.Spacing.md)
                 .padding(.vertical, CalmStrength.Spacing.sm)
                 .background(isSelected ? Color.dfPrimary : Color.dfSurface)

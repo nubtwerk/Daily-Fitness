@@ -125,9 +125,9 @@ struct LiveWorkoutView: View {
                 if session.exercises.isEmpty {
                     DFEmptyState(
                         title: "No exercises yet",
-                        message: "Add exercises from the library to start logging sets."
-                    )
-                    DFPrimaryButton(title: "Add exercise") {
+                        message: "Add exercises from the library to start logging sets.",
+                        actionTitle: "Add exercise"
+                    ) {
                         showExercisePicker = true
                     }
                 } else {
@@ -160,7 +160,7 @@ struct LiveWorkoutView: View {
         DFCard {
             VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
                 Text(exercise?.name ?? "Exercise")
-                    .font(.headline)
+                    .dfFont(.subheading)
                     .foregroundStyle(Color.dfPrimary)
 
                 if showProgression {
@@ -288,11 +288,11 @@ struct RestTimerBanner: View {
             DFCard {
                 HStack {
                     Text("Rest")
-                        .font(.headline)
+                        .dfFont(.subheading)
                     Spacer()
                     if let onExtend {
                         Button("+30s", action: onExtend)
-                            .font(.subheadline.weight(.medium))
+                            .dfFont(.subheading)
                     }
                     Text("\(remaining)s")
                         .font(.title2.monospacedDigit())

@@ -78,7 +78,7 @@ struct ProgramsView: View {
             DFSectionHeader(title: "My routines")
             if routines.isEmpty {
                 Text("Create a reusable session template.")
-                    .font(.subheadline)
+                    .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             } else {
                 ForEach(routines, id: \.id) { routine in
@@ -89,10 +89,10 @@ struct ProgramsView: View {
                             HStack {
                                 VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
                                     Text(routine.name)
-                                        .font(.headline)
+                                        .dfFont(.subheading)
                                         .foregroundStyle(Color.dfPrimary)
                                     Text("\(routine.exercises.count) exercises")
-                                        .font(.subheadline)
+                                        .dfFont(.callout)
                                         .foregroundStyle(Color.dfSecondaryText)
                                 }
                                 Spacer()
@@ -112,7 +112,7 @@ struct ProgramsView: View {
             DFSectionHeader(title: "Suggested")
             if suggestedPrograms.isEmpty {
                 Text("Suggested programs will appear here after seeding.")
-                    .font(.subheadline)
+                    .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             } else {
                 ForEach(suggestedPrograms, id: \.id) { program in
@@ -132,7 +132,7 @@ struct ProgramsView: View {
             DFSectionHeader(title: "My programs")
             if myPrograms.isEmpty {
                 Text("Start a suggested program or build your own.")
-                    .font(.subheadline)
+                    .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             } else {
                 ForEach(myPrograms, id: \.id) { program in
@@ -156,11 +156,11 @@ struct ProgramCard: View {
             VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
                 HStack {
                     Text(program.name)
-                        .font(.headline)
+                        .dfFont(.subheading)
                         .foregroundStyle(Color.dfPrimary)
                     if program.isActive {
                         Text("Active")
-                            .font(.caption2.weight(.medium))
+                            .dfFont(.captionStrong)
                             .padding(.horizontal, 6)
                             .padding(.vertical, 2)
                             .background(Color.dfAccent.opacity(0.2))
@@ -168,7 +168,7 @@ struct ProgramCard: View {
                     }
                 }
                 Text(program.category.rawValue.capitalized)
-                    .font(.subheadline)
+                    .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             }
         }

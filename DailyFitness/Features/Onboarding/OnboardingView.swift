@@ -34,8 +34,7 @@ struct OnboardingView: View {
             .padding(.horizontal, CalmStrength.Spacing.md)
 
             if step > 0 && step < 2 {
-                Button("Skip") { step = 2 }
-                    .foregroundStyle(Color.dfSecondaryText)
+                DFTertiaryButton(title: "Skip") { step = 2 }
             }
         }
         .padding(.vertical, CalmStrength.Spacing.lg)
@@ -45,10 +44,10 @@ struct OnboardingView: View {
     private var welcomeStep: some View {
         VStack(spacing: CalmStrength.Spacing.md) {
             Text("DailyFitness")
-                .font(.largeTitle.weight(.semibold))
+                .dfFont(.display)
                 .foregroundStyle(Color.dfPrimary)
             Text("Your daily training — strength, mobility, and yoga in one calm app.")
-                .font(.body)
+                .dfFont(.body)
                 .foregroundStyle(Color.dfSecondaryText)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, CalmStrength.Spacing.lg)
@@ -58,7 +57,7 @@ struct OnboardingView: View {
     private var trainingTypesStep: some View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.md) {
             Text("What do you train?")
-                .font(.title2.weight(.semibold))
+                .dfFont(.heading)
                 .foregroundStyle(Color.dfPrimary)
 
             ForEach([ExerciseCategory.strength, .mobility, .yoga, .flexibility], id: \.self) { type in
@@ -76,10 +75,10 @@ struct OnboardingView: View {
     private var finishStep: some View {
         VStack(spacing: CalmStrength.Spacing.md) {
             Text("You're ready")
-                .font(.title2.weight(.semibold))
+                .dfFont(.heading)
                 .foregroundStyle(Color.dfPrimary)
             Text("Start your first session from Home. Enable Lock Screen controls anytime in Profile.")
-                .font(.body)
+                .dfFont(.body)
                 .foregroundStyle(Color.dfSecondaryText)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, CalmStrength.Spacing.lg)
