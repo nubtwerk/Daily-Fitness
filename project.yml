@@ -89,6 +89,15 @@ targets:
           - WorkoutIntentObserver.swift
     info:
       path: WorkoutLiveActivityExtension/Info.plist
+      properties:
+        # Required for the embedded WidgetKit/Live Activity extension to INSTALL.
+        # Must live here (not only in Info.plist): xcodegen regenerates the plist
+        # from this block and strips a file-only NSExtension dict, which makes the
+        # app fail to install (only surfaces under `xcodebuild test`, not `build`).
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: app.dailybase.dailyfitness.liveactivity
