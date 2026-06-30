@@ -140,6 +140,11 @@ final class ProgramEntity {
         set { categoryRaw = newValue.rawValue }
     }
 
+    var syncStatus: SyncStatus {
+        get { SyncStatus(rawValue: syncStatusRaw) ?? .pending }
+        set { syncStatusRaw = newValue.rawValue }
+    }
+
     init(
         id: UUID = UUID(),
         userId: UUID? = nil,

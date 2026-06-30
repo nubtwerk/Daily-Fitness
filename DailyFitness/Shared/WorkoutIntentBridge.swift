@@ -8,7 +8,7 @@ enum WorkoutIntentAction: String, Codable {
 
 enum WorkoutIntentBridge {
     private static let actionKey = "pendingWorkoutIntentAction"
-    static let darwinNotificationName = "app.dailybase.dailyfitness.workoutIntent" as CFString
+    static let darwinNotificationName = CFNotificationName("app.dailybase.dailyfitness.workoutIntent" as CFString)
 
     static func post(_ action: WorkoutIntentAction) {
         AppGroup.defaults?.set(action.rawValue, forKey: actionKey)

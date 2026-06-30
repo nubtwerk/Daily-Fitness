@@ -23,7 +23,7 @@ final class WorkoutIntentObserver {
                     }
                 }
             },
-            WorkoutIntentBridge.darwinNotificationName,
+            WorkoutIntentBridge.darwinNotificationName.rawValue,
             nil,
             .deliverImmediately
         )
