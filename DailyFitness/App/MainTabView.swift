@@ -13,6 +13,10 @@ struct MainTabView: View {
                 .tabItem { Label("Home", systemImage: "house.fill") }
                 .tag(AppTab.home)
 
+            ExerciseLibraryView(dependencies: dependencies)
+                .tabItem { Label("Library", systemImage: "books.vertical.fill") }
+                .tag(AppTab.library)
+
             ProgramsView(dependencies: dependencies)
                 .tabItem { Label("Programs", systemImage: "calendar") }
                 .tag(AppTab.programs)
