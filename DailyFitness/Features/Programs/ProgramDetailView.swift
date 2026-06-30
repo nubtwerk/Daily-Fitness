@@ -14,11 +14,11 @@ struct ProgramDetailView: View {
                 DFCard {
                     VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
                         Text(program.category.rawValue.capitalized)
-                            .font(.caption)
+                            .dfFont(.caption)
                             .foregroundStyle(Color.dfSecondaryText)
                         if let weeks = program.weeks {
                             Text("\(weeks) weeks")
-                                .font(.subheadline)
+                                .dfFont(.callout)
                         }
                         if program.isActive {
                             Label("Active program", systemImage: "checkmark.circle.fill")
@@ -33,15 +33,15 @@ struct ProgramDetailView: View {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(dayName(day.dayOfWeek))
-                                    .font(.headline)
+                                    .dfFont(.subheading)
                                 Text(routineName(for: day.routineId))
-                                    .font(.subheadline)
+                                    .dfFont(.callout)
                                     .foregroundStyle(Color.dfSecondaryText)
                             }
                             Spacer()
                             if day.weekIndex > 0 {
                                 Text("Week \(day.weekIndex + 1)")
-                                    .font(.caption)
+                                    .dfFont(.caption)
                                     .foregroundStyle(Color.dfSecondaryText)
                             }
                         }
@@ -141,6 +141,8 @@ struct ProgramEditorView: View {
                 }
                 Stepper("Weeks: \(weeks)", value: $weeks, in: 1...12)
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.dfBackground)
             .navigationTitle("New program")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {

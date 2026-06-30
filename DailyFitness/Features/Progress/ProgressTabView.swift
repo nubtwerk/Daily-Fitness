@@ -96,7 +96,7 @@ struct ProgressTabView: View {
             )
             if prs.isEmpty {
                 Text("Complete strength sets to track personal records.")
-                    .font(.subheadline)
+                    .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             } else {
                 ForEach(prs, id: \.id) { pr in
@@ -104,14 +104,14 @@ struct ProgressTabView: View {
                         HStack {
                             VStack(alignment: .leading) {
                                 Text(prTitle(pr))
-                                    .font(.headline)
+                                    .dfFont(.subheading)
                                 Text(prTypeLabel(pr.type))
-                                    .font(.caption)
+                                    .dfFont(.caption)
                                     .foregroundStyle(Color.dfSecondaryText)
                             }
                             Spacer()
                             Text(String(format: "%.1f", pr.value))
-                                .font(.title3.weight(.semibold))
+                                .dfFont(.heading)
                         }
                     }
                 }
@@ -131,10 +131,10 @@ struct ProgressTabView: View {
                             .foregroundStyle(Color.dfAccent)
                         VStack(alignment: .leading, spacing: 2) {
                             Text("\(summary.mobilityYogaMinutes) min")
-                                .font(.title3.weight(.semibold))
+                                .dfFont(.heading)
                                 .foregroundStyle(Color.dfPrimary)
                             Text("across \(summary.mobilityYogaSessionCount) session\(summary.mobilityYogaSessionCount == 1 ? "" : "s")")
-                                .font(.subheadline)
+                                .dfFont(.callout)
                                 .foregroundStyle(Color.dfSecondaryText)
                         }
                         Spacer()
@@ -151,7 +151,7 @@ struct ProgressTabView: View {
             MuscleHeatmapView(volumes: summary.muscleVolumes)
             if !isPro {
                 Text("Upgrade to Pro for all-time muscle volume and trends.")
-                    .font(.caption)
+                    .dfFont(.caption)
                     .foregroundStyle(Color.dfSecondaryText)
             }
         }
@@ -192,10 +192,10 @@ struct ProgressTabView: View {
                             DFCard {
                                 VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
                                     Text(session.name)
-                                        .font(.headline)
+                                        .dfFont(.subheading)
                                         .foregroundStyle(Color.dfPrimary)
                                     Text(session.startedAt.formatted(date: .abbreviated, time: .shortened))
-                                        .font(.subheadline)
+                                        .dfFont(.callout)
                                         .foregroundStyle(Color.dfSecondaryText)
                                 }
                             }
@@ -265,8 +265,10 @@ struct SessionDetailView: View {
             VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
                 if let ended = session.endedAt {
                     Text("Duration: \(Int(ended.timeIntervalSince(session.startedAt) / 60)) min")
+                        .dfFont(.body)
                 }
                 Text("\(session.exercises.count) exercises")
+                    .dfFont(.body)
             }
         }
     }
@@ -276,7 +278,7 @@ struct SessionDetailView: View {
         let exercise = exercises.first(where: { $0.id == workoutExercise.exerciseId })
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
             Text(exercise?.name ?? "Exercise")
-                .font(.headline)
+                .dfFont(.subheading)
             ExerciseChartView(
                 exerciseId: workoutExercise.exerciseId,
                 loggingFields: exercise?.loggingFields ?? .weightReps,
@@ -286,7 +288,7 @@ struct SessionDetailView: View {
             )
             ForEach(workoutExercise.sets.filter(\.isCompleted).sorted(by: { $0.setNumber < $1.setNumber }), id: \.id) { set in
                 Text(setSummary(set, exercise: exercise))
-                    .font(.subheadline)
+                    .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             }
         }
@@ -331,7 +333,7 @@ struct ExerciseChartView: View {
             let points = series.points(for: metric)
             if points.isEmpty {
                 Text("Log sets to see this chart.")
-                    .font(.caption)
+                    .dfFont(.caption)
                     .foregroundStyle(Color.dfSecondaryText)
             } else {
                 Chart(points) { point in
@@ -352,7 +354,7 @@ struct ExerciseChartView: View {
 
             if !isPro && series.hasOlderData {
                 Label("Showing last 90 days — upgrade to Pro for full history.", systemImage: "lock.fill")
-                    .font(.caption2)
+                    .dfFont(.micro)
                     .foregroundStyle(Color.dfSecondaryText)
             }
         }
@@ -380,7 +382,7 @@ struct MuscleHeatmapView: View {
     var body: some View {
         if volumes.isEmpty {
             Text("Log strength work to see muscle volume.")
-                .font(.subheadline)
+                .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
         } else {
             let maxVolume = volumes.map(\.volume).max() ?? 1
@@ -391,9 +393,9 @@ struct MuscleHeatmapView: View {
                             .fill(Color.dfAccent.opacity(max(0.12, item.volume / maxVolume)))
                             .frame(height: 40)
                         Text(item.muscle.capitalized)
-                            .font(.caption)
+                            .dfFont(.caption)
                         Text("\(Int(item.volume))")
-                            .font(.caption2)
+                            .dfFont(.micro)
                             .foregroundStyle(Color.dfSecondaryText)
                     }
                 }
@@ -441,7 +443,7 @@ struct MonthCalendarView: View {
                 }
                 Spacer()
                 Text(monthTitle)
-                    .font(.headline)
+                    .dfFont(.heading)
                     .foregroundStyle(Color.dfPrimary)
                 Spacer()
                 Button { shiftMonth(1) } label: {
@@ -453,7 +455,7 @@ struct MonthCalendarView: View {
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: CalmStrength.Spacing.sm) {
                 ForEach(weekdaySymbols, id: \.self) { symbol in
                     Text(symbol)
-                        .font(.caption2)
+                        .dfFont(.micro)
                         .foregroundStyle(Color.dfSecondaryText)
                 }
                 ForEach(Array(days.enumerated()), id: \.offset) { _, day in
@@ -471,7 +473,7 @@ struct MonthCalendarView: View {
         let hasSession = sessionDays.contains(calendar.startOfDay(for: day))
         let isToday = calendar.isDateInToday(day)
         return Text("\(calendar.component(.day, from: day))")
-            .font(.caption)
+            .dfFont(.caption)
             .foregroundStyle(hasSession ? Color.white : Color.dfPrimary)
             .frame(width: 32, height: 32)
             .background(Circle().fill(hasSession ? Color.dfAccent : Color.clear))

@@ -14,11 +14,11 @@ struct PaywallView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: CalmStrength.Spacing.lg) {
                     Text("DailyFitness Pro")
-                        .font(.largeTitle.weight(.semibold))
+                        .dfFont(.display)
                         .foregroundStyle(Color.dfPrimary)
 
                     Text("Train without limits — unlimited routines, full progression, and export.")
-                        .font(.body)
+                        .dfFont(.body)
                         .foregroundStyle(Color.dfSecondaryText)
 
                     featureRow("Unlimited custom exercises")
@@ -36,7 +36,7 @@ struct PaywallView: View {
                         }
                     } else {
                         Text("Subscriptions unavailable in this build.")
-                            .font(.subheadline)
+                            .dfFont(.callout)
                             .foregroundStyle(Color.dfSecondaryText)
                     }
 
@@ -46,11 +46,12 @@ struct PaywallView: View {
                             if dependencies.userSession.isPro { dismiss() }
                         }
                     }
+                    .buttonStyle(.dfTertiary)
                     .frame(maxWidth: .infinity)
 
                     if let errorMessage {
                         Text(errorMessage)
-                            .font(.caption)
+                            .dfFont(.caption)
                             .foregroundStyle(.red)
                     }
                 }
@@ -73,6 +74,7 @@ struct PaywallView: View {
             Image(systemName: "checkmark.circle.fill")
                 .foregroundStyle(Color.dfAccent)
             Text(text)
+                .dfFont(.subheading)
                 .foregroundStyle(Color.dfPrimary)
         }
     }

@@ -37,10 +37,10 @@ struct ProgressionBanner: View {
                     .foregroundStyle(accent)
                 VStack(alignment: .leading, spacing: 2) {
                     Text(headline)
-                        .font(.caption.weight(.semibold))
+                        .dfFont(.captionStrong)
                         .foregroundStyle(Color.dfPrimary)
                     Text(recommendation.reason)
-                        .font(.caption2)
+                        .dfFont(.micro)
                         .foregroundStyle(Color.dfSecondaryText)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -49,18 +49,18 @@ struct ProgressionBanner: View {
 
             HStack(spacing: CalmStrength.Spacing.sm) {
                 Button(hasWeight ? "Accept" : "Got it", action: onAccept)
-                    .font(.caption.weight(.semibold))
+                    .dfFont(.captionStrong)
                     .buttonStyle(.borderedProminent)
                     .tint(accent)
                     .controlSize(.small)
                 Button("Ignore", action: onIgnore)
-                    .font(.caption)
+                    .dfFont(.caption)
                     .buttonStyle(.bordered)
                     .controlSize(.small)
                 Spacer(minLength: 0)
                 if hasWeight {
                     Text("or edit below")
-                        .font(.caption2)
+                        .dfFont(.micro)
                         .foregroundStyle(Color.dfSecondaryText)
                 }
             }
@@ -80,7 +80,7 @@ struct PRToastView: View {
                 Image(systemName: "trophy.fill")
                     .foregroundStyle(Color.dfAccent)
                 Text(prMessage)
-                    .font(.subheadline.weight(.medium))
+                    .dfFont(.subheading)
                     .foregroundStyle(Color.dfPrimary)
             }
             .padding(CalmStrength.Spacing.sm)

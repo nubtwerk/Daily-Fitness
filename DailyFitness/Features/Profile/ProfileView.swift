@@ -35,7 +35,7 @@ struct ProfileView: View {
                     LabeledContent("Status", value: syncStatusLabel)
                     if dependencies.syncEngine.pendingCount > 0 {
                         Text("\(dependencies.syncEngine.pendingCount) items pending upload")
-                            .font(.caption)
+                            .dfFont(.caption)
                             .foregroundStyle(Color.dfSecondaryText)
                     }
                     Button("Sync now") {
@@ -70,7 +70,7 @@ struct ProfileView: View {
                     }
                     if let authError {
                         Text(authError)
-                            .font(.caption)
+                            .dfFont(.caption)
                             .foregroundStyle(.red)
                     }
                 }
@@ -87,6 +87,8 @@ struct ProfileView: View {
                     LabeledContent("Version", value: "0.1.0")
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(Color.dfBackground)
             .navigationTitle("Profile")
             .onAppear(perform: loadPreferences)
             .onChange(of: usePounds) { _, _ in savePreferences() }
