@@ -22,32 +22,6 @@ final class ProgressionService {
         return try? context.fetch(descriptor).first
     }
 
-    func prefillSessionFromRecommendations(
-        session: WorkoutSessionEntity,
-        userId: UUID,
-        isPro: Bool,
-        context: ModelContext
-    ) {
-        let prefs = UserPreferencesRepository().loadOrCreate(userId: userId, context: context)
-        var strengthIndex = 0
-
-        for workoutExercise in session.exercises.sorted(by: { $0.sortOrder < $1.sortOrder }) {
-            guard let exercise = fetchExercise(id: workoutExercise.exerciseId, context: context),
-                  exercise.category == .strength else { continue }
-
-            if !isPro && strengthIndex >= 2 { break }
-            strengthIndex += 1
-
-            guard let rec = latestRecommendation(exerciseId: exercise.id, userId: userId, context: context),
-                  let targetWeight = rec.targetWeightKg else { continue }
-
-            for set in workoutExercise.sets where !set.isCompleted {
-                set.weightKg = targetWeight
-            }
-        }
-        try? context.save()
-    }
-
     func recomputeAfterSession(
         session: WorkoutSessionEntity,
         userId: UUID,
@@ -104,7 +78,8 @@ final class ProgressionService {
         var history: [CompletedWorkingSet] = []
         for session in sessions {
             for workoutExercise in session.exercises where workoutExercise.exerciseId == exerciseId {
-                for set in workoutExercise.sets where set.isCompleted {
+                // Warmups never feed progression math (LOG-07 / US-054).
+                for set in workoutExercise.sets where set.isCompleted && set.setType != .warmup {
                     guard let weight = set.weightKg, let reps = set.reps, weight > 0, reps > 0 else { continue }
                     history.append(CompletedWorkingSet(
                         weightKg: weight,

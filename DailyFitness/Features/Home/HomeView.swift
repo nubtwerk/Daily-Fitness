@@ -114,22 +114,19 @@ struct HomeView: View {
         let allExercises = (try? modelContext.fetch(exerciseDescriptor)) ?? []
 
         for routineExercise in routine.exercises.sorted(by: { $0.sortOrder < $1.sortOrder }) {
-            let loggingFields = allExercises.first(where: { $0.id == routineExercise.exerciseId })?.loggingFields ?? .weightReps
-            WorkoutExerciseFactory.addFromRoutineExercise(
+            let exercise = allExercises.first(where: { $0.id == routineExercise.exerciseId })
+            _ = WorkoutExerciseFactory.addFromRoutineExercise(
                 routineExercise,
                 to: session,
                 in: modelContext,
-                loggingFields: loggingFields
+                category: exercise?.category ?? .strength,
+                loggingFields: exercise?.loggingFields ?? .weightReps
             )
         }
 
         modelContext.insert(session)
-        dependencies.progressionService.prefillSessionFromRecommendations(
-            session: session,
-            userId: dependencies.userSession.effectiveUserId,
-            isPro: dependencies.userSession.isPro,
-            context: modelContext
-        )
+        // Logging uses non-destructive ghost placeholders (US-051); weights are no
+        // longer pre-written. The progression target stays advisory in ProgressionBanner.
         try? modelContext.save()
         dependencies.syncEngine.enqueue(.upsertSession(session.id))
         dependencies.router.startWorkout(sessionId: session.id)
