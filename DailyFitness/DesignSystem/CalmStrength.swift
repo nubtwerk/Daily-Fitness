@@ -111,16 +111,15 @@ enum CalmStrength {
         nav.configureWithOpaqueBackground()
         nav.backgroundColor = stone
         nav.shadowColor = .clear
-        nav.titleTextAttributes = [
-            .foregroundColor: forest,
-            .font: UIFont.systemFont(ofSize: 17, weight: .semibold)
-        ]
-        nav.largeTitleTextAttributes = [
-            .foregroundColor: forest,
-            .font: UIFont.systemFont(ofSize: 32, weight: .semibold)
-        ]
+        // Color only — let UIKit own the title font metrics.
+        nav.titleTextAttributes = [.foregroundColor: forest]
+        nav.largeTitleTextAttributes = [.foregroundColor: forest]
+        // Brand the bar in its scrolled (standard) and compact states only. Do NOT
+        // set scrollEdgeAppearance: on iOS 26 an opaque scroll-edge background
+        // suppresses the large title text. Leaving it default keeps a clean
+        // large title over the warm-stone content at the top, and the branded
+        // stone bar appears once the user scrolls.
         UINavigationBar.appearance().standardAppearance = nav
-        UINavigationBar.appearance().scrollEdgeAppearance = nav
         UINavigationBar.appearance().compactAppearance = nav
 
         let tab = UITabBarAppearance()
