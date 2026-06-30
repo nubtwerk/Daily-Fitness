@@ -1,32 +1,73 @@
 import SwiftUI
 
+/// Actionable next-session recommendation (US-080: accept / edit / ignore). When the
+/// recommendation is a deload it renders as a distinct, non-blocking warning (PROG-04).
 struct ProgressionBanner: View {
-    let recommendation: ProgressionRecommendationEntity?
+    let recommendation: ProgressionRecommendationEntity
     let usePounds: Bool
+    let onAccept: () -> Void
+    let onIgnore: () -> Void
+
+    private var isDeload: Bool { recommendation.action == .deload }
+    private var accent: Color { isDeload ? .orange : Color.dfAccent }
+
+    private var iconName: String {
+        switch recommendation.action {
+        case .increase: return "arrow.up.forward.circle.fill"
+        case .decrease: return "arrow.down.right.circle.fill"
+        case .deload: return "arrow.uturn.down.circle.fill"
+        case .hold: return "equal.circle.fill"
+        }
+    }
+
+    private var headline: String {
+        if isDeload { return "Deload suggested" }
+        if let weight = recommendation.targetWeightKg {
+            return "Suggested: \(WeightFormatter.display(kg: weight, usePounds: usePounds)) × \(recommendation.targetRepsMin)–\(recommendation.targetRepsMax)"
+        }
+        return "Target: \(recommendation.targetRepsMin)–\(recommendation.targetRepsMax) reps"
+    }
+
+    private var hasWeight: Bool { recommendation.targetWeightKg != nil }
 
     var body: some View {
-        if let recommendation {
-            HStack(spacing: CalmStrength.Spacing.sm) {
-                Image(systemName: "arrow.up.forward.circle.fill")
-                    .foregroundStyle(Color.dfAccent)
+        VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
+            HStack(alignment: .top, spacing: CalmStrength.Spacing.sm) {
+                Image(systemName: iconName)
+                    .foregroundStyle(accent)
                 VStack(alignment: .leading, spacing: 2) {
-                    if let weight = recommendation.targetWeightKg {
-                        Text("Suggested: \(WeightFormatter.display(kg: weight, usePounds: usePounds)) × \(recommendation.targetRepsMin)–\(recommendation.targetRepsMax)")
-                            .font(.caption.weight(.medium))
-                            .foregroundStyle(Color.dfPrimary)
-                    } else {
-                        Text("Target: \(recommendation.targetRepsMin)–\(recommendation.targetRepsMax) reps")
-                            .font(.caption.weight(.medium))
-                            .foregroundStyle(Color.dfPrimary)
-                    }
+                    Text(headline)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(Color.dfPrimary)
                     Text(recommendation.reason)
                         .font(.caption2)
                         .foregroundStyle(Color.dfSecondaryText)
-                        .lineLimit(2)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                Spacer(minLength: 0)
+            }
+
+            HStack(spacing: CalmStrength.Spacing.sm) {
+                Button(hasWeight ? "Accept" : "Got it", action: onAccept)
+                    .font(.caption.weight(.semibold))
+                    .buttonStyle(.borderedProminent)
+                    .tint(accent)
+                    .controlSize(.small)
+                Button("Ignore", action: onIgnore)
+                    .font(.caption)
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                Spacer(minLength: 0)
+                if hasWeight {
+                    Text("or edit below")
+                        .font(.caption2)
+                        .foregroundStyle(Color.dfSecondaryText)
                 }
             }
-            .padding(.vertical, CalmStrength.Spacing.xs)
         }
+        .padding(CalmStrength.Spacing.sm)
+        .background(accent.opacity(0.10))
+        .clipShape(RoundedRectangle(cornerRadius: CalmStrength.Radius.sm))
     }
 }
 

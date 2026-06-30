@@ -43,6 +43,7 @@ final class WorkoutSessionCoordinator {
 
         var newPRs: [PersonalRecord] = []
         if exercise?.category == .strength,
+           set.setType != .warmup,
            let weight = set.weightKg,
            let reps = set.reps,
            weight > 0, reps > 0 {
@@ -84,6 +85,7 @@ final class WorkoutSessionCoordinator {
         session.syncStatus = .pending
         try? context.save()
 
+        prService.recordSessionVolumePR(session: session, userId: userId, context: context)
         progressionService.recomputeAfterSession(session: session, userId: userId, isPro: isPro, context: context)
         syncEngine.enqueue(.upsertSession(session.id))
         LiveActivityManager.shared.end()

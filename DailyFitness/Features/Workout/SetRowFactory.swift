@@ -44,10 +44,16 @@ struct StrengthSetRow: View {
                 .frame(width: 52)
 
             if rirEnabled {
-                TextField("RIR", value: $set.rir, format: .number)
-                    .keyboardType(.numberPad)
-                    .textFieldStyle(.roundedBorder)
-                    .frame(width: 44)
+                Picker("RIR", selection: $set.rir) {
+                    Text("RIR").tag(Int?.none)
+                    ForEach(0...5, id: \.self) { value in
+                        Text("\(value)").tag(Int?.some(value))
+                    }
+                }
+                .pickerStyle(.menu)
+                .frame(width: 56)
+                .tint(Color.dfAccent)
+                .accessibilityLabel("Reps in reserve")
             }
 
             completeButton

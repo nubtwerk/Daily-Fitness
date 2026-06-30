@@ -18,6 +18,8 @@ struct LiveWorkoutView: View {
     @State private var showEndConfirmation = false
     @State private var showExercisePicker = false
     @State private var recentPRs: [PersonalRecord] = []
+    /// Workout-exercise ids whose recommendation the user has accepted or ignored this session.
+    @State private var handledRecommendations: Set<UUID> = []
 
     init(sessionId: UUID, dependencies: DependencyContainer) {
         self.sessionId = sessionId
@@ -163,14 +165,27 @@ struct LiveWorkoutView: View {
                     .font(.headline)
                     .foregroundStyle(Color.dfPrimary)
 
-                if showProgression {
+                if showProgression,
+                   !handledRecommendations.contains(workoutExercise.id),
+                   let recommendation = dependencies.progressionService.latestRecommendation(
+                        exerciseId: workoutExercise.exerciseId,
+                        userId: dependencies.userSession.effectiveUserId,
+                        context: modelContext
+                   ) {
                     ProgressionBanner(
-                        recommendation: dependencies.progressionService.latestRecommendation(
-                            exerciseId: workoutExercise.exerciseId,
-                            userId: dependencies.userSession.effectiveUserId,
-                            context: modelContext
-                        ),
-                        usePounds: usePounds
+                        recommendation: recommendation,
+                        usePounds: usePounds,
+                        onAccept: {
+                            dependencies.progressionService.applyRecommendation(
+                                recommendation,
+                                to: workoutExercise,
+                                context: modelContext
+                            )
+                            handledRecommendations.insert(workoutExercise.id)
+                        },
+                        onIgnore: {
+                            handledRecommendations.insert(workoutExercise.id)
+                        }
                     )
                 }
 

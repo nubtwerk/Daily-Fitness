@@ -124,12 +124,8 @@ struct HomeView: View {
         }
 
         modelContext.insert(session)
-        dependencies.progressionService.prefillSessionFromRecommendations(
-            session: session,
-            userId: dependencies.userSession.effectiveUserId,
-            isPro: dependencies.userSession.isPro,
-            context: modelContext
-        )
+        // Recommendations are surfaced in the live workout as an accept/edit/ignore banner
+        // (US-080) — set weights are never silently overwritten at session start.
         try? modelContext.save()
         dependencies.syncEngine.enqueue(.upsertSession(session.id))
         dependencies.router.startWorkout(sessionId: session.id)

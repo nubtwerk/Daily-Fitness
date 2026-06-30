@@ -39,6 +39,58 @@ final class PRService {
         return detected
     }
 
+    /// Detects and records a session-volume PR (AN-03; US-091). Volume counts completed,
+    /// non-warmup working sets across the session. Returns the PR if one was set.
+    @discardableResult
+    func recordSessionVolumePR(
+        session: WorkoutSessionEntity,
+        userId: UUID,
+        context: ModelContext
+    ) -> PersonalRecord? {
+        let volume = sessionWorkingVolume(session)
+        let previousBest = fetchBestSessionVolume(userId: userId, context: context)
+        guard let pr = PRDetector.detectSessionVolume(
+            volume: volume,
+            previousBest: previousBest,
+            at: session.endedAt ?? Date()
+        ) else { return nil }
+
+        let entity = PersonalRecordEntity(
+            id: pr.id,
+            userId: userId,
+            exerciseId: pr.exerciseId,
+            type: .sessionVolume,
+            value: pr.value,
+            achievedAt: pr.achievedAt,
+            sessionId: session.id,
+            setId: PRDetector.sessionWideId
+        )
+        context.insert(entity)
+        try? context.save()
+        return pr
+    }
+
+    private func sessionWorkingVolume(_ session: WorkoutSessionEntity) -> Double {
+        var total = 0.0
+        for workoutExercise in session.exercises {
+            for set in workoutExercise.sets where set.isCompleted && set.setType != .warmup {
+                if let weight = set.weightKg, let reps = set.reps, weight > 0, reps > 0 {
+                    total += weight * Double(reps)
+                }
+            }
+        }
+        return total
+    }
+
+    private func fetchBestSessionVolume(userId: UUID, context: ModelContext) -> Double? {
+        let volumeRaw = PersonalRecordType.sessionVolume.rawValue
+        let descriptor = FetchDescriptor<PersonalRecordEntity>(
+            predicate: #Predicate { $0.userId == userId && $0.typeRaw == volumeRaw }
+        )
+        let records = (try? context.fetch(descriptor)) ?? []
+        return records.map(\.value).max()
+    }
+
     func recentPRs(userId: UUID, limit: Int, context: ModelContext) -> [PersonalRecordEntity] {
         var descriptor = FetchDescriptor<PersonalRecordEntity>(
             predicate: #Predicate { $0.userId == userId },

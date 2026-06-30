@@ -1,6 +1,31 @@
 import Foundation
 
 enum PRDetector {
+    /// Sentinel id used for session-wide records (e.g. session volume), which are tied to
+    /// neither a single exercise nor a single set.
+    static let sessionWideId = UUID(uuidString: "00000000-0000-0000-0000-000000000000")!
+
+    /// Epley-style estimated 1RM for a single set.
+    static func estimated1RM(weightKg: Double, reps: Int) -> Double {
+        weightKg * (1 + Double(reps) / 30)
+    }
+
+    /// A session-volume PR if `volume` beats the previous best (or there is no prior best).
+    static func detectSessionVolume(
+        volume: Double,
+        previousBest: Double?,
+        at date: Date
+    ) -> PersonalRecord? {
+        guard volume > 0, previousBest == nil || volume > (previousBest ?? 0) else { return nil }
+        return PersonalRecord(
+            id: UUID(),
+            exerciseId: sessionWideId,
+            type: .sessionVolume,
+            value: volume,
+            achievedAt: date
+        )
+    }
+
     static func detect(
         set: CompletedWorkingSet,
         exerciseId: UUID,
@@ -10,7 +35,7 @@ enum PRDetector {
     ) -> [PersonalRecord] {
         var records: [PersonalRecord] = []
         let now = set.completedAt
-        let e1RM = set.weightKg * (1 + Double(set.reps) / 30)
+        let e1RM = estimated1RM(weightKg: set.weightKg, reps: set.reps)
 
         if previousBestWeight == nil || set.weightKg > (previousBestWeight ?? 0) {
             records.append(PersonalRecord(
