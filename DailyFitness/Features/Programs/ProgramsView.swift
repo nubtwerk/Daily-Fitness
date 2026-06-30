@@ -8,14 +8,30 @@ struct ProgramsView: View {
     private var suggestedPrograms: [ProgramEntity]
     @Query(filter: #Predicate<ProgramEntity> { $0.isSuggested == false })
     private var myPrograms: [ProgramEntity]
-    @Query(sort: \RoutineEntity.name) private var routines: [RoutineEntity]
+    @Query(sort: \RoutineEntity.name) private var allRoutines: [RoutineEntity]
     @State private var showCreateRoutine = false
     @State private var showCreateProgram = false
     @State private var routineToEdit: RoutineEntity?
     @State private var showLimitAlert = false
+    @State private var selectedCategory: ProgramCategory?
 
     init(dependencies: DependencyContainer) {
         self._dependencies = Bindable(wrappedValue: dependencies)
+    }
+
+    /// User-created routines only; seeded program-building routines are hidden here
+    /// and don't count toward the free-tier limit.
+    private var myRoutines: [RoutineEntity] {
+        allRoutines.filter { !$0.isSuggested && $0.deletedAt == nil }
+    }
+
+    private var filteredSuggested: [ProgramEntity] {
+        guard let selectedCategory else { return suggestedPrograms }
+        return suggestedPrograms.filter { $0.category == selectedCategory }
+    }
+
+    private var suggestedCategories: [ProgramCategory] {
+        ProgramCategory.allCases.filter { cat in suggestedPrograms.contains { $0.category == cat } }
     }
 
     var body: some View {
@@ -58,7 +74,7 @@ struct ProgramsView: View {
     }
 
     private func attemptCreateRoutine() {
-        if ContentLimitService.canCreateRoutine(currentCount: routines.count, isPro: dependencies.userSession.isPro) {
+        if ContentLimitService.canCreateRoutine(currentCount: myRoutines.count, isPro: dependencies.userSession.isPro) {
             showCreateRoutine = true
         } else {
             showLimitAlert = true
@@ -76,12 +92,12 @@ struct ProgramsView: View {
     private var routinesSection: some View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
             DFSectionHeader(title: "My routines")
-            if routines.isEmpty {
+            if myRoutines.isEmpty {
                 Text("Create a reusable session template.")
                     .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             } else {
-                ForEach(routines, id: \.id) { routine in
+                ForEach(myRoutines, id: \.id) { routine in
                     Button {
                         routineToEdit = routine
                     } label: {
@@ -109,13 +125,14 @@ struct ProgramsView: View {
 
     private var suggestedSection: some View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
-            DFSectionHeader(title: "Suggested")
+            DFSectionHeader(title: "Suggested programs")
             if suggestedPrograms.isEmpty {
                 Text("Suggested programs will appear here after seeding.")
                     .dfFont(.callout)
                     .foregroundStyle(Color.dfSecondaryText)
             } else {
-                ForEach(suggestedPrograms, id: \.id) { program in
+                categoryFilter
+                ForEach(filteredSuggested, id: \.id) { program in
                     NavigationLink {
                         ProgramDetailView(dependencies: dependencies, program: program)
                     } label: {
@@ -124,6 +141,22 @@ struct ProgramsView: View {
                     .buttonStyle(.plain)
                 }
             }
+        }
+    }
+
+    private var categoryFilter: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: CalmStrength.Spacing.sm) {
+                DFChip(title: "All", isSelected: selectedCategory == nil) {
+                    selectedCategory = nil
+                }
+                ForEach(suggestedCategories, id: \.self) { category in
+                    DFChip(title: category.displayName, isSelected: selectedCategory == category) {
+                        selectedCategory = category
+                    }
+                }
+            }
+            .padding(.bottom, CalmStrength.Spacing.xs)
         }
     }
 
@@ -153,11 +186,12 @@ struct ProgramCard: View {
 
     var body: some View {
         DFCard {
-            VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
+            VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
                 HStack {
-                    Text(program.name)
-                        .dfFont(.subheading)
-                        .foregroundStyle(Color.dfPrimary)
+                    Label(program.category.displayName, systemImage: program.category.symbolName)
+                        .dfFont(.captionStrong)
+                        .foregroundStyle(Color.dfAccent)
+                    Spacer()
                     if program.isActive {
                         Text("Active")
                             .dfFont(.captionStrong)
@@ -167,11 +201,31 @@ struct ProgramCard: View {
                             .clipShape(Capsule())
                     }
                 }
-                Text(program.category.rawValue.capitalized)
-                    .dfFont(.callout)
-                    .foregroundStyle(Color.dfSecondaryText)
+                Text(program.name)
+                    .dfFont(.subheading)
+                    .foregroundStyle(Color.dfPrimary)
+                HStack(spacing: CalmStrength.Spacing.md) {
+                    if let days = program.daysPerWeek {
+                        metaLabel("\(days)×/week", systemImage: "calendar")
+                    }
+                    metaLabel(durationText, systemImage: "clock")
+                    if let level = program.level {
+                        metaLabel(level.displayName, systemImage: "chart.bar")
+                    }
+                }
             }
         }
+    }
+
+    private var durationText: String {
+        if let weeks = program.weeks { return "\(weeks) weeks" }
+        return "Ongoing"
+    }
+
+    private func metaLabel(_ text: String, systemImage: String) -> some View {
+        Label(text, systemImage: systemImage)
+            .dfFont(.caption)
+            .foregroundStyle(Color.dfSecondaryText)
     }
 }
 
