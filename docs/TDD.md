@@ -623,7 +623,7 @@ Resources/Exercises/
 └── equipment.json
 ```
 
-**Import script** (Swift CLI or Python in `scripts/import_exercises.py`):
+**Import script** (Python in `scripts/import-exercises.py`):
 
 1. Validate schema (name, category, muscles non-empty)
 2. Dedupe by normalized name

@@ -117,7 +117,7 @@ struct ExerciseLibraryView: View {
             HStack(spacing: CalmStrength.Spacing.sm) {
                 ForEach(Array(items.enumerated()), id: \.offset) { index, title in
                     let isSelected = index == 0 ? isAll : (title == selectedTitle)
-                    DFFilterChip(title: title, isSelected: isSelected) {
+                    DFChip(title: title, isSelected: isSelected) {
                         if index == 0 { onSelect("") } else { onSelect(title) }
                     }
                 }
