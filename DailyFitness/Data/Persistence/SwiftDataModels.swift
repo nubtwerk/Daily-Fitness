@@ -229,6 +229,8 @@ final class WorkoutExerciseEntity {
     var sortOrder: Int
     var supersetGroupId: UUID?
     var note: String?
+    /// Per-exercise rest override (seconds). Falls back to the user's default rest when nil.
+    var restSecondsOverride: Int?
     @Relationship(deleteRule: .cascade, inverse: \WorkoutSetEntity.workoutExercise)
     var sets: [WorkoutSetEntity]
     var session: WorkoutSessionEntity?

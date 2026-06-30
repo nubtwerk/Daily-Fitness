@@ -5,7 +5,7 @@ import SwiftData
 
 @MainActor
 final class SyncEngine {
-    enum SyncOperation: Sendable {
+    enum SyncOperation: Sendable, Codable, Equatable {
         case upsertSession(UUID)
         case upsertRoutine(UUID)
         case upsertProgram(UUID)
@@ -13,12 +13,20 @@ final class SyncEngine {
         case deleteEntity(UUID)
     }
 
-    private var queue: [SyncOperation] = []
+    private static let queueDefaultsKey = "app.dailybase.dailyfitness.syncQueue"
+
+    private var queue: [SyncOperation] = [] {
+        didSet { persistQueue() }
+    }
     private(set) var isAuthenticated = false
     private(set) var isOnline = true
     private var isFlushing = false
     private var pathMonitor: NWPathMonitor?
     private weak var monitoredContext: ModelContext?
+
+    init() {
+        queue = loadPersistedQueue()
+    }
 
     private var client: SupabaseClient {
         SupabaseClient(supabaseURL: AppConfig.supabaseURL, supabaseKey: AppConfig.supabaseAnonKey)
@@ -30,6 +38,7 @@ final class SyncEngine {
 
     func startMonitoring(context: ModelContext) {
         monitoredContext = context
+        reenqueuePendingEntities(context: context)
         guard pathMonitor == nil else { return }
         let monitor = NWPathMonitor()
         monitor.pathUpdateHandler = { [weak self] path in
@@ -48,10 +57,52 @@ final class SyncEngine {
     }
 
     func enqueue(_ operation: SyncOperation) {
+        guard !queue.contains(operation) else { return }
         queue.append(operation)
     }
 
+    /// Drop any pending upserts for a session that is being discarded.
+    func cancelPendingSession(id: UUID) {
+        queue.removeAll { $0 == .upsertSession(id) }
+    }
+
     var pendingCount: Int { queue.count }
+
+    // MARK: - Durable queue (LOG-11 / US-011)
+
+    private func persistQueue() {
+        if let data = try? JSONEncoder().encode(queue) {
+            UserDefaults.standard.set(data, forKey: Self.queueDefaultsKey)
+        }
+    }
+
+    private func loadPersistedQueue() -> [SyncOperation] {
+        guard let data = UserDefaults.standard.data(forKey: Self.queueDefaultsKey),
+              let ops = try? JSONDecoder().decode([SyncOperation].self, from: data) else {
+            return []
+        }
+        return ops
+    }
+
+    /// Re-enqueue any locally pending entities at launch, in case ops were lost
+    /// (e.g. a crash before the queue persisted) — defensive durability for
+    /// offline logging.
+    func reenqueuePendingEntities(context: ModelContext) {
+        let sessions = (try? context.fetch(FetchDescriptor<WorkoutSessionEntity>(
+            predicate: #Predicate { $0.syncStatusRaw == "pending" }
+        ))) ?? []
+        for session in sessions { enqueue(.upsertSession(session.id)) }
+
+        let routines = (try? context.fetch(FetchDescriptor<RoutineEntity>(
+            predicate: #Predicate { $0.syncStatusRaw == "pending" }
+        ))) ?? []
+        for routine in routines { enqueue(.upsertRoutine(routine.id)) }
+
+        let programs = (try? context.fetch(FetchDescriptor<ProgramEntity>(
+            predicate: #Predicate { $0.syncStatusRaw == "pending" }
+        ))) ?? []
+        for program in programs { enqueue(.upsertProgram(program.id)) }
+    }
 
     func flush(context: ModelContext) async throws {
         guard isAuthenticated, isOnline, !AppConfig.supabaseAnonKey.isEmpty else { return }
@@ -59,7 +110,7 @@ final class SyncEngine {
         isFlushing = true
         defer { isFlushing = false }
 
-        var pending = queue
+        let pending = queue
         queue.removeAll()
         var retry: [SyncOperation] = []
 
@@ -175,6 +226,11 @@ final class SyncEngine {
             let is_completed: Bool
         }
 
+        // NOTE: there is no workout_exercises table in the sync payload yet, so a live
+        // session's per-exercise note / supersetGroupId / restSecondsOverride are
+        // local-only here. For routine-based sessions the note is mirrored onto the
+        // routine (see WorkoutSessionCoordinator.persistExerciseNotesToRoutine) and
+        // synced via routine_exercises. A dedicated workout_exercises sync is Phase E.
         var setRows: [SetRow] = []
         for workoutExercise in session.exercises {
             for set in workoutExercise.sets {
@@ -232,7 +288,9 @@ final class SyncEngine {
             let target_reps_max: Int?
             let target_duration_seconds: Int?
             let rest_seconds: Int
+            let superset_group_id: UUID?
             let progression_enabled: Bool
+            let note: String?
         }
 
         let rows = routine.exercises.map { item in
@@ -247,7 +305,9 @@ final class SyncEngine {
                 target_reps_max: item.targetRepsMax,
                 target_duration_seconds: item.targetDurationSeconds,
                 rest_seconds: item.restSeconds,
-                progression_enabled: item.progressionEnabled
+                superset_group_id: item.supersetGroupId,
+                progression_enabled: item.progressionEnabled,
+                note: item.note
             )
         }
 

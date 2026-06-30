@@ -6,6 +6,9 @@ final class AppRouter {
     var selectedTab: AppTab = .home
     var activeWorkoutSessionId: UUID?
     var showOnboarding: Bool
+    /// Bumped when a Live Activity deep link asks the live workout to scroll to
+    /// the current set (LOCK-03 / US-062).
+    var scrollToCurrentSetToken = 0
 
     init(showOnboarding: Bool = false) {
         self.showOnboarding = showOnboarding
@@ -17,6 +20,12 @@ final class AppRouter {
 
     func endWorkout() {
         activeWorkoutSessionId = nil
+    }
+
+    /// Open the live workout from a Live Activity tap and request a scroll to the current set.
+    func openWorkoutFromDeepLink(sessionId: UUID) {
+        activeWorkoutSessionId = sessionId
+        scrollToCurrentSetToken += 1
     }
 }
 

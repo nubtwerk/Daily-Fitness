@@ -277,11 +277,8 @@ struct MuscleHeatmapView: View {
         for session in sessions where session.startedAt >= cutoff {
             for workoutExercise in session.exercises {
                 guard let exercise = exercises.first(where: { $0.id == workoutExercise.exerciseId }) else { continue }
-                let volume = workoutExercise.sets
-                    .filter(\.isCompleted)
-                    .reduce(0.0) { partial, set in
-                        partial + (set.weightKg ?? 0) * Double(set.reps ?? 0)
-                    }
+                // Warmups excluded from volume totals (LOG-07 / US-054).
+                let volume = WorkoutMetrics.strengthVolume(for: workoutExercise)
                 for muscle in exercise.primaryMuscles {
                     volumes[muscle, default: 0] += volume
                 }

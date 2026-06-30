@@ -8,6 +8,13 @@ final class WorkoutSessionCoordinator {
     let progressionService: ProgressionService
     let preferencesRepository: UserPreferencesRepository
 
+    /// Outcome of completing a single set: any new PRs plus the rest deadline the
+    /// UI should display (nil when no rest applies).
+    struct CompleteSetResult {
+        var personalRecords: [PersonalRecord]
+        var restEndsAt: Date?
+    }
+
     init(
         syncEngine: SyncEngine,
         prService: PRService,
@@ -27,22 +34,31 @@ final class WorkoutSessionCoordinator {
         exercise: ExerciseEntity?,
         userId: UUID,
         context: ModelContext
-    ) -> [PersonalRecord] {
-        guard !set.isCompleted else { return [] }
+    ) -> CompleteSetResult {
+        guard !set.isCompleted else { return CompleteSetResult(personalRecords: [], restEndsAt: nil) }
 
         set.isCompleted = true
         set.completedAt = Date()
 
+        // One-tap confirm: fill unchanged values from the last working set (US-051).
         if exercise?.loggingFields == .weightReps || exercise == nil {
-            if set.weightKg == nil { set.weightKg = 0 }
-            if set.reps == nil { set.reps = 0 }
+            let last = LastWorkingSetService.lastPerformance(
+                exerciseId: workoutExercise.exerciseId,
+                userId: userId,
+                excludingSessionId: session.id,
+                context: context
+            )
+            if set.weightKg == nil { set.weightKg = last?.weightKg ?? 0 }
+            if set.reps == nil { set.reps = last?.reps ?? 0 }
         }
 
         session.syncStatus = .pending
         try? context.save()
 
+        // Warmups never count as PRs (LOG-07 / US-054).
         var newPRs: [PersonalRecord] = []
         if exercise?.category == .strength,
+           set.setType != .warmup,
            let weight = set.weightKg,
            let reps = set.reps,
            weight > 0, reps > 0 {
@@ -59,7 +75,7 @@ final class WorkoutSessionCoordinator {
         syncEngine.enqueue(.upsertSession(session.id))
 
         let prefs = preferencesRepository.loadOrCreate(userId: userId, context: context)
-        let restSeconds = exercise?.category == .strength ? prefs.defaultRestSeconds : 0
+        let restSeconds = restSecondsFor(exercise: exercise, workoutExercise: workoutExercise, prefs: prefs)
         let restEndsAt = restSeconds > 0 ? Date().addingTimeInterval(TimeInterval(restSeconds)) : nil
 
         if prefs.liveActivitiesEnabled {
@@ -71,7 +87,53 @@ final class WorkoutSessionCoordinator {
             )
         }
 
-        return newPRs
+        // Rest-end notification fallback (LOCK-06 / US-063).
+        if prefs.restEndNotificationEnabled, let restEndsAt {
+            NotificationService.shared.scheduleRestEnd(at: restEndsAt)
+        } else {
+            NotificationService.shared.cancelRestEnd()
+        }
+
+        return CompleteSetResult(personalRecords: newPRs, restEndsAt: restEndsAt)
+    }
+
+    /// Default rest for a strength set is the per-exercise override or the user's
+    /// global default. Mobility/yoga only rests when explicitly configured (US-053).
+    private func restSecondsFor(
+        exercise: ExerciseEntity?,
+        workoutExercise: WorkoutExerciseEntity,
+        prefs: UserPreferencesEntity
+    ) -> Int {
+        if exercise?.category == .strength {
+            return workoutExercise.restSecondsOverride ?? prefs.defaultRestSeconds
+        }
+        return workoutExercise.restSecondsOverride ?? 0
+    }
+
+    /// Re-sync the rest state after the user extends or skips rest in-app.
+    func syncRest(
+        session: WorkoutSessionEntity,
+        restEndsAt: Date?,
+        userId: UUID,
+        context: ModelContext
+    ) {
+        let prefs = preferencesRepository.loadOrCreate(userId: userId, context: context)
+        let resting = (restEndsAt != nil)
+
+        if prefs.liveActivitiesEnabled {
+            LiveActivityManager.shared.update(
+                session: session,
+                exerciseLookup: { id in exerciseName(for: id, context: context) },
+                phase: resting ? .resting : .active,
+                restEndsAt: restEndsAt
+            )
+        }
+
+        if prefs.restEndNotificationEnabled, let restEndsAt {
+            NotificationService.shared.scheduleRestEnd(at: restEndsAt)
+        } else {
+            NotificationService.shared.cancelRestEnd()
+        }
     }
 
     func finishSession(
@@ -84,15 +146,59 @@ final class WorkoutSessionCoordinator {
         session.syncStatus = .pending
         try? context.save()
 
+        // Persist per-exercise notes back to the routine so they pre-fill next time (US-042).
+        persistExerciseNotesToRoutine(session: session, context: context)
+
         progressionService.recomputeAfterSession(session: session, userId: userId, isPro: isPro, context: context)
         syncEngine.enqueue(.upsertSession(session.id))
+        NotificationService.shared.cancelRestEnd()
         LiveActivityManager.shared.end()
     }
 
     func discardSession(_ session: WorkoutSessionEntity, context: ModelContext) {
+        let sessionId = session.id
+
+        // PRs are standalone rows keyed by sessionId (no cascade relationship), so
+        // delete them explicitly or they'd poison future PR baselines.
+        let prDescriptor = FetchDescriptor<PersonalRecordEntity>(
+            predicate: #Predicate { $0.sessionId == sessionId }
+        )
+        for pr in (try? context.fetch(prDescriptor)) ?? [] {
+            context.delete(pr)
+        }
+
+        // If any set was flushed mid-session, the session already exists on the
+        // server — cancel its pending upserts and queue a server delete so it isn't
+        // resurrected on the next pull.
+        syncEngine.cancelPendingSession(id: sessionId)
+        syncEngine.enqueue(.deleteEntity(sessionId))
+
         context.delete(session)
         try? context.save()
+        NotificationService.shared.cancelRestEnd()
         LiveActivityManager.shared.end()
+    }
+
+    private func persistExerciseNotesToRoutine(session: WorkoutSessionEntity, context: ModelContext) {
+        guard let routineId = session.routineId else { return }
+        let descriptor = FetchDescriptor<RoutineEntity>(predicate: #Predicate { $0.id == routineId })
+        guard let routine = try? context.fetch(descriptor).first else { return }
+        var changed = false
+        for workoutExercise in session.exercises {
+            guard let routineExercise = routine.exercises.first(where: { $0.exerciseId == workoutExercise.exerciseId }) else { continue }
+            // Mirror the live note onto the routine, including clearing it (US-042).
+            let liveNote = workoutExercise.note?.isEmpty == true ? nil : workoutExercise.note
+            if routineExercise.note != liveNote {
+                routineExercise.note = liveNote
+                changed = true
+            }
+        }
+        if changed {
+            routine.updatedAt = Date()
+            routine.syncStatus = .pending
+            syncEngine.enqueue(.upsertRoutine(routine.id))
+            try? context.save()
+        }
     }
 
     func startLiveActivityIfEnabled(

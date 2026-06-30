@@ -23,15 +23,23 @@ enum WorkoutExerciseFactory {
         _ routineExercise: RoutineExerciseEntity,
         to session: WorkoutSessionEntity,
         in context: ModelContext,
+        category: ExerciseCategory,
         loggingFields: LoggingFieldMask = .weightReps
     ) -> WorkoutExerciseEntity {
-        addExercise(
+        let workoutExercise = addExercise(
             exerciseId: routineExercise.exerciseId,
             loggingFields: loggingFields,
             to: session,
             in: context,
             setCount: routineExercise.targetSets
         )
+        // Carry routine configuration into the live session (LOG-08/09, US-041/042/053).
+        workoutExercise.supersetGroupId = routineExercise.supersetGroupId
+        workoutExercise.note = routineExercise.note
+        // Only strength rests by default; mobility/yoga must be explicitly configured
+        // (US-053), so non-strength exercises start with no rest override.
+        workoutExercise.restSecondsOverride = category == .strength ? routineExercise.restSeconds : nil
+        return workoutExercise
     }
 
     @MainActor
