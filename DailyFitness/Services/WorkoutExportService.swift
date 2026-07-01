@@ -6,24 +6,27 @@ enum WorkoutExportService {
         exercises: [ExerciseEntity],
         userId: UUID
     ) -> URL? {
-        var lines = ["session_id,session_name,started_at,exercise,set_number,weight_kg,reps,duration_seconds,hold_seconds"]
+        var lines = ["session_id,session_name,started_at,exercise,set_number,set_type,weight_kg,reps,duration_seconds,hold_seconds,notes"]
 
-        for session in sessions where session.userId == userId {
+        for session in sessions where session.userId == userId && session.deletedAt == nil {
             for workoutExercise in session.exercises {
                 let exerciseName = exercises.first(where: { $0.id == workoutExercise.exerciseId })?.name ?? "Exercise"
+                let exerciseNote = workoutExercise.note ?? ""
                 for set in workoutExercise.sets where set.isCompleted {
-                    let row = [
+                    let fields: [String] = [
                         session.id.uuidString,
                         csvEscape(session.name),
                         ISO8601DateFormatter().string(from: session.startedAt),
                         csvEscape(exerciseName),
                         String(set.setNumber),
+                        set.setType.rawValue,
                         set.weightKg.map { String($0) } ?? "",
                         set.reps.map { String($0) } ?? "",
                         set.durationSeconds.map { String($0) } ?? "",
-                        set.holdSeconds.map { String($0) } ?? ""
-                    ].joined(separator: ",")
-                    lines.append(row)
+                        set.holdSeconds.map { String($0) } ?? "",
+                        csvEscape(exerciseNote)
+                    ]
+                    lines.append(fields.joined(separator: ","))
                 }
             }
         }

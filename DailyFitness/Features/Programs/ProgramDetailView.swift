@@ -12,6 +12,12 @@ struct ProgramDetailView: View {
     @State private var editorTarget: ProgramEntity?
     @State private var basedOnName: String?
     @State private var showLeaveConfirm = false
+    @State private var paywallContext: PaywallContext?
+
+    /// User-created routines that count toward the combined free-tier limit (PRD §13).
+    private var myRoutineCount: Int {
+        routines.filter { !$0.isSuggested && $0.deletedAt == nil }.count
+    }
 
     var body: some View {
         ScrollView {
@@ -37,6 +43,9 @@ struct ProgramDetailView: View {
         .navigationTitle(program.name)
         .sheet(item: $editorTarget) { target in
             ProgramEditorView(dependencies: dependencies, program: target)
+        }
+        .sheet(item: $paywallContext) { context in
+            PaywallView(dependencies: dependencies, context: context)
         }
         .confirmationDialog(
             "Leave this program?",
@@ -184,7 +193,12 @@ struct ProgramDetailView: View {
         let myProgramCount = (try? modelContext.fetchCount(FetchDescriptor<ProgramEntity>(
             predicate: #Predicate { $0.isSuggested == false }
         ))) ?? 0
-        guard ContentLimitService.canCreateProgram(currentCount: myProgramCount, isPro: dependencies.userSession.isPro) else { return }
+        guard ContentLimitService.canCreateCustomContent(
+            routineCount: myRoutineCount, programCount: myProgramCount, isPro: dependencies.userSession.isPro
+        ) else {
+            paywallContext = .customContent
+            return
+        }
 
         let copy = makeOwnedCopy(active: true)
         modelContext.insert(copy)
@@ -273,7 +287,7 @@ struct ProgramDetailView: View {
             title: "Couldn’t leave the program",
             message: "We couldn’t leave this program just now. Please try again in a moment."
         )
-        dependencies.syncEngine.enqueue(.deleteEntity(id))
+        dependencies.syncEngine.enqueue(.deleteEntity(.program, id))
         dismiss()
     }
 
@@ -452,7 +466,12 @@ struct ProgramEditorView: View {
             let count = (try? modelContext.fetchCount(FetchDescriptor<ProgramEntity>(
                 predicate: #Predicate { $0.isSuggested == false }
             ))) ?? 0
-            guard ContentLimitService.canCreateProgram(currentCount: count, isPro: dependencies.userSession.isPro) else {
+            let routineCount = (try? modelContext.fetchCount(FetchDescriptor<RoutineEntity>(
+                predicate: #Predicate { $0.isSuggested == false && $0.deletedAt == nil }
+            ))) ?? 0
+            guard ContentLimitService.canCreateCustomContent(
+                routineCount: routineCount, programCount: count, isPro: dependencies.userSession.isPro
+            ) else {
                 dismiss()
                 return
             }

@@ -10,6 +10,7 @@ struct ProgressTabView: View {
     private var sessions: [WorkoutSessionEntity]
 
     @State private var exportItem: ExportItem?
+    @State private var paywallContext: PaywallContext?
     @State private var summary = ProgressSummary()
     @State private var historyMode: HistoryMode = .list
     @State private var categoryFilter: CategoryFilter = .all
@@ -34,8 +35,13 @@ struct ProgressTabView: View {
 
     private var isPro: Bool { dependencies.userSession.isPro }
 
+    private var allCompletedSessions: [WorkoutSessionEntity] {
+        sessions.filter { $0.endedAt != nil && $0.deletedAt == nil }
+    }
+
+    /// Free tier keeps the last `AnalyticsService.freeWindowDays`; Pro sees everything.
     private var completedSessions: [WorkoutSessionEntity] {
-        let completed = sessions.filter { $0.endedAt != nil }
+        let completed = allCompletedSessions
         guard !isPro else { return completed }
         let cutoff = Calendar.current.date(byAdding: .day, value: -AnalyticsService.freeWindowDays, to: Date()) ?? Date()
         return completed.filter { $0.startedAt >= cutoff }
@@ -44,6 +50,11 @@ struct ProgressTabView: View {
     private var filteredSessions: [WorkoutSessionEntity] {
         guard let raw = categoryFilter.categoryRaw else { return completedSessions }
         return completedSessions.filter { summary.categoriesBySession[$0.id]?.contains(raw) ?? false }
+    }
+
+    /// Whether the free user has sessions older than the free window that Pro would reveal.
+    private var hasOlderHistory: Bool {
+        !isPro && allCompletedSessions.count > completedSessions.count
     }
 
     var body: some View {
@@ -61,8 +72,8 @@ struct ProgressTabView: View {
             .navigationTitle("Progress")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
+                    // Always tappable: free users get the paywall instead of a dead button.
                     Button("Export") { exportHistory() }
-                        .disabled(!isPro)
                 }
             }
             .sheet(item: $exportItem) { item in
@@ -70,6 +81,9 @@ struct ProgressTabView: View {
                     Text("Share CSV")
                 }
                 .presentationDetents([.medium])
+            }
+            .sheet(item: $paywallContext) { context in
+                PaywallView(dependencies: dependencies, context: context)
             }
             .onAppear { refreshSummary() }
             .onChange(of: sessions.count) { _, _ in refreshSummary() }
@@ -202,6 +216,18 @@ struct ProgressTabView: View {
                         .buttonStyle(.plain)
                     }
                 }
+
+                if hasOlderHistory {
+                    Button {
+                        paywallContext = .history
+                    } label: {
+                        Label("See your full history with Pro", systemImage: "clock.arrow.circlepath")
+                            .dfFont(.callout)
+                            .foregroundStyle(Color.dfAccent)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                    }
+                    .padding(.top, CalmStrength.Spacing.xs)
+                }
             }
         }
     }
@@ -228,7 +254,11 @@ struct ProgressTabView: View {
     }
 
     private func exportHistory() {
-        guard isPro else { return }
+        // CSV export is a Pro feature — free users get the export-context paywall.
+        guard isPro else {
+            paywallContext = .export
+            return
+        }
         if let url = WorkoutExportService.exportCSV(
             sessions: completedSessions,
             exercises: fetchExercises(),

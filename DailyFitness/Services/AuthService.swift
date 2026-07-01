@@ -8,15 +8,13 @@ import UIKit
 final class AuthService: NSObject {
     private let userSession: UserSession
     private let syncEngine: SyncEngine
+    private let client: SupabaseClient
     private var continuation: CheckedContinuation<Void, Error>?
 
-    private var client: SupabaseClient {
-        SupabaseClient(supabaseURL: AppConfig.supabaseURL, supabaseKey: AppConfig.supabaseAnonKey)
-    }
-
-    init(userSession: UserSession, syncEngine: SyncEngine) {
+    init(userSession: UserSession, syncEngine: SyncEngine, client: SupabaseClient = SupabaseClientProvider.shared) {
         self.userSession = userSession
         self.syncEngine = syncEngine
+        self.client = client
         super.init()
     }
 
@@ -55,10 +53,17 @@ final class AuthService: NSObject {
     func deleteAccount(context: ModelContext) async throws {
         guard userSession.isAuthenticated else { return }
 
-        // Remote: sign out (full delete requires server-side admin function in Supabase)
+        // Real server-side deletion. `delete_current_user` is a SECURITY DEFINER RPC that deletes
+        // the row in `auth.users`; ON DELETE CASCADE then removes every owned row across all
+        // tables. We call it BEFORE wiping locally and rethrow on failure, so the user is never
+        // shown a false "deleted" when their cloud data still exists.
+        if !AppConfig.supabaseAnonKey.isEmpty {
+            try await client.rpc("delete_current_user").execute()
+        }
         try? await client.auth.signOut()
 
         let wiped = wipeLocalData(context: context)
+        syncEngine.resetSyncState()
 
         userSession.isAuthenticated = false
         userSession.supabaseUserId = nil
@@ -69,21 +74,49 @@ final class AuthService: NSObject {
         if !wiped { throw AuthError.dataDeletionFailed }
     }
 
+    /// On first sign-in, claim all local content for the new user, push it, then pull anything
+    /// that already exists in the cloud (e.g. from another device).
     func mergeLocalData(context: ModelContext) async throws {
         let userId = userSession.effectiveUserId
+        let now = Date()
+
+        // The previous implementation marked rows `.pending` but never enqueued them, so the
+        // subsequent flush pushed nothing. Enqueue every entity type explicitly.
         let sessions = try context.fetch(FetchDescriptor<WorkoutSessionEntity>())
-        for session in sessions {
+        for session in sessions where session.deletedAt == nil {
             session.userId = userId
             session.syncStatus = .pending
+            session.updatedAt = now
+            syncEngine.enqueue(.upsertSession(session.id))
         }
         let routines = try context.fetch(FetchDescriptor<RoutineEntity>())
-        for routine in routines {
+        for routine in routines where routine.deletedAt == nil {
             routine.userId = userId
             routine.syncStatus = .pending
+            routine.updatedAt = now
+            syncEngine.enqueue(.upsertRoutine(routine.id))
         }
+        let programs = try context.fetch(FetchDescriptor<ProgramEntity>(
+            predicate: #Predicate { $0.isSuggested == false }
+        ))
+        for program in programs where program.deletedAt == nil {
+            program.userId = userId
+            program.syncStatus = .pending
+            program.updatedAt = now
+            syncEngine.enqueue(.upsertProgram(program.id))
+        }
+        let customExercises = try context.fetch(FetchDescriptor<ExerciseEntity>(
+            predicate: #Predicate { $0.isCustom == true }
+        ))
+        for exercise in customExercises where exercise.deletedAt == nil {
+            exercise.userId = userId
+            exercise.updatedAt = now
+            syncEngine.enqueue(.upsertExercise(exercise.id))
+        }
+
         try context.save()
         try await syncEngine.flush(context: context)
-        try await syncEngine.pullRemoteChanges(since: nil, context: context)
+        try await syncEngine.restoreFromCloud(context: context)
     }
 
     @discardableResult

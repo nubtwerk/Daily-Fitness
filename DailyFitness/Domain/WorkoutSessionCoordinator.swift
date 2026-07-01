@@ -56,6 +56,7 @@ final class WorkoutSessionCoordinator {
         }
 
         session.syncStatus = .pending
+        session.updatedAt = Date()
         context.saveOrPresent(
             "completeSet",
             presenter: errorPresenter,
@@ -152,6 +153,7 @@ final class WorkoutSessionCoordinator {
     ) {
         session.endedAt = Date()
         session.syncStatus = .pending
+        session.updatedAt = Date()
         context.saveOrPresent(
             "finishSession",
             presenter: errorPresenter,
@@ -182,10 +184,10 @@ final class WorkoutSessionCoordinator {
         }
 
         // If any set was flushed mid-session, the session already exists on the
-        // server — cancel its pending upserts and queue a server delete so it isn't
-        // resurrected on the next pull.
+        // server — cancel its pending upserts and queue a server soft-delete (routed to the
+        // sessions table) so it isn't resurrected on the next pull.
         syncEngine.cancelPendingSession(id: sessionId)
-        syncEngine.enqueue(.deleteEntity(sessionId))
+        syncEngine.enqueue(.deleteEntity(.session, sessionId))
 
         context.delete(session)
         context.saveOrPresent(

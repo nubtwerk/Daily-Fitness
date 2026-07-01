@@ -6,7 +6,6 @@ struct CustomExerciseEditorView: View {
     @Environment(\.modelContext) private var modelContext
 
     let userId: UUID
-    let isPro: Bool
     /// When set, the editor edits this existing custom exercise instead of creating one.
     var existing: ExerciseEntity? = nil
     var onCreated: ((ExerciseEntity) -> Void)? = nil
@@ -159,12 +158,7 @@ struct CustomExerciseEditorView: View {
             return
         }
 
-        let count = repo.customExerciseCount(userId: userId, context: modelContext)
-        guard ContentLimitService.canCreateCustomExercise(currentCount: count, isPro: isPro) else {
-            errorMessage = "Free plan allows \(ContentLimitService.maxFreeCustomExercises) custom exercises. Upgrade to Pro for unlimited."
-            return
-        }
-
+        // Custom exercises are unlimited on every tier (PRD §13 never capped them).
         do {
             let entity = try repo.createCustom(
                 name: trimmedName,

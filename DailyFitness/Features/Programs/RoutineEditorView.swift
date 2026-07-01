@@ -110,6 +110,14 @@ struct RoutineEditorView: View {
                         Text("Tap the link icon to superset an exercise with the one above it (up to 4).")
                     }
                 }
+
+                if existingRoutine != nil {
+                    Section {
+                        Button("Delete routine", role: .destructive) {
+                            deleteRoutine()
+                        }
+                    }
+                }
             }
             .scrollContentBackground(.hidden)
             .background(Color.dfBackground)
@@ -285,6 +293,16 @@ struct RoutineEditorView: View {
             title: "Couldn’t save your routine",
             message: "Something went wrong while saving. Please try again."
         )
+        dismiss()
+    }
+
+    private func deleteRoutine() {
+        guard let routine = existingRoutine else { return }
+        // Propagate a remote soft-delete by id, then remove the local copy. Same pattern as
+        // discarding a session — avoids leaking a `deletedAt`-flagged row into routine queries.
+        dependencies.syncEngine.enqueue(.deleteEntity(.routine, routine.id))
+        modelContext.delete(routine)
+        try? modelContext.save()
         dismiss()
     }
 }

@@ -4,6 +4,7 @@ import SwiftData
 struct ProfileView: View {
     @Bindable var dependencies: DependencyContainer
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.openURL) private var openURL
     @Query private var preferences: [UserPreferencesEntity]
 
     @State private var usePounds: Bool = Locale.current.measurementSystem != .metric
@@ -13,8 +14,6 @@ struct ProfileView: View {
     @State private var restEndNotificationEnabled = false
     @State private var showPaywall = false
     @State private var showDeleteConfirmation = false
-    @State private var authError: String?
-    @State private var isSigningIn = false
 
     init(dependencies: DependencyContainer) {
         self._dependencies = Bindable(wrappedValue: dependencies)
@@ -38,10 +37,19 @@ struct ProfileView: View {
                             .dfFont(.caption)
                             .foregroundStyle(Color.dfSecondaryText)
                     }
+                    if dependencies.syncEngine.conflictsResolved > 0 {
+                        Label(
+                            "\(dependencies.syncEngine.conflictsResolved) item\(dependencies.syncEngine.conflictsResolved == 1 ? "" : "s") updated from another device",
+                            systemImage: "arrow.triangle.2.circlepath"
+                        )
+                        .dfFont(.caption)
+                        .foregroundStyle(Color.dfSecondaryText)
+                    }
                     Button("Sync now") {
                         Task {
+                            dependencies.syncEngine.acknowledgeConflicts()
                             try? await dependencies.syncEngine.flush(context: modelContext)
-                            try? await dependencies.syncEngine.pullRemoteChanges(since: nil, context: modelContext)
+                            try? await dependencies.syncEngine.pullRemoteChanges(context: modelContext)
                         }
                     }
                     .disabled(!dependencies.userSession.isAuthenticated)
@@ -50,34 +58,29 @@ struct ProfileView: View {
                 Section("Account") {
                     if dependencies.userSession.isAuthenticated {
                         Label("Signed in with Apple", systemImage: "checkmark.seal.fill")
+                        Button("Restore from cloud") {
+                            Task { try? await dependencies.syncEngine.restoreFromCloud(context: modelContext) }
+                        }
                         Button("Sign out", role: .destructive) {
                             Task { try? await dependencies.authService.signOut() }
                         }
-                        Button("Delete account & local data", role: .destructive) {
+                        Button("Delete account & all data", role: .destructive) {
                             showDeleteConfirmation = true
                         }
                     } else {
-                        Button {
-                            signIn()
-                        } label: {
-                            if isSigningIn {
-                                ProgressView()
-                            } else {
-                                Text("Sign in with Apple")
-                            }
-                        }
-                        .disabled(isSigningIn)
-                    }
-                    if let authError {
-                        Text(authError)
+                        Text("Back up and sync your workouts across devices.")
                             .dfFont(.caption)
-                            .foregroundStyle(.red)
+                            .foregroundStyle(Color.dfSecondaryText)
+                        AppleSignInButton(dependencies: dependencies)
+                            .listRowInsets(EdgeInsets())
+                            .listRowBackground(Color.clear)
                     }
                 }
 
                 Section("Subscription") {
                     if dependencies.userSession.isPro {
-                        Text("DailyFitness Pro")
+                        Label("DailyFitness Pro", systemImage: "crown.fill")
+                        Button("Manage subscription") { openURL(SubscriptionManagement.url) }
                     } else {
                         Button("Upgrade to Pro") { showPaywall = true }
                     }
@@ -131,7 +134,7 @@ struct ProfileView: View {
                 }
                 Button("Cancel", role: .cancel) {}
             } message: {
-                Text("This removes your local workouts and signs you out. Cloud data may remain until server deletion is configured.")
+                Text("This permanently deletes your account and all cloud data, and removes everything from this device. This can't be undone.")
             }
         }
     }
@@ -190,19 +193,5 @@ struct ProfileView: View {
             context: modelContext
         )
         LiveActivityManager.shared.setEnabled(liveActivitiesEnabled)
-    }
-
-    private func signIn() {
-        isSigningIn = true
-        authError = nil
-        Task {
-            do {
-                try await dependencies.authService.signInWithApple()
-                try await dependencies.authService.mergeLocalData(context: modelContext)
-            } catch {
-                authError = error.localizedDescription
-            }
-            isSigningIn = false
-        }
     }
 }
