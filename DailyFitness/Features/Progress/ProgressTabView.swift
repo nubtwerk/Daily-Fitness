@@ -9,8 +9,19 @@ struct ProgressTabView: View {
     @Query(sort: \WorkoutSessionEntity.startedAt, order: .reverse)
     private var sessions: [WorkoutSessionEntity]
 
-    @State private var showExport = false
     @State private var exportItem: ExportItem?
+    @State private var summary = ProgressSummary()
+    @State private var historyMode: HistoryMode = .list
+    @State private var categoryFilter: CategoryFilter = .all
+
+    private enum HistoryMode: Hashable { case list, calendar }
+
+    private enum CategoryFilter: String, CaseIterable, Identifiable {
+        case all, strength, mobility, yoga
+        var id: String { rawValue }
+        var title: String { rawValue.capitalized }
+        var categoryRaw: String? { self == .all ? nil : rawValue }
+    }
 
     private struct ExportItem: Identifiable {
         let id = UUID()
@@ -21,15 +32,18 @@ struct ProgressTabView: View {
         self._dependencies = Bindable(wrappedValue: dependencies)
     }
 
+    private var isPro: Bool { dependencies.userSession.isPro }
+
     private var completedSessions: [WorkoutSessionEntity] {
         let completed = sessions.filter { $0.endedAt != nil }
-        guard !dependencies.userSession.isPro else { return completed }
-        let cutoff = Calendar.current.date(byAdding: .day, value: -90, to: Date()) ?? Date()
+        guard !isPro else { return completed }
+        let cutoff = Calendar.current.date(byAdding: .day, value: -AnalyticsService.freeWindowDays, to: Date()) ?? Date()
         return completed.filter { $0.startedAt >= cutoff }
     }
 
-    private var heatmapDays: Int {
-        dependencies.userSession.isPro ? 30 : 7
+    private var filteredSessions: [WorkoutSessionEntity] {
+        guard let raw = categoryFilter.categoryRaw else { return completedSessions }
+        return completedSessions.filter { summary.categoriesBySession[$0.id]?.contains(raw) ?? false }
     }
 
     var body: some View {
@@ -37,6 +51,7 @@ struct ProgressTabView: View {
             ScrollView {
                 VStack(alignment: .leading, spacing: CalmStrength.Spacing.lg) {
                     prShelf
+                    mobilityYogaCard
                     muscleHeatmap
                     historySection
                 }
@@ -47,7 +62,7 @@ struct ProgressTabView: View {
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Export") { exportHistory() }
-                        .disabled(!dependencies.userSession.isPro)
+                        .disabled(!isPro)
                 }
             }
             .sheet(item: $exportItem) { item in
@@ -56,7 +71,19 @@ struct ProgressTabView: View {
                 }
                 .presentationDetents([.medium])
             }
+            .onAppear { refreshSummary() }
+            .onChange(of: sessions.count) { _, _ in refreshSummary() }
+            .onChange(of: isPro) { _, _ in refreshSummary() }
         }
+    }
+
+    private func refreshSummary() {
+        summary = dependencies.analyticsService.progressSummary(
+            userId: dependencies.userSession.effectiveUserId,
+            isPro: isPro,
+            context: modelContext,
+            exercises: fetchExercises()
+        )
     }
 
     private var prShelf: some View {
@@ -76,9 +103,9 @@ struct ProgressTabView: View {
                     DFCard {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(exerciseName(for: pr.exerciseId))
+                                Text(prTitle(pr))
                                     .dfFont(.subheading)
-                                Text(pr.type.rawValue.capitalized)
+                                Text(prTypeLabel(pr.type))
                                     .dfFont(.caption)
                                     .foregroundStyle(Color.dfSecondaryText)
                             }
@@ -92,16 +119,38 @@ struct ProgressTabView: View {
         }
     }
 
+    @ViewBuilder
+    private var mobilityYogaCard: some View {
+        if summary.mobilityYogaSessionCount > 0 {
+            VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
+                DFSectionHeader(title: "Mobility & yoga")
+                DFCard {
+                    HStack(spacing: CalmStrength.Spacing.md) {
+                        Image(systemName: "figure.mind.and.body")
+                            .font(.title2)
+                            .foregroundStyle(Color.dfAccent)
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text("\(summary.mobilityYogaMinutes) min")
+                                .dfFont(.heading)
+                                .foregroundStyle(Color.dfPrimary)
+                            Text("across \(summary.mobilityYogaSessionCount) session\(summary.mobilityYogaSessionCount == 1 ? "" : "s")")
+                                .dfFont(.callout)
+                                .foregroundStyle(Color.dfSecondaryText)
+                        }
+                        Spacer()
+                    }
+                }
+            }
+        }
+    }
+
     private var muscleHeatmap: some View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
-            DFSectionHeader(title: "Muscle volume (\(heatmapDays) days)")
-            MuscleHeatmapView(
-                sessions: completedSessions,
-                exercises: fetchExercises(),
-                dayWindow: heatmapDays
-            )
-            if !dependencies.userSession.isPro {
-                Text("Upgrade to Pro for 30-day muscle trends.")
+            let windowLabel = summary.muscleWindowDays.map { "\($0) days" } ?? "all time"
+            DFSectionHeader(title: "Muscle volume (\(windowLabel))")
+            MuscleHeatmapView(volumes: summary.muscleVolumes)
+            if !isPro {
+                Text("Upgrade to Pro for all-time muscle volume and trends.")
                     .dfFont(.caption)
                     .foregroundStyle(Color.dfSecondaryText)
             }
@@ -111,30 +160,62 @@ struct ProgressTabView: View {
     private var historySection: some View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
             DFSectionHeader(title: "History")
-            if completedSessions.isEmpty {
-                DFEmptyState(
-                    title: "No workouts yet",
-                    message: "Complete a session to see your history here."
-                )
+
+            DFChipPicker(
+                options: [HistoryMode.list, .calendar],
+                title: { $0 == .list ? "List" : "Calendar" },
+                selection: $historyMode
+            )
+
+            if historyMode == .calendar {
+                DFCard {
+                    MonthCalendarView(sessionDays: summary.sessionDays)
+                }
             } else {
-                ForEach(completedSessions.prefix(20), id: \.id) { session in
-                    NavigationLink {
-                        SessionDetailView(session: session, dependencies: dependencies)
-                    } label: {
-                        DFCard {
-                            VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
-                                Text(session.name)
-                                    .dfFont(.subheading)
-                                    .foregroundStyle(Color.dfPrimary)
-                                Text(session.startedAt.formatted(date: .abbreviated, time: .shortened))
-                                    .dfFont(.callout)
-                                    .foregroundStyle(Color.dfSecondaryText)
+                DFChipPicker(
+                    options: CategoryFilter.allCases,
+                    title: { $0.title },
+                    selection: $categoryFilter
+                )
+
+                if filteredSessions.isEmpty {
+                    DFEmptyState(
+                        title: "No workouts yet",
+                        message: "Complete a session to see your history here."
+                    )
+                } else {
+                    ForEach(filteredSessions.prefix(20), id: \.id) { session in
+                        NavigationLink {
+                            SessionDetailView(session: session, dependencies: dependencies)
+                        } label: {
+                            DFCard {
+                                VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
+                                    Text(session.name)
+                                        .dfFont(.subheading)
+                                        .foregroundStyle(Color.dfPrimary)
+                                    Text(session.startedAt.formatted(date: .abbreviated, time: .shortened))
+                                        .dfFont(.callout)
+                                        .foregroundStyle(Color.dfSecondaryText)
+                                }
                             }
                         }
+                        .buttonStyle(.plain)
                     }
-                    .buttonStyle(.plain)
                 }
             }
+        }
+    }
+
+    private func prTitle(_ pr: PersonalRecordEntity) -> String {
+        pr.type == .sessionVolume ? "Session volume" : exerciseName(for: pr.exerciseId)
+    }
+
+    private func prTypeLabel(_ type: PersonalRecordType) -> String {
+        switch type {
+        case .weight: return "Weight"
+        case .reps: return "Reps"
+        case .estimated1RM: return "Est. 1RM"
+        case .sessionVolume: return "Total volume"
         }
     }
 
@@ -147,7 +228,7 @@ struct ProgressTabView: View {
     }
 
     private func exportHistory() {
-        guard dependencies.userSession.isPro else { return }
+        guard isPro else { return }
         if let url = WorkoutExportService.exportCSV(
             sessions: completedSessions,
             exercises: fetchExercises(),
@@ -183,8 +264,10 @@ struct SessionDetailView: View {
             VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
                 if let ended = session.endedAt {
                     Text("Duration: \(Int(ended.timeIntervalSince(session.startedAt) / 60)) min")
+                        .dfFont(.body)
                 }
                 Text("\(session.exercises.count) exercises")
+                    .dfFont(.body)
             }
         }
     }
@@ -197,9 +280,10 @@ struct SessionDetailView: View {
                 .dfFont(.subheading)
             ExerciseChartView(
                 exerciseId: workoutExercise.exerciseId,
+                loggingFields: exercise?.loggingFields ?? .weightReps,
                 userId: dependencies.userSession.effectiveUserId,
-                context: modelContext,
-                isPro: dependencies.userSession.isPro
+                isPro: dependencies.userSession.isPro,
+                analyticsService: dependencies.analyticsService
             )
             ForEach(workoutExercise.sets.filter(\.isCompleted).sorted(by: { $0.setNumber < $1.setNumber }), id: \.id) { set in
                 Text(setSummary(set, exercise: exercise))
@@ -221,93 +305,184 @@ struct SessionDetailView: View {
     }
 }
 
+/// Per-exercise history chart with a metric switcher (weight/reps/volume/e1RM) and a
+/// free 90-day window plus an upgrade prompt at the boundary (US-092; AN-02).
 struct ExerciseChartView: View {
     let exerciseId: UUID
+    let loggingFields: LoggingFieldMask
     let userId: UUID
-    let context: ModelContext
     let isPro: Bool
+    let analyticsService: AnalyticsService
+    @Environment(\.modelContext) private var modelContext
 
-    private var dataPoints: [(Date, Double)] {
-        let descriptor = FetchDescriptor<WorkoutSessionEntity>(
-            predicate: #Predicate { $0.userId == userId && $0.endedAt != nil },
-            sortBy: [SortDescriptor(\.startedAt)]
-        )
-        let sessions = (try? context.fetch(descriptor)) ?? []
-        var points: [(Date, Double)] = []
-        for session in sessions {
-            for workoutExercise in session.exercises where workoutExercise.exerciseId == exerciseId {
-                for set in workoutExercise.sets where set.isCompleted {
-                    if let weight = set.weightKg, weight > 0 {
-                        points.append((set.completedAt ?? session.startedAt, weight))
-                    }
-                }
-            }
-        }
-        return points.suffix(20).map { $0 }
-    }
+    @State private var series = ExerciseSeries()
+    @State private var metric: ChartMetric = .weight
 
     var body: some View {
-        if !isPro {
-            Text("Charts available with Pro")
-                .dfFont(.caption)
-                .foregroundStyle(Color.dfSecondaryText)
-        } else if dataPoints.isEmpty {
-            EmptyView()
-        } else {
-            Chart(dataPoints, id: \.0) { point in
-                LineMark(
-                    x: .value("Date", point.0),
-                    y: .value("Weight", point.1)
+        VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
+            if series.availableMetrics.count > 1 {
+                DFChipPicker(
+                    options: series.availableMetrics,
+                    title: { $0.title },
+                    selection: $metric
                 )
-                .foregroundStyle(Color.dfAccent)
             }
-            .frame(height: 120)
+
+            let points = series.points(for: metric)
+            if points.isEmpty {
+                Text("Log sets to see this chart.")
+                    .dfFont(.caption)
+                    .foregroundStyle(Color.dfSecondaryText)
+            } else {
+                Chart(points) { point in
+                    LineMark(
+                        x: .value("Date", point.date),
+                        y: .value(metric.title, point.value)
+                    )
+                    .foregroundStyle(Color.dfAccent)
+                    .interpolationMethod(.catmullRom)
+                    PointMark(
+                        x: .value("Date", point.date),
+                        y: .value(metric.title, point.value)
+                    )
+                    .foregroundStyle(Color.dfAccent)
+                }
+                .frame(height: 140)
+            }
+
+            if !isPro && series.hasOlderData {
+                Label("Showing last 90 days — upgrade to Pro for full history.", systemImage: "lock.fill")
+                    .dfFont(.micro)
+                    .foregroundStyle(Color.dfSecondaryText)
+            }
+        }
+        .task(id: exerciseId) { loadSeries() }
+        .onChange(of: isPro) { _, _ in loadSeries() }
+    }
+
+    private func loadSeries() {
+        series = analyticsService.exerciseSeries(
+            exerciseId: exerciseId,
+            loggingFields: loggingFields,
+            userId: userId,
+            isPro: isPro,
+            context: modelContext
+        )
+        if !series.availableMetrics.contains(metric) {
+            metric = series.availableMetrics.first ?? .weight
         }
     }
 }
 
 struct MuscleHeatmapView: View {
-    let sessions: [WorkoutSessionEntity]
-    let exercises: [ExerciseEntity]
-    var dayWindow: Int = 7
-
-    private var volumeByMuscle: [String: Double] {
-        let cutoff = Calendar.current.date(byAdding: .day, value: -dayWindow, to: Date()) ?? Date()
-        var volumes: [String: Double] = [:]
-        for session in sessions where session.startedAt >= cutoff {
-            for workoutExercise in session.exercises {
-                guard let exercise = exercises.first(where: { $0.id == workoutExercise.exerciseId }) else { continue }
-                // Warmups excluded from volume totals (LOG-07 / US-054).
-                let volume = WorkoutMetrics.strengthVolume(for: workoutExercise)
-                for muscle in exercise.primaryMuscles {
-                    volumes[muscle, default: 0] += volume
-                }
-            }
-        }
-        return volumes
-    }
+    let volumes: [MuscleVolume]
 
     var body: some View {
-        if volumeByMuscle.isEmpty {
+        if volumes.isEmpty {
             Text("Log strength work to see muscle volume.")
                 .dfFont(.callout)
                 .foregroundStyle(Color.dfSecondaryText)
         } else {
-            let maxVolume = volumeByMuscle.values.max() ?? 1
+            let maxVolume = volumes.map(\.volume).max() ?? 1
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 100))], spacing: CalmStrength.Spacing.sm) {
-                ForEach(volumeByMuscle.sorted(by: { $0.value > $1.value }), id: \.key) { muscle, volume in
+                ForEach(volumes) { item in
                     VStack {
                         RoundedRectangle(cornerRadius: CalmStrength.Radius.sm)
-                            .fill(Color.dfAccent.opacity(volume / maxVolume))
+                            .fill(Color.dfAccent.opacity(max(0.12, item.volume / maxVolume)))
                             .frame(height: 40)
-                        Text(muscle.capitalized)
+                        Text(item.muscle.capitalized)
                             .dfFont(.caption)
-                        Text("\(Int(volume))")
+                        Text("\(Int(item.volume))")
                             .dfFont(.micro)
                             .foregroundStyle(Color.dfSecondaryText)
                     }
                 }
             }
+        }
+    }
+}
+
+/// A simple month calendar marking days with completed sessions (AN-06; US-090).
+struct MonthCalendarView: View {
+    let sessionDays: Set<Date>
+    @State private var monthAnchor = Date()
+    private let calendar = Calendar.current
+
+    private var monthTitle: String {
+        monthAnchor.formatted(.dateTime.month(.wide).year())
+    }
+
+    private var weekdaySymbols: [String] {
+        let symbols = calendar.veryShortWeekdaySymbols
+        let shift = calendar.firstWeekday - 1
+        return Array(symbols[shift...] + symbols[..<shift])
+    }
+
+    private var days: [Date?] {
+        guard let monthInterval = calendar.dateInterval(of: .month, for: monthAnchor),
+              let firstWeekday = calendar.dateComponents([.weekday], from: monthInterval.start).weekday
+        else { return [] }
+        let leading = (firstWeekday - calendar.firstWeekday + 7) % 7
+        var cells: [Date?] = Array(repeating: nil, count: leading)
+        var day = monthInterval.start
+        while day < monthInterval.end {
+            cells.append(day)
+            guard let next = calendar.date(byAdding: .day, value: 1, to: day) else { break }
+            day = next
+        }
+        return cells
+    }
+
+    var body: some View {
+        VStack(spacing: CalmStrength.Spacing.sm) {
+            HStack {
+                Button { shiftMonth(-1) } label: {
+                    Image(systemName: "chevron.left")
+                }
+                Spacer()
+                Text(monthTitle)
+                    .dfFont(.heading)
+                    .foregroundStyle(Color.dfPrimary)
+                Spacer()
+                Button { shiftMonth(1) } label: {
+                    Image(systemName: "chevron.right")
+                }
+            }
+            .tint(Color.dfAccent)
+
+            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 7), spacing: CalmStrength.Spacing.sm) {
+                ForEach(weekdaySymbols, id: \.self) { symbol in
+                    Text(symbol)
+                        .dfFont(.micro)
+                        .foregroundStyle(Color.dfSecondaryText)
+                }
+                ForEach(Array(days.enumerated()), id: \.offset) { _, day in
+                    if let day {
+                        dayCell(day)
+                    } else {
+                        Color.clear.frame(height: 32)
+                    }
+                }
+            }
+        }
+    }
+
+    private func dayCell(_ day: Date) -> some View {
+        let hasSession = sessionDays.contains(calendar.startOfDay(for: day))
+        let isToday = calendar.isDateInToday(day)
+        return Text("\(calendar.component(.day, from: day))")
+            .dfFont(.caption)
+            .foregroundStyle(hasSession ? Color.dfBackground : Color.dfPrimary)
+            .frame(width: 32, height: 32)
+            .background(Circle().fill(hasSession ? Color.dfAccent : Color.clear))
+            .overlay(
+                Circle().strokeBorder(isToday && !hasSession ? Color.dfAccent : Color.clear, lineWidth: 1)
+            )
+    }
+
+    private func shiftMonth(_ delta: Int) {
+        if let next = calendar.date(byAdding: .month, value: delta, to: monthAnchor) {
+            monthAnchor = next
         }
     }
 }

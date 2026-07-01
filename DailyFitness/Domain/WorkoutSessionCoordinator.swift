@@ -146,6 +146,7 @@ final class WorkoutSessionCoordinator {
         session.syncStatus = .pending
         try? context.save()
 
+        prService.recordSessionVolumePR(session: session, userId: userId, context: context)
         // Persist per-exercise notes back to the routine so they pre-fill next time (US-042).
         persistExerciseNotesToRoutine(session: session, context: context)
 

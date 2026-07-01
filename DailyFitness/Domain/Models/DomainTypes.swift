@@ -81,6 +81,7 @@ enum ProgressionAction: String, Codable, Sendable {
     case increase
     case hold
     case decrease
+    case deload
 }
 
 enum AppTab: Hashable, Sendable {
@@ -109,6 +110,28 @@ struct ProgressionInput: Sendable {
     let targets: RepRange
     let rirEnabled: Bool
     let incrementKg: Double
+    /// Consecutive prior sessions that stalled (held or regressed) for this exercise.
+    let failedAttempts: Int
+    /// True when the routine's rep targets changed since the last recommendation — resets the stall streak.
+    let targetsChanged: Bool
+
+    init(
+        exerciseId: UUID,
+        history: [CompletedWorkingSet],
+        targets: RepRange,
+        rirEnabled: Bool,
+        incrementKg: Double,
+        failedAttempts: Int = 0,
+        targetsChanged: Bool = false
+    ) {
+        self.exerciseId = exerciseId
+        self.history = history
+        self.targets = targets
+        self.rirEnabled = rirEnabled
+        self.incrementKg = incrementKg
+        self.failedAttempts = failedAttempts
+        self.targetsChanged = targetsChanged
+    }
 }
 
 struct ProgressionOutput: Sendable, Equatable {
@@ -118,6 +141,26 @@ struct ProgressionOutput: Sendable, Equatable {
     let targetRir: Int?
     let action: ProgressionAction
     let reason: String
+    /// Running count of consecutive stalls after this recommendation (0 after an increase or deload).
+    let failedAttempts: Int
+
+    init(
+        targetWeightKg: Double?,
+        targetRepsMin: Int,
+        targetRepsMax: Int,
+        targetRir: Int?,
+        action: ProgressionAction,
+        reason: String,
+        failedAttempts: Int = 0
+    ) {
+        self.targetWeightKg = targetWeightKg
+        self.targetRepsMin = targetRepsMin
+        self.targetRepsMax = targetRepsMax
+        self.targetRir = targetRir
+        self.action = action
+        self.reason = reason
+        self.failedAttempts = failedAttempts
+    }
 }
 
 enum PersonalRecordType: String, Codable, Sendable {

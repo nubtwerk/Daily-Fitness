@@ -135,8 +135,9 @@ struct HomeView: View {
         }
 
         modelContext.insert(session)
-        // Logging uses non-destructive ghost placeholders (US-051); weights are no
-        // longer pre-written. The progression target stays advisory in ProgressionBanner.
+        // Recommendations stay advisory: surfaced in the live workout as an accept/edit/ignore
+        // banner (US-080) alongside non-destructive ghost placeholders (US-051) — set weights
+        // are never silently pre-written at session start.
         try? modelContext.save()
         dependencies.syncEngine.enqueue(.upsertSession(session.id))
         dependencies.router.startWorkout(sessionId: session.id)

@@ -67,6 +67,7 @@ final class DependencyContainer {
     let exerciseRepository: ExerciseRepository
     let progressionService: ProgressionService
     let prService: PRService
+    let analyticsService: AnalyticsService
     let workoutCoordinator: WorkoutSessionCoordinator
     let syncEngine: SyncEngine
     let authService: AuthService
@@ -82,6 +83,7 @@ final class DependencyContainer {
         exerciseRepository: ExerciseRepository,
         progressionService: ProgressionService,
         prService: PRService,
+        analyticsService: AnalyticsService,
         workoutCoordinator: WorkoutSessionCoordinator,
         syncEngine: SyncEngine,
         authService: AuthService,
@@ -96,6 +98,7 @@ final class DependencyContainer {
         self.exerciseRepository = exerciseRepository
         self.progressionService = progressionService
         self.prService = prService
+        self.analyticsService = analyticsService
         self.workoutCoordinator = workoutCoordinator
         self.syncEngine = syncEngine
         self.authService = authService
@@ -109,6 +112,7 @@ final class DependencyContainer {
         let exerciseRepository = ExerciseRepository()
         let progressionService = ProgressionService(engine: progressionEngine)
         let prService = PRService()
+        let analyticsService = AnalyticsService()
         let syncEngine = SyncEngine()
         let authService = AuthService(userSession: userSession, syncEngine: syncEngine)
         let revenueCatService = RevenueCatService(userSession: userSession)
@@ -131,6 +135,7 @@ final class DependencyContainer {
             exerciseRepository: exerciseRepository,
             progressionService: progressionService,
             prService: prService,
+            analyticsService: analyticsService,
             workoutCoordinator: workoutCoordinator,
             syncEngine: syncEngine,
             authService: authService,

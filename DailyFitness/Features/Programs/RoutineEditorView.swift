@@ -11,6 +11,7 @@ struct RoutineExerciseDraft: Identifiable {
     var targetRepsMax: Int
     var targetDurationSeconds: Int
     var restSeconds: Int
+    var progressionEnabled: Bool
     var supersetGroupId: UUID?
     var note: String
 
@@ -24,6 +25,7 @@ struct RoutineExerciseDraft: Identifiable {
         targetRepsMax = entity.targetRepsMax ?? 12
         targetDurationSeconds = entity.targetDurationSeconds ?? 60
         restSeconds = entity.restSeconds
+        progressionEnabled = entity.progressionEnabled
         supersetGroupId = entity.supersetGroupId
         note = entity.note ?? ""
     }
@@ -38,6 +40,7 @@ struct RoutineExerciseDraft: Identifiable {
         targetRepsMax = 12
         targetDurationSeconds = 60
         restSeconds = category == .strength ? 90 : 30
+        progressionEnabled = true
         supersetGroupId = nil
         note = ""
     }
@@ -266,6 +269,7 @@ struct RoutineEditorView: View {
                 targetRepsMax: draft.isStrength ? draft.targetRepsMax : nil,
                 targetDurationSeconds: draft.isStrength ? nil : draft.targetDurationSeconds,
                 restSeconds: draft.restSeconds,
+                progressionEnabled: draft.isStrength ? draft.progressionEnabled : false,
                 note: trimmedNote.isEmpty ? nil : trimmedNote
             )
             routineExercise.supersetGroupId = draft.supersetGroupId
@@ -321,6 +325,8 @@ private struct RoutineExerciseDraftRow: View {
                 Stepper("Min reps: \(draft.targetRepsMin)", value: $draft.targetRepsMin, in: 1...30)
                 Stepper("Max reps: \(draft.targetRepsMax)", value: $draft.targetRepsMax, in: 1...30)
                 Stepper("Rest: \(draft.restSeconds)s", value: $draft.restSeconds, in: 15...300, step: 15)
+                Toggle("Auto-progression", isOn: $draft.progressionEnabled)
+                    .tint(Color.dfAccent)
             } else {
                 Stepper("Duration: \(draft.targetDurationSeconds)s", value: $draft.targetDurationSeconds, in: 15...3600, step: 15)
             }

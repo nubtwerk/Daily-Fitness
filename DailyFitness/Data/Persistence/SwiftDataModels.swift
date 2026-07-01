@@ -306,7 +306,14 @@ final class ProgressionRecommendationEntity {
     var targetRepsMax: Int
     var targetRir: Int?
     var reason: String
+    var actionRaw: String = ProgressionAction.hold.rawValue
+    var failedAttempts: Int = 0
     var computedAt: Date
+
+    var action: ProgressionAction {
+        get { ProgressionAction(rawValue: actionRaw) ?? .hold }
+        set { actionRaw = newValue.rawValue }
+    }
 
     init(
         id: UUID = UUID(),
@@ -324,6 +331,8 @@ final class ProgressionRecommendationEntity {
         self.targetRepsMax = output.targetRepsMax
         self.targetRir = output.targetRir
         self.reason = output.reason
+        self.actionRaw = output.action.rawValue
+        self.failedAttempts = output.failedAttempts
         self.computedAt = Date()
     }
 }

@@ -24,6 +24,8 @@ struct LiveWorkoutView: View {
     @State private var sessionNoteDraft = ""
     @State private var showLiveActivityExplainer = false
     @State private var recentPRs: [PersonalRecord] = []
+    /// Workout-exercise ids whose recommendation the user has accepted or ignored this session.
+    @State private var handledRecommendations: Set<UUID> = []
     @State private var handledScrollToken = 0
 
     init(sessionId: UUID, dependencies: DependencyContainer) {
@@ -215,18 +217,31 @@ struct LiveWorkoutView: View {
 
                 if let lastSummary = lastPerformance?.summary(loggingFields: loggingFields, usePounds: usePounds) {
                     Text(lastSummary)
-                        .font(.caption)
+                        .dfFont(.caption)
                         .foregroundStyle(Color.dfSecondaryText)
                 }
 
-                if showProgression {
+                if showProgression,
+                   !handledRecommendations.contains(workoutExercise.id),
+                   let recommendation = dependencies.progressionService.latestRecommendation(
+                        exerciseId: workoutExercise.exerciseId,
+                        userId: dependencies.userSession.effectiveUserId,
+                        context: modelContext
+                   ) {
                     ProgressionBanner(
-                        recommendation: dependencies.progressionService.latestRecommendation(
-                            exerciseId: workoutExercise.exerciseId,
-                            userId: dependencies.userSession.effectiveUserId,
-                            context: modelContext
-                        ),
-                        usePounds: usePounds
+                        recommendation: recommendation,
+                        usePounds: usePounds,
+                        onAccept: {
+                            dependencies.progressionService.applyRecommendation(
+                                recommendation,
+                                to: workoutExercise,
+                                context: modelContext
+                            )
+                            handledRecommendations.insert(workoutExercise.id)
+                        },
+                        onIgnore: {
+                            handledRecommendations.insert(workoutExercise.id)
+                        }
                     )
                 }
 

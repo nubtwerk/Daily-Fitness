@@ -164,11 +164,19 @@ struct StrengthSetRow: View {
                 .dfField()
                 .frame(width: 52)
 
-            if rirEnabled {
-                TextField("RIR", value: $set.rir, format: .number)
-                    .keyboardType(.numberPad)
-                    .dfField()
-                    .frame(width: 44)
+            // US-082: RIR is logged retrospectively — the 0–5 picker appears once the
+            // set is complete (how hard it actually was), not while entering the target.
+            if rirEnabled && set.isCompleted {
+                Picker("RIR", selection: $set.rir) {
+                    Text("RIR").tag(Int?.none)
+                    ForEach(0...5, id: \.self) { value in
+                        Text("\(value)").tag(Int?.some(value))
+                    }
+                }
+                .pickerStyle(.menu)
+                .frame(width: 56)
+                .tint(Color.dfAccent)
+                .accessibilityLabel("Reps in reserve")
             }
 
             Spacer(minLength: 0)
