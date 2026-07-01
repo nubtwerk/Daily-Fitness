@@ -9,7 +9,7 @@ struct ProgressionBanner: View {
     let onIgnore: () -> Void
 
     private var isDeload: Bool { recommendation.action == .deload }
-    private var accent: Color { isDeload ? .orange : Color.dfAccent }
+    private var accent: Color { isDeload ? Color.dfWarning : Color.dfAccent }
 
     private var iconName: String {
         switch recommendation.action {
@@ -47,16 +47,22 @@ struct ProgressionBanner: View {
                 Spacer(minLength: 0)
             }
 
-            HStack(spacing: CalmStrength.Spacing.sm) {
-                Button(hasWeight ? "Accept" : "Got it", action: onAccept)
-                    .dfFont(.captionStrong)
-                    .buttonStyle(.borderedProminent)
-                    .tint(accent)
-                    .controlSize(.small)
-                Button("Ignore", action: onIgnore)
-                    .dfFont(.caption)
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
+            HStack(spacing: CalmStrength.Spacing.md) {
+                Button(action: onAccept) {
+                    Text(hasWeight ? "Accept" : "Got it")
+                        .dfFont(.captionStrong)
+                        .foregroundStyle(Color.dfBackground)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 14)
+                        .background(accent, in: Capsule(style: .continuous))
+                }
+                .buttonStyle(.plain)
+                Button(action: onIgnore) {
+                    Text("Ignore")
+                        .dfFont(.captionStrong)
+                        .foregroundStyle(Color.dfSecondaryText)
+                }
+                .buttonStyle(.plain)
                 Spacer(minLength: 0)
                 if hasWeight {
                     Text("or edit below")

@@ -161,23 +161,22 @@ struct ProgressTabView: View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
             DFSectionHeader(title: "History")
 
-            Picker("View", selection: $historyMode) {
-                Text("List").tag(HistoryMode.list)
-                Text("Calendar").tag(HistoryMode.calendar)
-            }
-            .pickerStyle(.segmented)
+            DFChipPicker(
+                options: [HistoryMode.list, .calendar],
+                title: { $0 == .list ? "List" : "Calendar" },
+                selection: $historyMode
+            )
 
             if historyMode == .calendar {
                 DFCard {
                     MonthCalendarView(sessionDays: summary.sessionDays)
                 }
             } else {
-                Picker("Filter", selection: $categoryFilter) {
-                    ForEach(CategoryFilter.allCases) { filter in
-                        Text(filter.title).tag(filter)
-                    }
-                }
-                .pickerStyle(.segmented)
+                DFChipPicker(
+                    options: CategoryFilter.allCases,
+                    title: { $0.title },
+                    selection: $categoryFilter
+                )
 
                 if filteredSessions.isEmpty {
                     DFEmptyState(
@@ -322,12 +321,11 @@ struct ExerciseChartView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
             if series.availableMetrics.count > 1 {
-                Picker("Metric", selection: $metric) {
-                    ForEach(series.availableMetrics) { metric in
-                        Text(metric.title).tag(metric)
-                    }
-                }
-                .pickerStyle(.segmented)
+                DFChipPicker(
+                    options: series.availableMetrics,
+                    title: { $0.title },
+                    selection: $metric
+                )
             }
 
             let points = series.points(for: metric)
@@ -474,7 +472,7 @@ struct MonthCalendarView: View {
         let isToday = calendar.isDateInToday(day)
         return Text("\(calendar.component(.day, from: day))")
             .dfFont(.caption)
-            .foregroundStyle(hasSession ? Color.white : Color.dfPrimary)
+            .foregroundStyle(hasSession ? Color.dfBackground : Color.dfPrimary)
             .frame(width: 32, height: 32)
             .background(Circle().fill(hasSession ? Color.dfAccent : Color.clear))
             .overlay(

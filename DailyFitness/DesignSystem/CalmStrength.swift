@@ -167,6 +167,7 @@ extension Color {
     // Derived / computed tokens (no asset needed)
     static let dfHairline        = Color.dfPrimary.opacity(0.08)  // light input/separator border (dark cards use .white.opacity(0.08))
     static let dfFieldBackground = Color.dfPrimary.opacity(0.04)  // input fill that matches the card system
+    static let dfWarning         = Color(red: 0.769, green: 0.471, blue: 0.353) // muted terracotta #C4785A — calm warning, never alarm (DSS §1.2)
 }
 
 // MARK: - Shadow application
