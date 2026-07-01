@@ -133,7 +133,7 @@ struct ExercisePickerView: View {
                 }
                 ForEach(muscleOptions, id: \.self) { muscle in
                     DFChip(
-                        title: muscle.capitalized,
+                        title: MuscleGroup.displayName(forToken: muscle),
                         isSelected: selectedMuscle == muscle
                     ) {
                         selectedMuscle = muscle
@@ -151,28 +151,28 @@ private struct ExercisePickerRow: View {
     let exercise: ExerciseEntity
 
     var body: some View {
-        VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
-            HStack {
-                Text(exercise.name)
-                    .dfFont(.subheading)
-                    .foregroundStyle(Color.dfPrimary)
-                if exercise.isCustom {
-                    Text("Custom")
-                        .dfFont(.captionStrong)
-                        .padding(.horizontal, 6)
-                        .padding(.vertical, 2)
-                        .background(Color.dfAccent.opacity(0.2))
-                        .clipShape(Capsule())
+        HStack(spacing: CalmStrength.Spacing.md) {
+            ExerciseImageView(imageURL: exercise.imageURL, category: exercise.category)
+                .frame(width: 48, height: 48)
+
+            VStack(alignment: .leading, spacing: CalmStrength.Spacing.xs) {
+                HStack {
+                    Text(exercise.name)
+                        .dfFont(.subheading)
+                        .foregroundStyle(Color.dfPrimary)
+                    if exercise.isCustom {
+                        CustomBadge()
+                    }
                 }
-            }
-            HStack(spacing: CalmStrength.Spacing.sm) {
-                Text(exercise.category.rawValue.capitalized)
-                    .dfFont(.caption)
-                    .foregroundStyle(Color.dfSecondaryText)
-                if let muscle = exercise.primaryMuscles.first {
-                    Text(muscle.capitalized)
+                HStack(spacing: CalmStrength.Spacing.sm) {
+                    Text(exercise.category.displayName)
                         .dfFont(.caption)
                         .foregroundStyle(Color.dfSecondaryText)
+                    if let muscle = exercise.primaryMuscles.first {
+                        Text(MuscleGroup.displayName(forToken: muscle))
+                            .dfFont(.caption)
+                            .foregroundStyle(Color.dfSecondaryText)
+                    }
                 }
             }
         }

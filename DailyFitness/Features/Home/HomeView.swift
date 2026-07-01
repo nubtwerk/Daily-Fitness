@@ -4,7 +4,7 @@ import SwiftData
 struct HomeView: View {
     @Bindable var dependencies: DependencyContainer
     @Environment(\.modelContext) private var modelContext
-    @Query(sort: \RoutineEntity.name) private var routines: [RoutineEntity]
+    @Query(sort: \RoutineEntity.name) private var allRoutines: [RoutineEntity]
     @Query(filter: #Predicate<WorkoutSessionEntity> { $0.endedAt == nil })
     private var activeSessions: [WorkoutSessionEntity]
     @Query(filter: #Predicate<ProgramEntity> { $0.isActive == true })
@@ -12,6 +12,11 @@ struct HomeView: View {
 
     init(dependencies: DependencyContainer) {
         self._dependencies = Bindable(wrappedValue: dependencies)
+    }
+
+    /// User-created routines for Quick start; seeded program-building routines are hidden.
+    private var routines: [RoutineEntity] {
+        allRoutines.filter { !$0.isSuggested && $0.deletedAt == nil }
     }
 
     var body: some View {
@@ -81,8 +86,13 @@ struct HomeView: View {
 
     @ViewBuilder
     private var todayProgramCard: some View {
+        // Resolve against ALL routines: an active program's days may reference seeded
+        // (suggested) routines that are hidden from the Quick-start list.
         if let program = activePrograms.first,
-           let match = ProgramScheduleResolver.routineForToday(program: program, routines: routines) {
+           let match = ProgramScheduleResolver.routineForToday(
+               program: program,
+               routines: allRoutines.filter { $0.deletedAt == nil }
+           ) {
             let (today, routine) = match
             DFCard {
                 VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {

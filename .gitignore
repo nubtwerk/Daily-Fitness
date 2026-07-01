@@ -26,3 +26,7 @@ Config/Secrets.xcconfig
 
 # Supabase
 supabase/.temp/
+
+# Python
+__pycache__/
+*.pyc

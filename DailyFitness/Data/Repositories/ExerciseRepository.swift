@@ -33,6 +33,24 @@ final class ExerciseRepository {
         return entity
     }
 
+    func updateCustom(
+        _ exercise: ExerciseEntity,
+        name: String,
+        category: ExerciseCategory,
+        primaryMuscles: [String],
+        equipment: [String],
+        loggingFields: LoggingFieldMask,
+        context: ModelContext
+    ) throws {
+        exercise.name = name
+        exercise.category = category
+        exercise.primaryMuscles = primaryMuscles
+        exercise.equipment = equipment
+        exercise.loggingFields = loggingFields
+        exercise.updatedAt = Date()
+        try context.save()
+    }
+
     func softDelete(_ exercise: ExerciseEntity, context: ModelContext) throws {
         exercise.deletedAt = Date()
         exercise.updatedAt = Date()

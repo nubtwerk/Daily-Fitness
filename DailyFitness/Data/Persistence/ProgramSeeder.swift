@@ -6,7 +6,7 @@ final class ProgramSeeder {
     private let versionKey = "programSeedVersion"
 
     func seedIfNeeded(context: ModelContext, routines: [RoutineEntity]) throws {
-        let targetVersion = 1
+        let targetVersion = 2
         let currentVersion = UserDefaults.standard.integer(forKey: versionKey)
         if currentVersion >= targetVersion { return }
 
@@ -27,7 +27,11 @@ final class ProgramSeeder {
                 name: item.name,
                 category: item.category,
                 isSuggested: true,
-                weeks: item.weeks
+                weeks: item.weeks,
+                programDescription: item.description,
+                level: item.level.flatMap { ProgramLevel(rawValue: $0) },
+                daysPerWeek: item.daysPerWeek,
+                equipment: item.equipment ?? []
             )
             for day in item.days {
                 let routineId = day.routineName.flatMap { name in
@@ -65,6 +69,10 @@ private struct ProgramSeedItem: Decodable {
     let name: String
     let category: ProgramCategory
     let weeks: Int?
+    let description: String?
+    let level: String?
+    let daysPerWeek: Int?
+    let equipment: [String]?
     let days: [ProgramDaySeedItem]
 }
 
