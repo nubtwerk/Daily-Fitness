@@ -29,6 +29,9 @@ Hardening pass on top of Phases A–D to make the app TestFlight-ready.
 **F3 — Design assets**
 - The calm rest-timer ring and abstract flow/balance mark already shipped in Phase A/D; this phase polished
   the ring for AA contrast + VoiceOver rather than duplicating them.
+- **Deferred:** "soft natural hero imagery for onboarding/program cards/empty states" (PRD §6 / roadmap F3)
+  is NOT included — it needs art direction, photographic assets, and inclusive-representation sign-off
+  (US-121), which are out of scope for a headless hardening pass. Tracked as a follow-up.
 
 **F4 — TestFlight / QA (US-120)**
 - Feedback channel in Profile (pre-filled mailto with app + OS version).

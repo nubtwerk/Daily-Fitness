@@ -63,13 +63,14 @@ Run on a **real iPhone** (Live Activity, Dynamic Island, and haptics do not exis
 
 ## 3. Accessibility spot-check on device (US-122)
 
-- [ ] VoiceOver: each set row announces "Set N", then weight/reps/RIR with units and "empty" when blank;
-      the complete button reads "Complete set N … not completed/completed".
+- [ ] VoiceOver: the set-type control announces "Set N, <type>"; the weight/reps fields read their label +
+      value (with "empty" when blank); the complete button reads "Mark set complete" / "Set complete".
 - [ ] The rest-timer ring is one element reading "Rest timer, N seconds remaining".
-- [ ] PR earns a spoken "New personal record!" announcement even though the toast auto-dismisses.
-- [ ] Dynamic Type at the largest accessibility size: set rows reflow to a vertical layout; nothing clips;
-      the 44pt complete target stays on screen.
-- [ ] Calm Strength contrast holds in light and dark (palette is WCAG-AA per `.context/phase-f/contrast.json`).
+- [ ] PR earns a spoken "New PR!" announcement (matching the on-screen toast) even though it auto-dismisses.
+- [ ] Dynamic Type at the largest accessibility size: the strength set rows reflow to a vertical layout;
+      nothing clips; the 44pt complete target stays on screen.
+- [ ] Calm Strength contrast holds in light and dark — WCAG-AA: SecondaryText 4.95:1, AccentForeground
+      5.4–6.0:1 on Background / Surface / SurfaceElevated (see CHANGELOG 0.3.0).
 
 ## 4. Final visual sign-off
 
