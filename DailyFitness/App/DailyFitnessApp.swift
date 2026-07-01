@@ -37,8 +37,9 @@ struct DailyFitnessApp: App {
                     }
                     await dependencies.authService.restoreSession()
                     do {
-                        try await dependencies.syncEngine.pullRemoteChanges(since: nil, context: context)
+                        // Flush local changes before pulling so our edits win where appropriate.
                         try await dependencies.syncEngine.flush(context: context)
+                        try await dependencies.syncEngine.pullRemoteChanges(context: context)
                     } catch {
                         AppLog.sync.error("Initial sync failed: \(String(describing: error), privacy: .public)")
                     }

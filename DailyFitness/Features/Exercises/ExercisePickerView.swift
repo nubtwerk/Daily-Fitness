@@ -93,8 +93,9 @@ struct ExercisePickerView: View {
                 if let dependencies {
                     CustomExerciseEditorView(
                         userId: dependencies.userSession.effectiveUserId,
-                        isPro: dependencies.userSession.isPro,
                         onCreated: { exercise in
+                            // Custom exercises were never pushed before; enqueue on creation.
+                            dependencies.syncEngine.enqueue(.upsertExercise(exercise.id))
                             onSelect(exercise)
                             dismiss()
                         }

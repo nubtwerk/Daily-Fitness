@@ -101,8 +101,7 @@ struct ExerciseLibraryView: View {
             }
             .sheet(isPresented: $showCustomEditor) {
                 CustomExerciseEditorView(
-                    userId: dependencies.userSession.effectiveUserId,
-                    isPro: dependencies.userSession.isPro
+                    userId: dependencies.userSession.effectiveUserId
                 )
             }
         }

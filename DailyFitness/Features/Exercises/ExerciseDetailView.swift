@@ -77,7 +77,6 @@ struct ExerciseDetailView: View {
         .sheet(isPresented: $showEditor) {
             CustomExerciseEditorView(
                 userId: dependencies.userSession.effectiveUserId,
-                isPro: dependencies.userSession.isPro,
                 existing: exercise,
                 onDeleted: { dismiss() }
             )

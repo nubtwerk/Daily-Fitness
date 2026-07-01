@@ -140,6 +140,7 @@ final class ProgramEntity {
     var createdAt: Date
     var updatedAt: Date
     var syncStatusRaw: String
+    var deletedAt: Date?
 
     var category: ProgramCategory {
         get { ProgramCategory(rawValue: categoryRaw) ?? .strength }
@@ -223,6 +224,9 @@ final class WorkoutSessionEntity {
     @Relationship(deleteRule: .cascade, inverse: \WorkoutExerciseEntity.session)
     var exercises: [WorkoutExerciseEntity]
     var syncStatusRaw: String
+    // Defaulted/optional so SwiftData lightweight migration adds them to existing stores.
+    var updatedAt: Date = Date()
+    var deletedAt: Date?
 
     var isActive: Bool { endedAt == nil }
 
@@ -236,8 +240,10 @@ final class WorkoutSessionEntity {
         self.userId = userId
         self.name = name
         self.startedAt = Date()
+        self.routineId = routineId
         self.exercises = []
         self.syncStatusRaw = SyncStatus.pending.rawValue
+        self.updatedAt = Date()
     }
 }
 

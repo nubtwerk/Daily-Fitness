@@ -24,6 +24,8 @@ struct LiveWorkoutView: View {
     @State private var sessionNoteDraft = ""
     @State private var showLiveActivityExplainer = false
     @State private var recentPRs: [PersonalRecord] = []
+    @State private var paywallContext: PaywallContext?
+    @State private var showCloudSyncPrompt = false
     /// Workout-exercise ids whose recommendation the user has accepted or ignored this session.
     @State private var handledRecommendations: Set<UUID> = []
     @State private var handledScrollToken = 0
@@ -84,6 +86,12 @@ struct LiveWorkoutView: View {
                         addExercise(exercise, to: session)
                     }
                 )
+            }
+            .sheet(item: $paywallContext) { context in
+                PaywallView(dependencies: dependencies, context: context)
+            }
+            .sheet(isPresented: $showCloudSyncPrompt, onDismiss: closeAfterFinish) {
+                CloudSyncPromptView(dependencies: dependencies)
             }
             .sheet(isPresented: $showSessionNote) { sessionNoteSheet }
             .sheet(isPresented: $showSummary) {
@@ -202,6 +210,8 @@ struct LiveWorkoutView: View {
                 forStrengthIndex: strengthIndex(for: workoutExercise, in: session),
                 isPro: dependencies.userSession.isPro
             )
+        // Strength exercise past the free progression allowance, on a free plan.
+        let progressionLocked = isStrength && !showProgression && !dependencies.userSession.isPro
         let lastPerformance = LastWorkingSetService.lastPerformance(
             exerciseId: workoutExercise.exerciseId,
             userId: dependencies.userSession.effectiveUserId,
@@ -243,6 +253,14 @@ struct LiveWorkoutView: View {
                             handledRecommendations.insert(workoutExercise.id)
                         }
                     )
+                } else if progressionLocked {
+                    Button {
+                        paywallContext = .progression
+                    } label: {
+                        Label("Unlock progression for this exercise", systemImage: "lock.fill")
+                            .dfFont(.captionStrong)
+                            .foregroundStyle(Color.dfAccent)
+                    }
                 }
 
                 ForEach(workoutExercise.sets.sorted(by: { $0.setNumber < $1.setNumber }), id: \.id) { set in
@@ -448,12 +466,14 @@ struct LiveWorkoutView: View {
     private func addExercise(_ exercise: ExerciseEntity, to session: WorkoutSessionEntity) {
         _ = WorkoutExerciseFactory.addExercise(exercise, to: session, in: modelContext)
         session.syncStatus = .pending
+        session.updatedAt = Date()
         modelContext.saveOrPresent(
             "addExercise",
             presenter: dependencies.errorPresenter,
             title: "Couldn’t add the exercise",
             message: "We couldn’t save that exercise to your workout. Please try again."
         )
+        dependencies.syncEngine.enqueue(.upsertSession(session.id))
     }
 
     private func completeSet(
@@ -516,6 +536,16 @@ struct LiveWorkoutView: View {
             isPro: dependencies.userSession.isPro,
             context: modelContext
         )
+        // After the user's first saved workout, invite them to back it up to the cloud (once).
+        if !dependencies.userSession.isAuthenticated, CloudSyncPromptView.shouldPrompt {
+            CloudSyncPromptView.markPrompted()
+            showCloudSyncPrompt = true
+        } else {
+            closeAfterFinish()
+        }
+    }
+
+    private func closeAfterFinish() {
         dependencies.router.endWorkout()
         dismiss()
     }

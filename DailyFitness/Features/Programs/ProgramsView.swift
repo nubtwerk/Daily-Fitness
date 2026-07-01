@@ -12,7 +12,7 @@ struct ProgramsView: View {
     @State private var showCreateRoutine = false
     @State private var showCreateProgram = false
     @State private var routineToEdit: RoutineEntity?
-    @State private var showLimitAlert = false
+    @State private var paywallContext: PaywallContext?
     @State private var selectedCategory: ProgramCategory?
 
     init(dependencies: DependencyContainer) {
@@ -65,27 +65,33 @@ struct ProgramsView: View {
             .sheet(isPresented: $showCreateProgram) {
                 ProgramEditorView(dependencies: dependencies)
             }
-            .alert("Free limit reached", isPresented: $showLimitAlert) {
-                Button("OK", role: .cancel) {}
-            } message: {
-                Text("Upgrade to Pro for unlimited routines and programs.")
+            .sheet(item: $paywallContext) { context in
+                PaywallView(dependencies: dependencies, context: context)
             }
         }
     }
 
+    private var canCreateCustomContent: Bool {
+        ContentLimitService.canCreateCustomContent(
+            routineCount: myRoutines.count,
+            programCount: myPrograms.count,
+            isPro: dependencies.userSession.isPro
+        )
+    }
+
     private func attemptCreateRoutine() {
-        if ContentLimitService.canCreateRoutine(currentCount: myRoutines.count, isPro: dependencies.userSession.isPro) {
+        if canCreateCustomContent {
             showCreateRoutine = true
         } else {
-            showLimitAlert = true
+            paywallContext = .customContent
         }
     }
 
     private func attemptCreateProgram() {
-        if ContentLimitService.canCreateProgram(currentCount: myPrograms.count, isPro: dependencies.userSession.isPro) {
+        if canCreateCustomContent {
             showCreateProgram = true
         } else {
-            showLimitAlert = true
+            paywallContext = .customContent
         }
     }
 
