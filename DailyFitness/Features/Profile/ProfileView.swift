@@ -83,8 +83,15 @@ struct ProfileView: View {
                     }
                 }
 
+                Section("Feedback") {
+                    Link(destination: feedbackURL) {
+                        Label("Send feedback", systemImage: "envelope")
+                    }
+                    .accessibilityHint("Opens your mail app to send feedback about the app.")
+                }
+
                 Section("About") {
-                    LabeledContent("Version", value: "0.1.0")
+                    LabeledContent("Version", value: appVersionString)
                 }
             }
             .scrollContentBackground(.hidden)
@@ -111,7 +118,15 @@ struct ProfileView: View {
             ) {
                 Button("Delete account & data", role: .destructive) {
                     Task {
-                        try? await dependencies.authService.deleteAccount(context: modelContext)
+                        do {
+                            try await dependencies.authService.deleteAccount(context: modelContext)
+                        } catch {
+                            AppLog.auth.error("Account deletion failed: \(String(describing: error), privacy: .public)")
+                            dependencies.errorPresenter.present(
+                                title: "Couldn’t delete your account",
+                                message: "We couldn’t fully remove your data. Please try again."
+                            )
+                        }
                     }
                 }
                 Button("Cancel", role: .cancel) {}
@@ -125,6 +140,30 @@ struct ProfileView: View {
         if !dependencies.userSession.isAuthenticated { return "Local only" }
         if dependencies.syncEngine.pendingCount > 0 { return "Pending" }
         return "Synced"
+    }
+
+    /// Email address that beta/App Store feedback is routed to. Change to your support inbox.
+    private static let feedbackEmail = "joachim@noobwork.no"
+
+    private var appVersionString: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "0.2.0"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "1"
+        return "\(version) (\(build))"
+    }
+
+    /// Pre-fills a feedback email with the app version and OS so reports are triageable (US-120).
+    private var feedbackURL: URL {
+        let os = ProcessInfo.processInfo.operatingSystemVersionString
+        let subject = "DailyFitness feedback (\(appVersionString))"
+        let body = "\n\n—\nApp \(appVersionString)\n\(os)"
+        var components = URLComponents()
+        components.scheme = "mailto"
+        components.path = Self.feedbackEmail
+        components.queryItems = [
+            URLQueryItem(name: "subject", value: subject),
+            URLQueryItem(name: "body", value: body),
+        ]
+        return components.url ?? URL(string: "mailto:\(Self.feedbackEmail)")!
     }
 
     private func loadPreferences() {

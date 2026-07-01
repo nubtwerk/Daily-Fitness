@@ -279,7 +279,12 @@ struct RoutineEditorView: View {
 
         routine.syncStatus = .pending
         dependencies.syncEngine.enqueue(.upsertRoutine(routine.id))
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "saveRoutine",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t save your routine",
+            message: "Something went wrong while saving. Please try again."
+        )
         dismiss()
     }
 }

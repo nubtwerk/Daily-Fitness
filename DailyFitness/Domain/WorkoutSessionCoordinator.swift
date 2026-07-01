@@ -7,6 +7,7 @@ final class WorkoutSessionCoordinator {
     let prService: PRService
     let progressionService: ProgressionService
     let preferencesRepository: UserPreferencesRepository
+    let errorPresenter: ErrorPresenter
 
     /// Outcome of completing a single set: any new PRs plus the rest deadline the
     /// UI should display (nil when no rest applies).
@@ -19,12 +20,14 @@ final class WorkoutSessionCoordinator {
         syncEngine: SyncEngine,
         prService: PRService,
         progressionService: ProgressionService,
-        preferencesRepository: UserPreferencesRepository
+        preferencesRepository: UserPreferencesRepository,
+        errorPresenter: ErrorPresenter
     ) {
         self.syncEngine = syncEngine
         self.prService = prService
         self.progressionService = progressionService
         self.preferencesRepository = preferencesRepository
+        self.errorPresenter = errorPresenter
     }
 
     func completeSet(
@@ -53,7 +56,12 @@ final class WorkoutSessionCoordinator {
         }
 
         session.syncStatus = .pending
-        try? context.save()
+        context.saveOrPresent(
+            "completeSet",
+            presenter: errorPresenter,
+            title: "Couldn’t save your set",
+            message: "Your last set may not have been saved. Check your device storage and try logging it again."
+        )
 
         // Warmups never count as PRs (LOG-07 / US-054).
         var newPRs: [PersonalRecord] = []
@@ -144,7 +152,12 @@ final class WorkoutSessionCoordinator {
     ) {
         session.endedAt = Date()
         session.syncStatus = .pending
-        try? context.save()
+        context.saveOrPresent(
+            "finishSession",
+            presenter: errorPresenter,
+            title: "Couldn’t save your workout",
+            message: "We hit a problem saving this workout. Check your device storage; your logged sets are still here, so try finishing again."
+        )
 
         prService.recordSessionVolumePR(session: session, userId: userId, context: context)
         // Persist per-exercise notes back to the routine so they pre-fill next time (US-042).
@@ -175,7 +188,12 @@ final class WorkoutSessionCoordinator {
         syncEngine.enqueue(.deleteEntity(sessionId))
 
         context.delete(session)
-        try? context.save()
+        context.saveOrPresent(
+            "discardSession",
+            presenter: errorPresenter,
+            title: "Couldn’t discard the workout",
+            message: "We couldn’t fully remove this workout. It may reappear until you try again."
+        )
         NotificationService.shared.cancelRestEnd()
         LiveActivityManager.shared.end()
     }
@@ -198,7 +216,7 @@ final class WorkoutSessionCoordinator {
             routine.updatedAt = Date()
             routine.syncStatus = .pending
             syncEngine.enqueue(.upsertRoutine(routine.id))
-            try? context.save()
+            context.saveOrLog("persistExerciseNotesToRoutine")
         }
     }
 

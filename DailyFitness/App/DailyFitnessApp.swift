@@ -18,28 +18,40 @@ struct DailyFitnessApp: App {
             RootView(dependencies: dependencies, seedingState: seedingState)
                 .modelContainer(sharedModelContainer)
                 .task {
+                    CrashDiagnosticsService.shared.start()
                     dependencies.revenueCatService.configure()
                     let context = sharedModelContainer.mainContext
                     dependencies.syncEngine.startMonitoring(context: context)
                     do {
-                        let exercises = try context.fetch(FetchDescriptor<ExerciseEntity>())
                         try dependencies.exerciseSeeder.seedIfNeeded(context: context, state: seedingState)
                         let allExercises = try context.fetch(FetchDescriptor<ExerciseEntity>())
                         try RoutineSeeder().seedSuggestedIfNeeded(context: context, exercises: allExercises)
                         let routines = try context.fetch(FetchDescriptor<RoutineEntity>())
                         try dependencies.programSeeder.seedIfNeeded(context: context, routines: routines)
                     } catch {
-                        print("Seeding failed: \(error)")
+                        AppLog.seeding.error("Seeding failed: \(String(describing: error), privacy: .public)")
+                        dependencies.errorPresenter.present(
+                            title: "Some content didn’t load",
+                            message: "We couldn’t finish setting up your exercise library and programs. Restart the app to try again."
+                        )
                     }
                     await dependencies.authService.restoreSession()
-                    try? await dependencies.syncEngine.pullRemoteChanges(since: nil, context: context)
-                    try? await dependencies.syncEngine.flush(context: context)
+                    do {
+                        try await dependencies.syncEngine.pullRemoteChanges(since: nil, context: context)
+                        try await dependencies.syncEngine.flush(context: context)
+                    } catch {
+                        AppLog.sync.error("Initial sync failed: \(String(describing: error), privacy: .public)")
+                    }
                 }
                 .onChange(of: scenePhase) { _, phase in
                     if phase == .active {
                         Task {
                             let context = sharedModelContainer.mainContext
-                            try? await dependencies.syncEngine.flush(context: context)
+                            do {
+                                try await dependencies.syncEngine.flush(context: context)
+                            } catch {
+                                AppLog.sync.error("Foreground sync flush failed: \(String(describing: error), privacy: .public)")
+                            }
                         }
                     }
                 }
@@ -62,7 +74,7 @@ enum ModelContainerFactory {
         do {
             return try ModelContainer(for: schema, configurations: [config])
         } catch {
-            print("SwiftData container failed (\(error)). Retrying in-memory store.")
+            AppLog.app.error("SwiftData container failed (\(String(describing: error), privacy: .public)). Retrying in-memory store.")
             let memoryConfig = ModelConfiguration(isStoredInMemoryOnly: true)
             do {
                 return try ModelContainer(for: schema, configurations: [memoryConfig])
@@ -102,6 +114,7 @@ struct RootView: View {
                 .clipShape(RoundedRectangle(cornerRadius: CalmStrength.Radius.md, style: .continuous))
             }
         }
+        .dfErrorAlert(dependencies.errorPresenter)
         #if DEBUG
         .onAppear(perform: applyUITestLaunchArgumentsIfNeeded)
         #endif
@@ -131,7 +144,7 @@ struct RootView: View {
                 name: "Session"
             )
             modelContext.insert(session)
-            try? modelContext.save()
+            modelContext.saveOrLog("uitestBlankWorkout")
             dependencies.router.startWorkout(sessionId: session.id)
         }
     }

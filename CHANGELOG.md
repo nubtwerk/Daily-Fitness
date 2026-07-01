@@ -2,6 +2,40 @@
 
 All notable changes to DailyFitness are documented here.
 
+## [0.3.0] - 2026-07-01
+
+### Phase F — Ship-readiness (US-120, US-122, PRD §15)
+
+Hardening pass on top of Phases A–D to make the app TestFlight-ready.
+
+**F1 — Error-handling posture**
+- No more silent persistence failures: replaced every swallowed `try? context.save()` (25 sites) with
+  `ModelContext.saveOrLog` / `saveOrPresent`. Live-workout and user-authored saves surface a calm alert via
+  a new `@Observable ErrorPresenter` (mounted at the app root **and** inside the live-workout
+  `fullScreenCover`); derived/background saves log via a new `os.Logger` wrapper (`AppLog`). `print`
+  diagnostics replaced with structured logging. Account deletion now reports a partial wipe.
+- Enabled `SWIFT_STRICT_CONCURRENCY = complete` and fixed what it surfaced (AppIntents `static let title`;
+  `@unchecked Sendable` on the stateless MetricKit subscriber). Residual warnings are SwiftData
+  predicate-keypath noise only.
+
+**F2 — Accessibility (US-122)**
+- WCAG-AA contrast: darkened `SecondaryText` (light) to 4.95:1 on Background; added an `AccentForeground`
+  token (5.4–6.0:1) for foreground sage glyphs (rest-timer arc, completed-set check), keeping decorative
+  `Accent` fills unchanged. Verified against Background, Surface, and SurfaceElevated.
+- VoiceOver: rest-timer ring announces remaining seconds as one element; weight/reps fields carry labels +
+  spoken values ("empty" when blank); PRs earn a spoken announcement matching the toast.
+- Dynamic Type: set-row entry fields scale with text size instead of clipping.
+
+**F3 — Design assets**
+- The calm rest-timer ring and abstract flow/balance mark already shipped in Phase A/D; this phase polished
+  the ring for AA contrast + VoiceOver rather than duplicating them.
+
+**F4 — TestFlight / QA (US-120)**
+- Feedback channel in Profile (pre-filled mailto with app + OS version).
+- Dependency-free MetricKit `CrashDiagnosticsService` for crash/hang visibility.
+- `ExportOptions.plist` + `docs/TESTFLIGHT.md` (submission runbook + on-device QA checklist). The physical
+  device-QA gate is handed off there.
+
 ## [0.2.0] - 2026-06-30
 
 ### Phase B — Core logging loop (LOG-01..11, LOCK-01..06)

@@ -12,7 +12,7 @@ final class UserPreferencesRepository {
         }
         let prefs = UserPreferencesEntity(userId: userId)
         context.insert(prefs)
-        try? context.save()
+        context.saveOrLog("createDefaultPreferences")
         return prefs
     }
 
@@ -31,6 +31,6 @@ final class UserPreferencesRepository {
         prefs.liveActivitiesEnabled = liveActivitiesEnabled
         prefs.restEndNotificationEnabled = restEndNotificationEnabled
         prefs.defaultRestSeconds = defaultRestSeconds
-        try? context.save()
+        context.saveOrLog("savePreferences")
     }
 }

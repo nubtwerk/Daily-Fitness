@@ -448,7 +448,12 @@ struct LiveWorkoutView: View {
     private func addExercise(_ exercise: ExerciseEntity, to session: WorkoutSessionEntity) {
         _ = WorkoutExerciseFactory.addExercise(exercise, to: session, in: modelContext)
         session.syncStatus = .pending
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "addExercise",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t add the exercise",
+            message: "We couldn’t save that exercise to your workout. Please try again."
+        )
     }
 
     private func completeSet(
@@ -467,6 +472,9 @@ struct LiveWorkoutView: View {
         )
         if !result.personalRecords.isEmpty {
             recentPRs = result.personalRecords
+            // The PR toast auto-dismisses; announce the same text so VoiceOver users hear it.
+            let types = result.personalRecords.map { $0.type.rawValue }.joined(separator: ", ")
+            AccessibilityNotification.Announcement("New PR! (\(types))").post()
         }
         restEndsAt = result.restEndsAt
         if let end = result.restEndsAt {
@@ -526,7 +534,12 @@ struct LiveWorkoutView: View {
 
     private func persist(_ session: WorkoutSessionEntity) {
         session.syncStatus = .pending
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "persistWorkout",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t save your change",
+            message: "Your last edit to this workout may not be saved. Please try again."
+        )
     }
 
     private func processIntentAction(_ action: WorkoutIntentAction) {

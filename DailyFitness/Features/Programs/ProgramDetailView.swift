@@ -190,7 +190,12 @@ struct ProgramDetailView: View {
         modelContext.insert(copy)
         deactivateOthers(except: copy.id)
         copy.isActive = true
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "startSuggestedProgram",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t start the program",
+            message: "We couldn’t start this program just now. Please try again in a moment."
+        )
         dependencies.syncEngine.enqueue(.upsertProgram(copy.id))
     }
 
@@ -198,7 +203,12 @@ struct ProgramDetailView: View {
     private func fork() {
         let copy = makeOwnedCopy(active: false)
         modelContext.insert(copy)
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "duplicateProgram",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t duplicate the program",
+            message: "We couldn’t make a copy of this program just now. Please try again in a moment."
+        )
         dependencies.syncEngine.enqueue(.upsertProgram(copy.id))
         editorTarget = copy
     }
@@ -233,21 +243,36 @@ struct ProgramDetailView: View {
         deactivateOthers(except: target.id)
         target.isActive = true
         target.updatedAt = Date()
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "activateProgram",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t start the program",
+            message: "We couldn’t start this program just now. Please try again in a moment."
+        )
         dependencies.syncEngine.enqueue(.upsertProgram(target.id))
     }
 
     private func pauseProgram() {
         program.isActive = false
         program.updatedAt = Date()
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "pauseProgram",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t pause the program",
+            message: "We couldn’t pause this program just now. Please try again in a moment."
+        )
         dependencies.syncEngine.enqueue(.upsertProgram(program.id))
     }
 
     private func leaveProgram() {
         let id = program.id
         modelContext.delete(program)
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "leaveProgram",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t leave the program",
+            message: "We couldn’t leave this program just now. Please try again in a moment."
+        )
         dependencies.syncEngine.enqueue(.deleteEntity(id))
         dismiss()
     }
@@ -458,7 +483,12 @@ struct ProgramEditorView: View {
         }
 
         target.syncStatus = .pending
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "saveProgramEdits",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t save your changes",
+            message: "We couldn’t save your changes to this program just now. Please try again in a moment."
+        )
         dependencies.syncEngine.enqueue(.upsertProgram(target.id))
         dismiss()
     }

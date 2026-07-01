@@ -34,7 +34,7 @@ final class ProgressionService {
         for set in workoutExercise.sets where !set.isCompleted {
             set.weightKg = targetWeight
         }
-        try? context.save()
+        context.saveOrLog("applyRecommendation")
     }
 
     func recomputeAfterSession(
@@ -95,7 +95,7 @@ final class ProgressionService {
             )
             context.insert(rec)
         }
-        try? context.save()
+        context.saveOrLog("recomputeAfterSession")
     }
 
     /// The routine's rep targets for an exercise, falling back to a sensible 8–12 default

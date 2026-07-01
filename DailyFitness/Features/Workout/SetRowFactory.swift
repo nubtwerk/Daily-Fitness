@@ -78,12 +78,13 @@ private struct SetCompleteButton: View {
         Button(action: action) {
             Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle")
                 .font(.title2)
-                .foregroundStyle(isCompleted ? Color.dfAccent : Color.dfSecondaryText)
+                .foregroundStyle(isCompleted ? Color.dfAccentForeground : Color.dfSecondaryText)
                 .scaleEffect(isCompleted ? 1.0 : 0.9)
                 .animation(CalmStrength.Motion.standard, value: isCompleted)
         }
         .frame(minWidth: 44, minHeight: 44)
         .accessibilityLabel(isCompleted ? "Set complete" : "Mark set complete")
+        .accessibilityHint(isCompleted ? "" : "Marks this set as done and starts your rest timer.")
     }
 }
 
@@ -150,6 +151,10 @@ struct StrengthSetRow: View {
     let lastPerformance: LastWorkingSetService.Performance?
     let onComplete: () -> Void
 
+    // Field widths scale with Dynamic Type so multi-digit weights/reps don't clip at large sizes.
+    @ScaledMetric(relativeTo: .body) private var weightFieldWidth: CGFloat = 64
+    @ScaledMetric(relativeTo: .body) private var repsFieldWidth: CGFloat = 52
+
     var body: some View {
         HStack(spacing: CalmStrength.Spacing.sm) {
             SetTypeMenu(set: set)
@@ -157,12 +162,16 @@ struct StrengthSetRow: View {
             TextField(weightPrompt, value: weightBinding, format: .number)
                 .keyboardType(.decimalPad)
                 .dfField()
-                .frame(width: 64)
+                .frame(width: weightFieldWidth)
+                .accessibilityLabel(usePounds ? "Weight in pounds" : "Weight in kilograms")
+                .accessibilityValue(set.weightKg == nil ? "empty" : WeightFormatter.display(kg: set.weightKg!, usePounds: usePounds))
 
             TextField(repsPrompt, value: $set.reps, format: .number)
                 .keyboardType(.numberPad)
                 .dfField()
-                .frame(width: 52)
+                .frame(width: repsFieldWidth)
+                .accessibilityLabel("Reps")
+                .accessibilityValue(set.reps.map { "\($0) reps" } ?? "empty")
 
             // US-082: RIR is logged retrospectively — the 0–5 picker appears once the
             // set is complete (how hard it actually was), not while entering the target.
