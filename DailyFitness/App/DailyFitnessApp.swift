@@ -43,6 +43,14 @@ struct DailyFitnessApp: App {
                         }
                     }
                 }
+                .onOpenURL { url in
+                    // Live Activity tap fallback (LOCK-03 / US-062). The `dailyfitness`
+                    // scheme is registered in CFBundleURLTypes (project.yml) so the tap
+                    // reliably routes here and opens the active workout's current set.
+                    if let sessionId = WorkoutDeepLink.sessionId(from: url) {
+                        dependencies.router.openWorkoutFromDeepLink(sessionId: sessionId)
+                    }
+                }
         }
     }
 }

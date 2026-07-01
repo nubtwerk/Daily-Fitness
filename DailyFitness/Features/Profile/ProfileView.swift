@@ -95,7 +95,12 @@ struct ProfileView: View {
             .onChange(of: rirEnabled) { _, _ in savePreferences() }
             .onChange(of: liveActivitiesEnabled) { _, _ in savePreferences() }
             .onChange(of: defaultRestSeconds) { _, _ in savePreferences() }
-            .onChange(of: restEndNotificationEnabled) { _, _ in savePreferences() }
+            .onChange(of: restEndNotificationEnabled) { _, enabled in
+                savePreferences()
+                if enabled {
+                    Task { await NotificationService.shared.requestAuthorizationIfNeeded() }
+                }
+            }
             .sheet(isPresented: $showPaywall) {
                 PaywallView(dependencies: dependencies)
             }

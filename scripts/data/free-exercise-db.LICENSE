@@ -1,0 +1,19 @@
+free-exercise-db
+================
+
+Source:   https://github.com/yuhonas/free-exercise-db
+Snapshot: dist/exercises.json (873 records), retrieved 2026-06-29.
+License:  The Unlicense (public domain) — https://unlicense.org/
+
+This is free and unencumbered data released into the public domain.
+Anyone is free to copy, modify, publish, use, compile, sell, or distribute
+it, for any purpose, commercial or non-commercial, and by any means.
+
+Exercise illustration imagery referenced via imageURL is hosted from the same
+repository under the same public-domain dedication:
+  https://raw.githubusercontent.com/yuhonas/free-exercise-db/main/exercises/<path>
+
+DailyFitness ingests this snapshot via scripts/import-exercises.py and normalizes
+it into Resources/Exercises/exercises.json. Curated yoga/mobility/flexibility
+records (scripts/data/curated_exercises.json) plus a deterministic combinatorial
+strength expansion supplement this dataset to reach the >=2,000-exercise library.

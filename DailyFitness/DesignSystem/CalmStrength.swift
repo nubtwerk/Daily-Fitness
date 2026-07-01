@@ -501,6 +501,8 @@ struct DFRestTimerRing: View {
                 }
             }
             .transition(.opacity.combined(with: .scale(scale: 0.96)))
+            // In-app signal when rest ends, independent of the optional notification (US-053).
+            .sensoryFeedback(.success, trigger: remaining == 0)
         }
     }
 }

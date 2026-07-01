@@ -91,6 +91,14 @@ final class PRService {
         return records.map(\.value).max()
     }
 
+    func records(forSession sessionId: UUID, context: ModelContext) -> [PersonalRecordEntity] {
+        let descriptor = FetchDescriptor<PersonalRecordEntity>(
+            predicate: #Predicate { $0.sessionId == sessionId },
+            sortBy: [SortDescriptor(\.achievedAt, order: .reverse)]
+        )
+        return (try? context.fetch(descriptor)) ?? []
+    }
+
     func recentPRs(userId: UUID, limit: Int, context: ModelContext) -> [PersonalRecordEntity] {
         var descriptor = FetchDescriptor<PersonalRecordEntity>(
             predicate: #Predicate { $0.userId == userId },

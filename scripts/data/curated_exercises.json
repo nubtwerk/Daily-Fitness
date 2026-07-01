@@ -1,0 +1,8375 @@
+{
+  "_source": "Authored by curate-yoga-mobility-flexibility (round 1) + curate-round2 workflows (2026-06-29); validated/normalized by import-exercises.py",
+  "records": [
+    {
+      "name": "Mountain Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "core",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "calves"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Halfway Lift",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "hamstrings",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Chair Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Warrior I",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "hip_flexors",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Warrior II",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "adductors",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Warrior III",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "glutes",
+        "core",
+        "back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Reverse Warrior",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Humble Warrior",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "quads",
+        "chest"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Extended Side Angle",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "quads",
+        "adductors",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Triangle Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "obliques",
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Revolved Triangle",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "obliques",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Half Moon Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hamstrings",
+        "core",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Revolved Half Moon",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "obliques",
+        "glutes",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Pyramid Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Tree Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "core",
+        "ankles"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Eagle Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "quads",
+        "glutes",
+        "abductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Dancer's Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "shoulders",
+        "chest",
+        "glutes"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Standing Hand to Big Toe Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors",
+        "core",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Standing Figure Four",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Split",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "glutes",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Wide-Legged Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "adductors",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Gate Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Goddess Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "adductors",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Crescent Lunge",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "glutes",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Low Lunge",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Twisted Crescent Lunge",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "quads",
+        "spine",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Backbend",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "spine",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Upward Salute",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "spine",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Side Bend",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "lats",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Garland Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "ankles",
+        "glutes"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Standing Eagle Twist",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Warrior III with Eagle Arms",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "glutes",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Bow Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "chest",
+        "shoulders",
+        "glutes"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Toe Stand",
+      "category": "yoga",
+      "primaryMuscles": [
+        "calves",
+        "ankles",
+        "quads",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Half Lotus Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "hamstrings",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Tiptoe Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "calves",
+        "ankles",
+        "quads",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Pigeon",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Five-Pointed Star Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "quads",
+        "adductors",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Side Plank Tree",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "shoulders",
+        "core",
+        "abductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Revolved Chair Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "obliques",
+        "glutes",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Skater Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "quads",
+        "abductors",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Quad Stretch",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "ankles"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Intense Side Stretch",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "wrists"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Standing Forward Fold with Shoulder Opener",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Warrior II Side Bend",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "quads",
+        "lats"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Bird of Paradise",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "hips",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Wide Squat",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "adductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Forward Bend (Paschimottanasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Head-to-Knee Forward Bend (Janu Sirsasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Revolved Head-to-Knee Pose (Parivrtta Janu Sirsasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "hamstrings",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Wide-Angle Seated Forward Fold (Upavistha Konasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Bound Angle Pose (Baddha Konasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Reclining Bound Angle Pose (Supta Baddha Konasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Hero Pose (Virasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "ankles",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Reclining Hero Pose (Supta Virasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Thunderbolt Pose (Vajrasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "ankles",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Lotus Pose (Padmasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "adductors",
+        "ankles"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Half Lotus Pose (Ardha Padmasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "adductors",
+        "ankles"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Easy Pose (Sukhasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "lower_back",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Boat Pose (Navasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Half Boat Pose (Ardha Navasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Cow Face Pose (Gomukhasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "hips",
+        "triceps"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Gate Pose (Parighasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "adductors",
+        "lats"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Staff Pose (Dandasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "core",
+        "quads",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Seated Wide-Legged Straddle (Samakonasana Prep)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Half Lord of the Fishes Pose (Ardha Matsyendrasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "spine",
+        "glutes"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Marichi's Pose (Marichyasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Heron Pose (Krounchasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Firelog Pose (Agnistambhasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Pigeon Pose (Eka Pada Rajakapotasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hip_flexors",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Sleeping Pigeon Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "King Pigeon Pose (Rajakapotasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hip_flexors",
+        "back",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Child's Pose (Balasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "hips",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Wide-Knee Child's Pose (Utthita Balasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "hips",
+        "lats"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Thread the Needle Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "thoracic",
+        "shoulders",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Tortoise Pose (Kurmasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "adductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Spinal Twist (Bharadvajasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Compass Pose (Parivrtta Surya Yantrasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Garland Pose (Malasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "adductors",
+        "ankles"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Half Frog Pose (Ardha Bhekasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "chest"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Frog Pose (Mandukasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Reclining Hand-to-Big-Toe Pose (Supta Padangusthasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Happy Baby Pose (Ananda Balasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "adductors",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Side Bend (Parsva Sukhasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "lats",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Half Splits Pose (Ardha Hanumanasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Full Splits Pose (Hanumanasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors",
+        "adductors"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Lizard Pose (Utthan Pristhasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hips",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Cobbler's Forward Fold (Baddha Konasana Forward Bend)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "lower_back",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Noose Pose (Pasasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "ankles"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Monkey Pose Prep (Anjaneyasana Low Lunge)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Seated Cat-Cow (Seated Marjaryasana-Bitilasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "thoracic",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "chair"
+      ]
+    },
+    {
+      "name": "Three-Limbed Forward Bend (Triang Mukhaikapada Paschimottanasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "quads",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Yogic Sleep Pose (Yoganidrasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Embryo Pose (Garbha Pindasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "core",
+        "adductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Cradle Pose (Hindolasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "abductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Revolved Seated Forward Fold (Parivrtta Paschimottanasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "hamstrings",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Reclining Twist (Supta Matsyendrasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "glutes"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Cobra Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "lower_back",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Upward-Facing Dog",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "chest",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Sphinx Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "lower_back",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Locust Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "glutes",
+        "back",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Bow Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "chest",
+        "quads",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Bridge Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hamstrings",
+        "spine",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wheel Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "shoulders",
+        "chest",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Camel Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "chest",
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Fish Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "neck",
+        "chest",
+        "thoracic",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Upward Bow With Block",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Pigeon Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "King Pigeon Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "hip_flexors",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Dancer Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "quads",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cat-Cow Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "thoracic",
+        "lower_back",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Seated Spinal Twist",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "hips",
+        "back"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Half Lord of the Fishes Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "hips",
+        "back"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Supine Spinal Twist",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "lower_back",
+        "glutes"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Revolved Triangle Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "hamstrings",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Revolved Side Angle Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "quads",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Revolved Crescent Lunge",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "hip_flexors",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Marichi's Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "hips",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Downward-Facing Dog",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "hamstrings",
+        "calves",
+        "back"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Dolphin Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "hamstrings",
+        "back"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Plank Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "core",
+        "shoulders",
+        "chest",
+        "full_body"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Four-Limbed Staff Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "triceps",
+        "core",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Crocodile Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "lower_back",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Supported Shoulderstand",
+      "category": "yoga",
+      "primaryMuscles": [
+        "neck",
+        "shoulders",
+        "core",
+        "traps"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Plow Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "neck",
+        "spine",
+        "shoulders",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Headstand",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "neck",
+        "core",
+        "full_body"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Forearm Stand",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "back",
+        "triceps"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Handstand",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "wrists",
+        "core",
+        "full_body"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Legs Up the Wall Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "calves"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Feathered Peacock Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "spine",
+        "triceps"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Reclining Hero Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "spine",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Scorpion Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "shoulders",
+        "chest",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "One-Legged King Pigeon II",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "chest",
+        "shoulders",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wild Thing Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "chest",
+        "shoulders",
+        "glutes"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Upward Plank Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hamstrings",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Frog Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Bound Angle Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Belly-Down Twist",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "lower_back",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Supported Fish Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "chest",
+        "thoracic",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Bridge Pose With Block",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "spine",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Half Standing Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Cat-Cow Stretch",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "core",
+        "lower_back",
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Child's Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "hips",
+        "shoulders",
+        "lats"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Thread the Needle",
+      "category": "yoga",
+      "primaryMuscles": [
+        "thoracic",
+        "shoulders",
+        "back",
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Seal Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "spine",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Legs-Up-The-Wall",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "hips"
+      ],
+      "equipment": [
+        "wall",
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Reclined Bound Angle",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "block",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Corpse Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "full_body",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Happy Baby Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "adductors",
+        "lower_back",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Reclined Spinal Twist",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "lower_back",
+        "glutes"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Sleeping Swan",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Seated Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "calves",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "strap",
+        "block"
+      ]
+    },
+    {
+      "name": "Head-to-Knee Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "adductors",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Wide-Angle Seated Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings",
+        "lower_back",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "block",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Supported Bridge Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "lower_back",
+        "hip_flexors",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Extended Side Angle Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "quads",
+        "adductors",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Lizard Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hips",
+        "hamstrings",
+        "adductors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Half Lord of the Fishes",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "glutes",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Caterpillar Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "spine",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Dragon Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Banana Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "lats",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Supported Reclining Hero",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "ankles",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Eagle Arms",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cow Face Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "glutes",
+        "hips",
+        "triceps"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "Standing Half Forward Fold at Wall",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "shoulders",
+        "lats",
+        "spine"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wide-Legged Standing Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "adductors",
+        "lower_back",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Toe Squat",
+      "category": "yoga",
+      "primaryMuscles": [
+        "ankles",
+        "calves",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "90/90 Hip Switch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "90/90 Hip Stretch Hold",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Hip CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Quadruped Hip CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cossack Squat",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "glutes",
+        "quads",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Deep Squat Hold",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "adductors",
+        "ankles",
+        "glutes"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Frog Rocking Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Fire Hydrant",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "abductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "World's Greatest Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hips",
+        "thoracic",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Hip Airplane",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors",
+        "core"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Adductor Rock-Back",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Spiderman Lunge with Rotation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hips",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Half Pigeon Pose",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Reclined Pigeon Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Figure-Four Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Couch Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads",
+        "hips"
+      ],
+      "equipment": [
+        "wall",
+        "mat"
+      ]
+    },
+    {
+      "name": "Low Lunge Hip Flexor Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hips",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Kneeling Hip Flexor Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hips",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Butterfly Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Seated Wide-Leg Straddle",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Leg Swings Front-to-Back",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hamstrings",
+        "hips"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Lateral Leg Swings",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "abductors",
+        "hips"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Hip Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cradle Walk",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Knee-to-Chest Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Supine Figure-Four Hip Opener",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Supine Windshield Wipers",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Seated 90/90 Forward Lean",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Half-Kneeling Adductor Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cossack Squat Slide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Pancake Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Glute Bridge",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Quadruped Rock-Back",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Scorpion Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hips",
+        "spine",
+        "glutes"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Pigeon Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Lateral Lunge",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Curtsy Lunge",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "abductors",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Banded Hip Distraction",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "hip_flexors",
+        "adductors"
+      ],
+      "equipment": [
+        "bands",
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Pretzel Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "obliques"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Active Straight Leg Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hamstrings",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cossack Hold",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "glutes"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Frog Pumps",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Internal Hip Rotation Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "abductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wall Hip Flexor Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads",
+        "hips"
+      ],
+      "equipment": [
+        "wall",
+        "mat"
+      ]
+    },
+    {
+      "name": "Quadruped Thoracic Rotation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "spine",
+        "obliques"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Open Book Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "chest",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Thoracic Rotation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "obliques",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight",
+        "chair"
+      ]
+    },
+    {
+      "name": "Standing Thoracic Rotation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "obliques",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Foam Roller Thoracic Extension",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "spine"
+      ],
+      "equipment": [
+        "foam_roller",
+        "mat"
+      ]
+    },
+    {
+      "name": "Bench T-Spine Extension",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "shoulders",
+        "lats"
+      ],
+      "equipment": [
+        "bodyweight",
+        "block"
+      ]
+    },
+    {
+      "name": "Wall Slides",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "thoracic"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Band Pull-Apart",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Scapular Pushup",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "chest"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Shoulder CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Sleeper Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Prone Swimmers",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Prone Y Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Prone T Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Prone W Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Prone I Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Cat-Cow",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "thoracic",
+        "lower_back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Cross-Body Shoulder Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Doorway Pec Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wall Angels",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "thoracic"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Overhead Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "lats",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Band Dislocates",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Shoulder Pass-Through",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "strap"
+      ]
+    },
+    {
+      "name": "Puppy Pose",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "shoulders",
+        "lats"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Child's Pose with Side Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "lats",
+        "thoracic",
+        "obliques"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Bird Dog",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "core",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Wall Lat Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "lats",
+        "shoulders",
+        "thoracic"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Scapular Wall Slide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "thoracic"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Quadruped Reach Through",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Side-Lying Windmill",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Half-Kneeling Thoracic Rotation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "obliques",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Foam Roller Snow Angels",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "chest"
+      ],
+      "equipment": [
+        "foam_roller",
+        "mat"
+      ]
+    },
+    {
+      "name": "Prone Cobra",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "back",
+        "traps"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Cat-Cow",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "thoracic",
+        "lower_back"
+      ],
+      "equipment": [
+        "chair",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Banded Shoulder Distraction",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "lats"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Scapular Pull-Up",
+      "category": "mobility",
+      "primaryMuscles": [
+        "traps",
+        "lats",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Wall Pec Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Kneeling Lat Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "lats",
+        "shoulders",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Thoracic Rotation with Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Quadruped T-Spine Windmill",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Band Face Pull",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Overhead Band Reach-Back",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "lats",
+        "thoracic"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Side-Lying Open Book",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "chest",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Eagle Arms Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cow Face Arms Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "triceps",
+        "chest"
+      ],
+      "equipment": [
+        "strap",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wall Shoulder Flexion Slide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "lats",
+        "thoracic"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Bretzel Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "quads",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Scapular Retraction",
+      "category": "mobility",
+      "primaryMuscles": [
+        "traps",
+        "back",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Ankle Dorsiflexion Rock",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Half-Kneeling Ankle Dorsiflexion Rock",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Banded Ankle Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Heel-to-Wall Ankle Test",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Knee-to-Wall Ankle Drill",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Ankle CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Knee CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Ankle Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Seated Ankle Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight",
+        "chair"
+      ]
+    },
+    {
+      "name": "Tibialis Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight",
+        "wall"
+      ]
+    },
+    {
+      "name": "Seated Tibialis Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight",
+        "chair"
+      ]
+    },
+    {
+      "name": "Standing Calf Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Seated Calf Raise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight",
+        "chair"
+      ]
+    },
+    {
+      "name": "Calf Wall Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Gastrocnemius Wall Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Soleus Wall Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Standing Calf Stretch on Step",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Downward Dog Calf Pedal",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Calf Foam Roll",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves"
+      ],
+      "equipment": [
+        "foam_roller",
+        "mat"
+      ]
+    },
+    {
+      "name": "Tibialis Anterior Foam Roll",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "foam_roller",
+        "mat"
+      ]
+    },
+    {
+      "name": "Deep Knee Bend",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Deep Squat Ankle Rock",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Goblet Squat Hold",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "hips",
+        "ankles"
+      ],
+      "equipment": [
+        "kettlebell"
+      ]
+    },
+    {
+      "name": "Toe Yoga",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Big Toe Lift",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Toe Spreads",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Towel Toe Curls",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Short Foot Exercise",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Ankle Eversion with Band",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Ankle Inversion with Band",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Ankle Plantarflexion with Band",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Ankle Dorsiflexion with Band",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Ankle Alphabet",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight",
+        "chair"
+      ]
+    },
+    {
+      "name": "Heel Walks",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Toe Walks",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Hero Pose Ankle Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "block"
+      ]
+    },
+    {
+      "name": "Toe Sit Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Top-of-Foot Ankle Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Kneeling Shin Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Eccentric Heel Drop",
+      "category": "mobility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Knee Flexion Wall Slide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "hamstrings"
+      ],
+      "equipment": [
+        "wall",
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Knee Extension Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight",
+        "chair"
+      ]
+    },
+    {
+      "name": "Heel Slide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "strap"
+      ]
+    },
+    {
+      "name": "ATG Split Squat",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Patellar Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Toe Touch with Banded Ankle",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Banded Knee Distraction",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Single-Leg Balance Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "glutes"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Pistol Squat Negative",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "ankles",
+        "glutes"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Arm Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Neck CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wrist CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Hip CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "hip_flexors",
+        "glutes"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Spinal CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "thoracic",
+        "lower_back"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Leg Swings",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hamstrings",
+        "glutes"
+      ],
+      "equipment": [
+        "bodyweight",
+        "wall"
+      ]
+    },
+    {
+      "name": "Inchworm",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Walkout",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hamstrings",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Dead Bug",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Scorpion",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Spinal Wave",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "thoracic",
+        "lower_back"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Hip Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Lunge With Twist",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "thoracic",
+        "quads",
+        "obliques"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Spiderman Lunge",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Walking Knee Hug",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hip_flexors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Walking Quad Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Frankenstein Walk",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "High Knees",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Butt Kicks",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Carioca",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hips",
+        "adductors",
+        "abductors",
+        "obliques"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "A-Skip",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "calves",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Trunk Rotation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "spine",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Thoracic Rotation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "spine",
+        "obliques"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Wall Angel",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "thoracic",
+        "traps"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Scapular Push-Up",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "chest"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Downward Dog To Cobra",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "hamstrings",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Ankle Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wrist Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Torso Twist Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "thoracic",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Jumping Jacks",
+      "category": "mobility",
+      "primaryMuscles": [
+        "full_body",
+        "shoulders",
+        "calves"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Bear Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "shoulders",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Pike Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Walking Lunge",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Reverse Lunge With Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Hip Airplane",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "core"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Hamstring Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Seated Hamstring Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Lying Hamstring Stretch with Strap",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "equipment": [
+        "strap",
+        "mat"
+      ]
+    },
+    {
+      "name": "Head-to-Knee Forward Bend",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Lying Quad Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Kneeling Quad Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Hero Pose",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "quads",
+        "ankles"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Reclined Hero Pose",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Lying Hip Flexor Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Crescent Lunge Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Figure-Four Glute Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Figure-Four Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Supine Glute Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Glute Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Reclined Butterfly Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Frog Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Half Frog Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Adductor Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Side Lunge Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "glutes"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Seated Straddle Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Calf Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "calves"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Calf Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Seated Calf Stretch with Strap",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "strap",
+        "mat"
+      ]
+    },
+    {
+      "name": "Soleus Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Gastrocnemius Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "calves"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Standing Ankle Dorsiflexion Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "ankles",
+        "calves"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Seated Toe Touch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing IT Band Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "abductors",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cow Face Pose Legs",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "glutes",
+        "abductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Half Splits",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Front Splits",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Middle Splits",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Bound Angle Forward Fold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Reclined Big Toe Pose",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves"
+      ],
+      "equipment": [
+        "strap",
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Wide-Leg Adductor Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Seated Pigeon Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Doorway Chest Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Wall Chest Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Overhead Triceps Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "triceps",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Behind-the-Back Triceps Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "triceps",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Childs Pose Lat Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lats",
+        "back",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Extended Child's Pose",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lats",
+        "back",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Neck Side Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "neck",
+        "traps"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wrist Flexor Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wrist Extensor Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cobra Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "spine",
+        "chest",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Upper Trap Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "traps",
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Levator Scapulae Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "neck",
+        "traps"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Neck Flexion Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Neck Extension Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Chin Tuck Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cat Pose Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "spine",
+        "back",
+        "thoracic"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Reverse Prayer Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Kneeling Lat Stretch on Bench",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lats",
+        "shoulders",
+        "back"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Standing Forward Fold Shoulder Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "shoulders",
+        "chest",
+        "back"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Clasped Hands Behind Back Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders",
+        "biceps"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wall Biceps Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "biceps",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Seated Pec Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Knees-to-Chest Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lower_back",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Cat-Cow Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "spine",
+        "thoracic",
+        "back"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Bridge Pose Chest Opener",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "spine",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Wall Angel Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "shoulders",
+        "chest",
+        "thoracic"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Seated Neck Rotation Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Standing Lat Stretch on Wall",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lats",
+        "obliques"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Doorway Biceps Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "biceps",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Behind-Back Shoulder Strap Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "strap"
+      ]
+    },
+    {
+      "name": "Seated Side Bend Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "obliques",
+        "lats",
+        "spine"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Prone Scorpion Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Kneeling Wrist Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Quadruped Wrist Rocking Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Overhead Reach Lat Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lats",
+        "shoulders",
+        "obliques"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Banded Shoulder Dislocate Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Corner Chest Stretch",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Crow Pose (Bakasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "forearms"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Crane Pose (Bakasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "triceps"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Side Crow Pose (Parsva Bakasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "wrists",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Firefly Pose (Tittibhasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "core",
+        "hip_flexors",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Eight-Angle Pose (Astavakrasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "wrists",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Flying Pigeon Pose (Eka Pada Galavasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Grasshopper Pose (Parsva Bhuja Dandasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "wrists",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Peacock Pose (Mayurasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "forearms",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Pincha Mayurasana",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "forearms",
+        "core",
+        "back"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Scorpion Handstand (Vrschikasana B)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "spine",
+        "lower_back",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Shoulder-Pressing Pose (Bhujapidasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Flying Crow Pose (Eka Pada Bakasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "One-Legged Crow Pose (Eka Pada Bakasana II)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "glutes"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Rooster Pose (Kukkutasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "forearms",
+        "core",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Pendant Pose (Lolasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "lats"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Scale Pose (Tolasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "triceps"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Flying Lizard Pose (Uttana Prasithasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "obliques"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Two-Legged Inverted Staff Pose (Dwi Pada Viparita Dandasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "spine",
+        "chest",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Hurdler Pose (Eka Pada Koundinyasana II)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Koundinyasana I (Eka Pada Koundinyasana I)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "wrists",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Sage Galava's Pose (Galavasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Sundial Pose (Surya Yantrasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "obliques",
+        "shoulders",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Side Plank Pose (Vasisthasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "shoulders",
+        "core",
+        "wrists"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Side Plank Variation With Leg Lift (Vasisthasana B)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "shoulders",
+        "abductors",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Forearm Side Plank (Vasisthasana on Forearm)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "shoulders",
+        "forearms",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Wild Thing Pose (Camatkarasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "chest",
+        "shoulders",
+        "thoracic",
+        "glutes"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Flying Splits Pose (Eka Pada Koundinyasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Visvamitra's Pose (Visvamitrasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "obliques",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "One-Handed Tiger Pose (Eka Hasta Bhujasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Elephant Trunk Pose (Eka Hasta Bhujasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Forearm Wheel Pose (Viparita Dandasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "spine",
+        "chest",
+        "back"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Handstand Scorpion (Taraksvasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "spine",
+        "lower_back",
+        "wrists"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Hollowback Handstand",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "spine",
+        "back",
+        "wrists"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Press Handstand (Tuck to Handstand)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "wrists",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "L-Shaped Handstand at Wall",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "wrists",
+        "back"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Headstand Twist Variation (Parsva Sirsasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "core",
+        "obliques",
+        "shoulders",
+        "neck"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Tripod Headstand (Mukta Hasta Sirsasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "neck",
+        "core",
+        "wrists"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Bound Headstand (Salamba Sirsasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "neck",
+        "core",
+        "forearms"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Pigeon Scorpion (Eka Pada Rajakapotasana Variation)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "shoulders",
+        "hip_flexors",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Forearm Stand Scorpion (Pincha Vrschikasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "spine",
+        "lower_back",
+        "forearms"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Reverse Prayer Crow (Baddha Hasta Bakasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "forearms"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Chin Stand (Ganda Bherundasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "shoulders",
+        "lower_back",
+        "neck"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Splits in the Air (Eka Pada Sirsasana Inversion)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "shoulders",
+        "core",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "wall"
+      ]
+    },
+    {
+      "name": "Crow to Headstand Transition (Bakasana to Sirsasana)",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "shoulders",
+        "core",
+        "neck"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Chair Cat-Cow",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "lower_back",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Seated Twist in Chair",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "thoracic"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Wall Downward Dog",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "hamstrings",
+        "back",
+        "calves"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Plank",
+      "category": "yoga",
+      "primaryMuscles": [
+        "core",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Supported Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "spine"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Standing Wall Stretch",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lats",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Seated Mountain Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Pigeon",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Eagle Arms",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "hamstrings",
+        "spine",
+        "neck"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Warrior I",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "shoulders"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Warrior II",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hips",
+        "shoulders"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Seated Side Bend in Chair",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "lats",
+        "spine"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Cow Face Arms",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "triceps",
+        "chest"
+      ],
+      "equipment": [
+        "chair",
+        "strap"
+      ]
+    },
+    {
+      "name": "Chair Extended Side Angle",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "hips",
+        "quads"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Twisted Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "obliques",
+        "lower_back"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Wall Tree Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "core",
+        "calves"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Triangle Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "obliques",
+        "adductors"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Warrior III",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hamstrings",
+        "core",
+        "back"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Hamstring Stretch",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves",
+        "glutes"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Chest Opener",
+      "category": "yoga",
+      "primaryMuscles": [
+        "chest",
+        "shoulders",
+        "biceps"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Butterfly Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Cobra Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "lower_back",
+        "chest",
+        "shoulders",
+        "spine"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Bridge Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Seated Eagle Arms",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "traps",
+        "back"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Hip Opener",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Seated Ankle-to-Knee Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "glutes",
+        "abductors"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Reverse Prayer",
+      "category": "yoga",
+      "primaryMuscles": [
+        "wrists",
+        "forearms",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Neck Release",
+      "category": "yoga",
+      "primaryMuscles": [
+        "neck",
+        "traps",
+        "shoulders"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Wall Crescent Lunge",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Pyramid Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves",
+        "back"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Chair Goddess Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "adductors",
+        "quads",
+        "glutes"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Wall Standing Splits",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Half Moon Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "core",
+        "abductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Chair Boat Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Seated Heart Opener",
+      "category": "yoga",
+      "primaryMuscles": [
+        "chest",
+        "shoulders",
+        "thoracic",
+        "spine"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Knee-to-Chest",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "lower_back",
+        "hips"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Wall Camel Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "chest",
+        "hip_flexors",
+        "shoulders",
+        "spine"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Dancer Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "chest",
+        "shoulders"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Chair Garland Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hips",
+        "adductors",
+        "glutes"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Seated Wide-Legged Twist",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "spine",
+        "adductors"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Wall Chair Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "core"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Chair Thread the Needle",
+      "category": "yoga",
+      "primaryMuscles": [
+        "glutes",
+        "hips",
+        "abductors"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Wall Puppy Pose",
+      "category": "yoga",
+      "primaryMuscles": [
+        "shoulders",
+        "lats",
+        "chest",
+        "thoracic"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Seated Sufi Grind",
+      "category": "yoga",
+      "primaryMuscles": [
+        "spine",
+        "core",
+        "lower_back",
+        "hips"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Chair Reverse Warrior",
+      "category": "yoga",
+      "primaryMuscles": [
+        "obliques",
+        "quads",
+        "shoulders"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Wall Wide-Legged Forward Fold",
+      "category": "yoga",
+      "primaryMuscles": [
+        "hamstrings",
+        "adductors",
+        "lower_back"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Neck Pull",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Jackknife",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Scissors",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Bicycle",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Shoulder Bridge",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hamstrings",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Spine Twist",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "spine",
+        "thoracic"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Corkscrew",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "obliques",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Hip Twist",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "obliques",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Swimming",
+      "category": "mobility",
+      "primaryMuscles": [
+        "lower_back",
+        "glutes",
+        "shoulders",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Leg Pull Front",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "shoulders",
+        "glutes"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Leg Pull Back",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hamstrings",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Kneeling Side Kick",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "glutes",
+        "abductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Side Bend",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Boomerang",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Crab",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Rocking",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "quads",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Control Balance",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hamstrings",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Push-Up",
+      "category": "mobility",
+      "primaryMuscles": [
+        "chest",
+        "triceps",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Roll-Over",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "lower_back",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Single-Leg Circle",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "core",
+        "hips"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Open-Leg Rocker",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "hamstrings",
+        "adductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "The Saw",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "spine",
+        "hamstrings",
+        "thoracic"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Swan Dive",
+      "category": "mobility",
+      "primaryMuscles": [
+        "lower_back",
+        "spine",
+        "glutes",
+        "chest"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Single-Leg Kick",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "glutes",
+        "quads"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Double-Leg Kick",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "glutes",
+        "thoracic"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Teaser",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "The Seal",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Side Kick",
+      "category": "mobility",
+      "primaryMuscles": [
+        "abductors",
+        "glutes",
+        "core",
+        "obliques"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Spine Stretch Forward",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "hamstrings",
+        "lower_back",
+        "thoracic"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Rolling Like A Ball",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Single-Leg Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "obliques"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Double-Leg Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Criss-Cross",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "core",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Mermaid Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "lats",
+        "spine",
+        "shoulders"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Heel Squeeze Prone",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "lower_back",
+        "adductors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Cat Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "thoracic",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Side Leg Lift Series",
+      "category": "mobility",
+      "primaryMuscles": [
+        "abductors",
+        "obliques",
+        "glutes"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Tic Toc",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "core",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Roll-Up",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "spine",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Roll-Down",
+      "category": "mobility",
+      "primaryMuscles": [
+        "spine",
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Crab Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "glutes",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Beast Hold",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "shoulders",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Ape Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Lateral Ape",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "obliques"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Scorpion Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "spine",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Lateral Bear Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Reverse Bear Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Spiderman Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Lizard Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "shoulders",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Loaded Beast",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "hamstrings",
+        "core"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Underswitch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Bird-Dog Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "glutes",
+        "lower_back"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Inchworm Walkout",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Crab Walk",
+      "category": "mobility",
+      "primaryMuscles": [
+        "triceps",
+        "glutes",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Crab Toe Touch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "core",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Frog Hop",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Frogger Walk",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hip_flexors",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Monkey Flow",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Lateral Monkey",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Front Kick Through",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "obliques",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Side Kick Through",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Beast To Crab Transition",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Crab Hip Bridge",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hip_flexors",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Tabletop Bridge Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "shoulders",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Gorilla Walk",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Duck Walk",
+      "category": "mobility",
+      "primaryMuscles": [
+        "quads",
+        "glutes",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Alligator Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders",
+        "core"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Inchworm With Hip Opener",
+      "category": "mobility",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Crocodile Breathing Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Bear Crawl Shoulder Tap",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Crab Reach To Thread",
+      "category": "mobility",
+      "primaryMuscles": [
+        "thoracic",
+        "obliques",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Beast Shoulder Tap",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "wrists"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Sit-Through",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "obliques",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Crab Kick",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "hamstrings",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Heel Click Crab",
+      "category": "mobility",
+      "primaryMuscles": [
+        "glutes",
+        "adductors",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Cossack Flow",
+      "category": "mobility",
+      "primaryMuscles": [
+        "adductors",
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Hand-Switch Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "wrists",
+        "core"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Knee-Tuck Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "core",
+        "hip_flexors",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Beast Reach",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "lats"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Twisting Beast",
+      "category": "mobility",
+      "primaryMuscles": [
+        "obliques",
+        "shoulders",
+        "thoracic"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Diagonal Bear Crawl",
+      "category": "mobility",
+      "primaryMuscles": [
+        "shoulders",
+        "core",
+        "quads"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Median Nerve Glide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms",
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Ulnar Nerve Glide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms",
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Radial Nerve Glide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wrist Flexor Eccentric Lowering",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "dumbbell"
+      ]
+    },
+    {
+      "name": "Wrist Extensor Eccentric Lowering",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "dumbbell"
+      ]
+    },
+    {
+      "name": "Tabletop Wrist Extension Rocks",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Reverse Tabletop Wrist Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Fingertip Tabletop Wrist Load",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Wrist Radial Deviation Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wrist Ulnar Deviation Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Pronation Supination Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "dumbbell"
+      ]
+    },
+    {
+      "name": "Banded Wrist Distraction",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Banded Wrist Flexion Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Banded Wrist Extension Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Wall Wrist Extension Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Wall Wrist Flexion Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Foam Roller Forearm Smash",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "foam_roller"
+      ]
+    },
+    {
+      "name": "Finger Flexion Tendon Glide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Hook Fist Tendon Glide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Thumb Opposition Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Thumb CMC Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Finger Abduction Band Spread",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Rice Bucket Wrist Dig",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Towel Wringing Forearm Drill",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Elbow Flexion Extension Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "biceps",
+        "triceps",
+        "forearms"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Banded Elbow Extension Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "triceps",
+        "biceps"
+      ],
+      "equipment": [
+        "bands"
+      ]
+    },
+    {
+      "name": "Wall Triceps Tendon Glide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "triceps",
+        "forearms"
+      ],
+      "equipment": [
+        "wall"
+      ]
+    },
+    {
+      "name": "Pronator Teres Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Brachioradialis Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "biceps"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cervical Retraction Extension",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Chin Tuck With Rotation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Supine Chin Nod",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Cervical Rotation CARs",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Neck Half-Circles",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "traps"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Scalene Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "traps"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Sternocleidomastoid Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Suboccipital Release",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Upper Trap Self-Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "traps",
+        "neck"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Levator Scapulae Mobilization",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "traps",
+        "shoulders"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Cervical Lateral Glide",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine"
+      ],
+      "equipment": [
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Deep Neck Flexor Activation",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Towel-Assisted Cervical Traction",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Foam Roller Cervical Decompression",
+      "category": "mobility",
+      "primaryMuscles": [
+        "neck",
+        "spine",
+        "thoracic"
+      ],
+      "equipment": [
+        "foam_roller"
+      ]
+    },
+    {
+      "name": "Seated Forearm Pronation Stretch",
+      "category": "mobility",
+      "primaryMuscles": [
+        "forearms",
+        "wrists"
+      ],
+      "equipment": [
+        "chair"
+      ]
+    },
+    {
+      "name": "Quadruped Reverse Wrist Rocks",
+      "category": "mobility",
+      "primaryMuscles": [
+        "wrists",
+        "forearms"
+      ],
+      "equipment": [
+        "mat"
+      ]
+    },
+    {
+      "name": "Elevated Front Split Oversplit",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors",
+        "glutes"
+      ],
+      "equipment": [
+        "block",
+        "mat"
+      ]
+    },
+    {
+      "name": "Front Split PNF Contract-Relax Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Middle Split PNF Contract-Relax Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Wall-Assisted Straddle Split Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings",
+        "hips"
+      ],
+      "equipment": [
+        "wall",
+        "mat"
+      ]
+    },
+    {
+      "name": "Active Pancake Lift Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Banded Pancake Distraction Fold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bands",
+        "mat"
+      ]
+    },
+    {
+      "name": "Pancake PNF Push-Down Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Loaded Straddle Press Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hip_flexors",
+        "core"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Elevated Pigeon Glute PNF Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "glutes",
+        "hips"
+      ],
+      "equipment": [
+        "block",
+        "mat"
+      ]
+    },
+    {
+      "name": "Hamstring PNF Contract-Relax Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings"
+      ],
+      "equipment": [
+        "strap",
+        "mat"
+      ]
+    },
+    {
+      "name": "Jefferson Curl Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back",
+        "spine"
+      ],
+      "equipment": [
+        "dumbbell",
+        "block"
+      ]
+    },
+    {
+      "name": "Loaded Standing Pike Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "dumbbell",
+        "block"
+      ]
+    },
+    {
+      "name": "Standing Splits PNF Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "glutes",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "wall",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Couch Stretch PNF Quad Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "wall",
+        "mat"
+      ]
+    },
+    {
+      "name": "Elevated Couch Stretch Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "block",
+        "wall"
+      ]
+    },
+    {
+      "name": "Saddle Pose Quad Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "quads",
+        "hip_flexors",
+        "ankles"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Elevated Frog Pose Adductor Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "block",
+        "mat"
+      ]
+    },
+    {
+      "name": "Frog Pose PNF Rock Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Half-Kneeling Hip Flexor PNF Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "quads"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Lizard Lunge Deep Hip Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "adductors",
+        "glutes"
+      ],
+      "equipment": [
+        "block",
+        "mat"
+      ]
+    },
+    {
+      "name": "Forearm Lizard Lunge Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "adductors"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Box Split Slider Progression",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "foam_roller",
+        "mat"
+      ]
+    },
+    {
+      "name": "Front Split Slider Progression",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "hip_flexors"
+      ],
+      "equipment": [
+        "foam_roller",
+        "mat"
+      ]
+    },
+    {
+      "name": "Wall Straddle Inversion Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "wall",
+        "mat"
+      ]
+    },
+    {
+      "name": "Seated Wide Straddle PNF Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Tailor Pose Adductor PNF Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Forearm Wheel Backbend Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "King Cobra Backbend Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lower_back",
+        "spine",
+        "chest"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Bridge Wall Walk-Down Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "chest",
+        "shoulders",
+        "spine"
+      ],
+      "equipment": [
+        "wall",
+        "mat"
+      ]
+    },
+    {
+      "name": "Seal Pose Backbend Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lower_back",
+        "chest",
+        "spine"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Shoulder Strap Dislocate Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "shoulders",
+        "chest"
+      ],
+      "equipment": [
+        "strap",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Overhead Strap Lat Opener Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "lats",
+        "shoulders",
+        "thoracic"
+      ],
+      "equipment": [
+        "strap",
+        "wall"
+      ]
+    },
+    {
+      "name": "German Hang Shoulder Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "shoulders",
+        "chest",
+        "biceps"
+      ],
+      "equipment": [
+        "bands",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Deep Squat Pry Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "ankles"
+      ],
+      "equipment": [
+        "bodyweight",
+        "mat"
+      ]
+    },
+    {
+      "name": "Goblet Deep Squat PNF Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips",
+        "ankles"
+      ],
+      "equipment": [
+        "kettlebell",
+        "mat"
+      ]
+    },
+    {
+      "name": "Weighted Ankle Dorsiflexion Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "dumbbell",
+        "block"
+      ]
+    },
+    {
+      "name": "Loaded Calf Wedge Stretch Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "calves",
+        "ankles"
+      ],
+      "equipment": [
+        "block",
+        "dumbbell"
+      ]
+    },
+    {
+      "name": "Shin Box Internal Rotation Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hips",
+        "glutes"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Pyramid Pose Hamstring PNF Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves"
+      ],
+      "equipment": [
+        "block",
+        "mat"
+      ]
+    },
+    {
+      "name": "Standing Pancake Forward Fold Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings",
+        "lower_back"
+      ],
+      "equipment": [
+        "mat",
+        "bodyweight"
+      ]
+    },
+    {
+      "name": "Half Split Hamstring PNF Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hamstrings",
+        "calves"
+      ],
+      "equipment": [
+        "block",
+        "mat"
+      ]
+    },
+    {
+      "name": "Elevated Middle Split Block Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hips"
+      ],
+      "equipment": [
+        "block",
+        "mat"
+      ]
+    },
+    {
+      "name": "Banded Front Split Distraction Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "hip_flexors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "bands",
+        "mat"
+      ]
+    },
+    {
+      "name": "Loaded Pancake Adductor Hold",
+      "category": "flexibility",
+      "primaryMuscles": [
+        "adductors",
+        "hamstrings"
+      ],
+      "equipment": [
+        "dumbbell",
+        "mat"
+      ]
+    }
+  ]
+}

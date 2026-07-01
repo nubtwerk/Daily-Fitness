@@ -56,6 +56,7 @@ final class RoutineEntity {
     @Attribute(.unique) var id: UUID
     var userId: UUID
     var name: String
+    var isSuggested: Bool = false
     @Relationship(deleteRule: .cascade, inverse: \RoutineExerciseEntity.routine)
     var exercises: [RoutineExerciseEntity]
     var createdAt: Date
@@ -68,10 +69,11 @@ final class RoutineEntity {
         set { syncStatusRaw = newValue.rawValue }
     }
 
-    init(id: UUID = UUID(), userId: UUID, name: String) {
+    init(id: UUID = UUID(), userId: UUID, name: String, isSuggested: Bool = false) {
         self.id = id
         self.userId = userId
         self.name = name
+        self.isSuggested = isSuggested
         self.exercises = []
         self.createdAt = Date()
         self.updatedAt = Date()
@@ -129,6 +131,10 @@ final class ProgramEntity {
     var sourceTemplateId: UUID?
     var weeks: Int?
     var isActive: Bool
+    var programDescription: String?
+    var levelRaw: String?
+    var daysPerWeek: Int?
+    var equipment: [String] = []
     @Relationship(deleteRule: .cascade, inverse: \ProgramDayEntity.program)
     var days: [ProgramDayEntity]
     var createdAt: Date
@@ -138,6 +144,11 @@ final class ProgramEntity {
     var category: ProgramCategory {
         get { ProgramCategory(rawValue: categoryRaw) ?? .strength }
         set { categoryRaw = newValue.rawValue }
+    }
+
+    var level: ProgramLevel? {
+        get { levelRaw.flatMap { ProgramLevel(rawValue: $0) } }
+        set { levelRaw = newValue?.rawValue }
     }
 
     var syncStatus: SyncStatus {
@@ -151,7 +162,11 @@ final class ProgramEntity {
         name: String,
         category: ProgramCategory,
         isSuggested: Bool = false,
-        weeks: Int? = nil
+        weeks: Int? = nil,
+        programDescription: String? = nil,
+        level: ProgramLevel? = nil,
+        daysPerWeek: Int? = nil,
+        equipment: [String] = []
     ) {
         self.id = id
         self.userId = userId
@@ -159,6 +174,10 @@ final class ProgramEntity {
         self.categoryRaw = category.rawValue
         self.isSuggested = isSuggested
         self.weeks = weeks
+        self.programDescription = programDescription
+        self.levelRaw = level?.rawValue
+        self.daysPerWeek = daysPerWeek
+        self.equipment = equipment
         self.isActive = false
         self.days = []
         self.createdAt = Date()
@@ -229,6 +248,8 @@ final class WorkoutExerciseEntity {
     var sortOrder: Int
     var supersetGroupId: UUID?
     var note: String?
+    /// Per-exercise rest override (seconds). Falls back to the user's default rest when nil.
+    var restSecondsOverride: Int?
     @Relationship(deleteRule: .cascade, inverse: \WorkoutSetEntity.workoutExercise)
     var sets: [WorkoutSetEntity]
     var session: WorkoutSessionEntity?

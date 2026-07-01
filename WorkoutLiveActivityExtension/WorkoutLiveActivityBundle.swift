@@ -6,6 +6,7 @@ struct WorkoutLiveActivity: Widget {
     var body: some WidgetConfiguration {
         ActivityConfiguration(for: WorkoutAttributes.self) { context in
             LockScreenWorkoutView(context: context)
+                .widgetURL(WorkoutDeepLink.url(sessionId: context.state.sessionId))
         } dynamicIsland: { context in
             DynamicIsland {
                 DynamicIslandExpandedRegion(.leading) {
@@ -19,8 +20,21 @@ struct WorkoutLiveActivity: Widget {
                     }
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("\(context.state.exerciseName) · Set \(context.state.setCurrent)/\(context.state.setTotal)")
-                        .font(.caption2)
+                    VStack(spacing: 8) {
+                        Text("\(context.state.exerciseName) · Set \(context.state.setCurrent)/\(context.state.setTotal)")
+                            .font(.caption2)
+                        HStack {
+                            Button(intent: CompleteSetIntent()) {
+                                Label("Done", systemImage: "checkmark.circle")
+                            }
+                            .buttonStyle(.borderedProminent)
+                            Button(intent: EndWorkoutIntent()) {
+                                Label("End", systemImage: "stop.circle")
+                            }
+                            .buttonStyle(.bordered)
+                        }
+                        .font(.caption)
+                    }
                 }
             } compactLeading: {
                 Image(systemName: "figure.strengthtraining.traditional")
@@ -62,6 +76,11 @@ struct LockScreenWorkoutView: View {
 
                 Button(intent: ExtendRestIntent()) {
                     Label("+30s", systemImage: "plus.circle")
+                }
+                .buttonStyle(.bordered)
+
+                Button(intent: EndWorkoutIntent()) {
+                    Label("End", systemImage: "stop.circle")
                 }
                 .buttonStyle(.bordered)
             }
