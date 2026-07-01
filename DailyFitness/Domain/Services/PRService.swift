@@ -34,7 +34,7 @@ final class PRService {
             context.insert(entity)
         }
         if !detected.isEmpty {
-            try? context.save()
+            context.saveOrLog("recordIfPR")
         }
         return detected
     }
@@ -66,7 +66,7 @@ final class PRService {
             setId: PRDetector.sessionWideId
         )
         context.insert(entity)
-        try? context.save()
+        context.saveOrLog("recordSessionVolumePR")
         return pr
     }
 

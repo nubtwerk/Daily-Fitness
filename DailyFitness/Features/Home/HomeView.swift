@@ -138,7 +138,12 @@ struct HomeView: View {
         // Recommendations stay advisory: surfaced in the live workout as an accept/edit/ignore
         // banner (US-080) alongside non-destructive ghost placeholders (US-051) — set weights
         // are never silently pre-written at session start.
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "startRoutine",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t start your workout",
+            message: "Something got in the way just now. Please try starting again."
+        )
         dependencies.syncEngine.enqueue(.upsertSession(session.id))
         dependencies.router.startWorkout(sessionId: session.id)
     }
@@ -149,7 +154,12 @@ struct HomeView: View {
             name: "Session"
         )
         modelContext.insert(session)
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "startBlankWorkout",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t start your workout",
+            message: "Something got in the way just now. Please try starting again."
+        )
         dependencies.router.startWorkout(sessionId: session.id)
     }
 }

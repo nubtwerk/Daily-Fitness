@@ -33,6 +33,9 @@ struct MainTabView: View {
         .fullScreenCover(isPresented: workoutPresented) {
             if let sessionId = dependencies.router.activeWorkoutSessionId {
                 LiveWorkoutView(sessionId: sessionId, dependencies: dependencies)
+                    // The live workout is a separate presentation context; the app-root alert
+                    // can't present over it, so surface save failures from inside the cover too.
+                    .dfErrorAlert(dependencies.errorPresenter)
             }
         }
     }

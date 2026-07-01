@@ -161,7 +161,11 @@ extension Color {
 
     // Ink & accent
     static let dfPrimary       = Color("Primary")             // deep forest (inverts to pale sage in dark)
-    static let dfAccent        = Color("Accent")              // muted sage — the single accent
+    static let dfAccent        = Color("Accent")              // muted sage — the single accent (decorative fills)
+    /// AA-safe sage for FOREGROUND glyphs/text on Background or Surface. Plain `dfAccent` only
+    /// clears ~2.6–3.0:1 in light mode, so use this for the ring arc, completed checkmark, and
+    /// any icon/text that must be legible (WCAG-AA, US-122). Decorative `dfAccent` fills stay as-is.
+    static let dfAccentForeground = Color("AccentForeground")
     static let dfSecondaryText = Color("SecondaryText")       // muted sage-gray
 
     // Derived / computed tokens (no asset needed)
@@ -480,7 +484,8 @@ struct DFRestTimerRing: View {
                         Circle().stroke(Color.dfAccent.opacity(0.15), lineWidth: 6)
                         Circle()
                             .trim(from: 0, to: progress)
-                            .stroke(Color.dfAccent, style: StrokeStyle(lineWidth: 6, lineCap: .round))
+                            // AA-safe sage for the informational progress arc (dfAccent alone is < 3:1).
+                            .stroke(Color.dfAccentForeground, style: StrokeStyle(lineWidth: 6, lineCap: .round))
                             .rotationEffect(.degrees(-90))
                             .animation(CalmStrength.Motion.calm, value: progress)
                         Text("\(Int(remaining))")
@@ -489,12 +494,21 @@ struct DFRestTimerRing: View {
                             .foregroundStyle(Color.dfPrimary)
                     }
                     .frame(width: 88, height: 88)
+                    // One VoiceOver element whose value updates each tick as it counts down.
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel("Rest timer")
+                    .accessibilityValue("\(Int(remaining)) seconds remaining")
+                    .accessibilityAddTraits(.updatesFrequently)
 
                     VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
                         Text("Rest").dfFont(.heading)
                         HStack(spacing: CalmStrength.Spacing.md) {
                             if let onSkip { Button("Skip", action: onSkip).buttonStyle(.dfTertiary) }
-                            if let onExtend { Button("+30s", action: onExtend).buttonStyle(.dfTertiary) }
+                            if let onExtend {
+                                Button("+30s", action: onExtend)
+                                    .buttonStyle(.dfTertiary)
+                                    .accessibilityLabel("Add 30 seconds")
+                            }
                         }
                     }
                     Spacer()

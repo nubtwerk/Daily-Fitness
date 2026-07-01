@@ -60,6 +60,7 @@ final class UserSession {
 final class DependencyContainer {
     var router: AppRouter
     var userSession: UserSession
+    let errorPresenter: ErrorPresenter
     let progressionEngine: ProgressionEngineProtocol
     let exerciseSeeder: ExerciseSeeder
     let programSeeder: ProgramSeeder
@@ -76,6 +77,7 @@ final class DependencyContainer {
     init(
         router: AppRouter,
         userSession: UserSession,
+        errorPresenter: ErrorPresenter,
         progressionEngine: ProgressionEngineProtocol,
         exerciseSeeder: ExerciseSeeder,
         programSeeder: ProgramSeeder,
@@ -91,6 +93,7 @@ final class DependencyContainer {
     ) {
         self.router = router
         self.userSession = userSession
+        self.errorPresenter = errorPresenter
         self.progressionEngine = progressionEngine
         self.exerciseSeeder = exerciseSeeder
         self.programSeeder = programSeeder
@@ -107,6 +110,7 @@ final class DependencyContainer {
 
     static func makeDefault() -> DependencyContainer {
         let userSession = UserSession()
+        let errorPresenter = ErrorPresenter()
         let progressionEngine = ProgressionEngine()
         let preferencesRepository = UserPreferencesRepository()
         let exerciseRepository = ExerciseRepository()
@@ -120,7 +124,8 @@ final class DependencyContainer {
             syncEngine: syncEngine,
             prService: prService,
             progressionService: progressionService,
-            preferencesRepository: preferencesRepository
+            preferencesRepository: preferencesRepository,
+            errorPresenter: errorPresenter
         )
 
         return DependencyContainer(
@@ -128,6 +133,7 @@ final class DependencyContainer {
                 showOnboarding: !UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")
             ),
             userSession: userSession,
+            errorPresenter: errorPresenter,
             progressionEngine: progressionEngine,
             exerciseSeeder: ExerciseSeeder(),
             programSeeder: ProgramSeeder(),

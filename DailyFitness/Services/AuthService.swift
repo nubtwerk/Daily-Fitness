@@ -58,12 +58,15 @@ final class AuthService: NSObject {
         // Remote: sign out (full delete requires server-side admin function in Supabase)
         try? await client.auth.signOut()
 
-        wipeLocalData(context: context)
+        let wiped = wipeLocalData(context: context)
 
         userSession.isAuthenticated = false
         userSession.supabaseUserId = nil
         userSession.isPro = false
         syncEngine.setAuthenticated(false)
+
+        // Surface a partial wipe — the user was told their data is gone.
+        if !wiped { throw AuthError.dataDeletionFailed }
     }
 
     func mergeLocalData(context: ModelContext) async throws {
@@ -83,7 +86,8 @@ final class AuthService: NSObject {
         try await syncEngine.pullRemoteChanges(since: nil, context: context)
     }
 
-    private func wipeLocalData(context: ModelContext) {
+    @discardableResult
+    private func wipeLocalData(context: ModelContext) -> Bool {
         deleteAll(WorkoutSessionEntity.self, context: context)
         deleteAll(RoutineEntity.self, context: context)
         deleteAll(ProgramEntity.self, context: context)
@@ -91,7 +95,7 @@ final class AuthService: NSObject {
         deleteAll(ProgressionRecommendationEntity.self, context: context)
         deleteAll(PersonalRecordEntity.self, context: context)
         deleteAll(UserPreferencesEntity.self, context: context)
-        try? context.save()
+        return context.saveOrLog("wipeLocalData")
     }
 
     private func deleteAll<T: PersistentModel>(
@@ -167,10 +171,12 @@ extension AuthService: ASAuthorizationControllerPresentationContextProviding {
 
 enum AuthError: LocalizedError {
     case missingToken
+    case dataDeletionFailed
 
     var errorDescription: String? {
         switch self {
         case .missingToken: return "Sign in with Apple did not return an identity token."
+        case .dataDeletionFailed: return "We couldn’t fully remove your local data."
         }
     }
 }

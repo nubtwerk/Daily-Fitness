@@ -2,7 +2,7 @@ import AppIntents
 import Foundation
 
 struct CompleteSetIntent: LiveActivityIntent {
-    static var title: LocalizedStringResource = "Complete Set"
+    static let title: LocalizedStringResource = "Complete Set"
 
     func perform() async throws -> some IntentResult {
         WorkoutIntentBridge.post(.completeSet)
@@ -11,7 +11,7 @@ struct CompleteSetIntent: LiveActivityIntent {
 }
 
 struct ExtendRestIntent: LiveActivityIntent {
-    static var title: LocalizedStringResource = "Extend Rest"
+    static let title: LocalizedStringResource = "Extend Rest"
 
     func perform() async throws -> some IntentResult {
         WorkoutIntentBridge.post(.extendRest)
@@ -20,7 +20,7 @@ struct ExtendRestIntent: LiveActivityIntent {
 }
 
 struct EndWorkoutIntent: LiveActivityIntent {
-    static var title: LocalizedStringResource = "End Workout"
+    static let title: LocalizedStringResource = "End Workout"
 
     func perform() async throws -> some IntentResult {
         WorkoutIntentBridge.post(.endWorkout)

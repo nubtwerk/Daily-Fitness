@@ -78,7 +78,7 @@ private struct SetCompleteButton: View {
         Button(action: action) {
             Image(systemName: isCompleted ? "checkmark.circle.fill" : "circle")
                 .font(.title2)
-                .foregroundStyle(isCompleted ? Color.dfAccent : Color.dfSecondaryText)
+                .foregroundStyle(isCompleted ? Color.dfAccentForeground : Color.dfSecondaryText)
                 .scaleEffect(isCompleted ? 1.0 : 0.9)
                 .animation(CalmStrength.Motion.standard, value: isCompleted)
         }
@@ -150,40 +150,72 @@ struct StrengthSetRow: View {
     let lastPerformance: LastWorkingSetService.Performance?
     let onComplete: () -> Void
 
+    // Field widths scale with Dynamic Type so multi-digit weights/reps don't clip at large sizes.
+    @ScaledMetric(relativeTo: .body) private var weightFieldWidth: CGFloat = 64
+    @ScaledMetric(relativeTo: .body) private var repsFieldWidth: CGFloat = 52
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+
     var body: some View {
-        HStack(spacing: CalmStrength.Spacing.sm) {
-            SetTypeMenu(set: set)
+        layout
+            .dfSetCompletion(set.isCompleted)
+    }
 
-            TextField(weightPrompt, value: weightBinding, format: .number)
-                .keyboardType(.decimalPad)
-                .dfField()
-                .frame(width: 64)
-
-            TextField(repsPrompt, value: $set.reps, format: .number)
-                .keyboardType(.numberPad)
-                .dfField()
-                .frame(width: 52)
-
-            // US-082: RIR is logged retrospectively — the 0–5 picker appears once the
-            // set is complete (how hard it actually was), not while entering the target.
-            if rirEnabled && set.isCompleted {
-                Picker("RIR", selection: $set.rir) {
-                    Text("RIR").tag(Int?.none)
-                    ForEach(0...5, id: \.self) { value in
-                        Text("\(value)").tag(Int?.some(value))
-                    }
+    // Reflow the row to a vertical stack at accessibility text sizes so the fields never clip
+    // or push the complete button off-screen (US-122 "Dynamic Type without layout breakage").
+    @ViewBuilder
+    private var layout: some View {
+        if dynamicTypeSize.isAccessibilitySize {
+            VStack(alignment: .leading, spacing: CalmStrength.Spacing.sm) {
+                SetTypeMenu(set: set)
+                weightField.frame(maxWidth: .infinity, alignment: .leading)
+                repsField.frame(maxWidth: .infinity, alignment: .leading)
+                if rirEnabled && set.isCompleted { rirPicker }
+                HStack {
+                    Spacer()
+                    SetCompleteButton(isCompleted: set.isCompleted, action: onComplete)
                 }
-                .pickerStyle(.menu)
-                .frame(width: 56)
-                .tint(Color.dfAccent)
-                .accessibilityLabel("Reps in reserve")
             }
-
-            Spacer(minLength: 0)
-
-            SetCompleteButton(isCompleted: set.isCompleted, action: onComplete)
+        } else {
+            HStack(spacing: CalmStrength.Spacing.sm) {
+                SetTypeMenu(set: set)
+                weightField.frame(width: weightFieldWidth)
+                repsField.frame(width: repsFieldWidth)
+                if rirEnabled && set.isCompleted { rirPicker }
+                Spacer(minLength: 0)
+                SetCompleteButton(isCompleted: set.isCompleted, action: onComplete)
+            }
         }
-        .dfSetCompletion(set.isCompleted)
+    }
+
+    private var weightField: some View {
+        TextField(weightPrompt, value: weightBinding, format: .number)
+            .keyboardType(.decimalPad)
+            .dfField()
+            .accessibilityLabel(usePounds ? "Weight in pounds" : "Weight in kilograms")
+            .accessibilityValue(set.weightKg == nil ? "empty" : WeightFormatter.display(kg: set.weightKg!, usePounds: usePounds))
+    }
+
+    private var repsField: some View {
+        TextField(repsPrompt, value: $set.reps, format: .number)
+            .keyboardType(.numberPad)
+            .dfField()
+            .accessibilityLabel("Reps")
+            .accessibilityValue(set.reps.map { "\($0) reps" } ?? "empty")
+    }
+
+    // US-082: RIR is logged retrospectively — the 0–5 picker appears once the
+    // set is complete (how hard it actually was), not while entering the target.
+    private var rirPicker: some View {
+        Picker("RIR", selection: $set.rir) {
+            Text("RIR").tag(Int?.none)
+            ForEach(0...5, id: \.self) { value in
+                Text("\(value)").tag(Int?.some(value))
+            }
+        }
+        .pickerStyle(.menu)
+        .frame(width: 56)
+        .tint(Color.dfAccent)
+        .accessibilityLabel("Reps in reserve")
     }
 
     private var weightPrompt: String {

@@ -287,7 +287,12 @@ struct AddToRoutineSheet: View {
         routine.exercises.append(item)
         routine.updatedAt = Date()
         routine.syncStatus = .pending
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "add exercise to routine",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t add to routine",
+            message: "We couldn’t add this exercise just now. Please try again in a moment."
+        )
         dependencies.syncEngine.enqueue(.upsertRoutine(routine.id))
         dismiss()
     }
@@ -302,7 +307,12 @@ struct AddToRoutineSheet: View {
         modelContext.insert(item)
         routine.exercises.append(item)
         routine.syncStatus = .pending
-        try? modelContext.save()
+        modelContext.saveOrPresent(
+            "create routine from exercise",
+            presenter: dependencies.errorPresenter,
+            title: "Couldn’t create routine",
+            message: "We couldn’t create your routine just now. Please try again in a moment."
+        )
         dependencies.syncEngine.enqueue(.upsertRoutine(routine.id))
         dismiss()
     }
